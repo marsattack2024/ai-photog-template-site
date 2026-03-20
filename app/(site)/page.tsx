@@ -4,16 +4,15 @@ import { Hero } from "@/components/sections/Hero";
 import { TestimonialCards } from "@/components/sections/TestimonialCards";
 import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
 import { EmpathyBlock } from "@/components/sections/EmpathyBlock";
-import { SplitSection } from "@/components/sections/SplitSection";
+import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { MeetPhotographer } from "@/components/sections/MeetPhotographer";
 import { WhyBook } from "@/components/sections/WhyBook";
-import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { IncludesGrid } from "@/components/sections/IncludesGrid";
 import { GalleryGrid } from "@/components/sections/GalleryGrid";
 import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
-import { FAQSection } from "@/components/sections/FAQSection";
 import { UrgencyBlock } from "@/components/sections/UrgencyBlock";
 import { ContactForm } from "@/components/sections/ContactForm";
+import { FAQSection } from "@/components/sections/FAQSection";
 
 export default function Home() {
   return (
@@ -31,64 +30,62 @@ export default function Home() {
         imageAlt="Photography session"
       />
 
-      {/* 2. Testimonial cards — early social proof */}
+      {/* 2. Early social proof — 3 review cards */}
       <TestimonialCards />
 
-      {/* 3. Social proof strip */}
+      {/* 3. Single pull quote strip */}
       <SocialProofStrip />
 
-      {/* 4. Centered intro / empathy */}
+      {/* 4. Empathy / "if you've been putting this off" */}
       <EmpathyBlock />
 
-      {/* 5. Session type A — image left, text right */}
-      <SplitSection
-        imageSrc="/placeholder/portrait.svg"
-        imageAlt="Portrait session"
-        eyebrow="Portraits & Headshots"
-        headline="[Session Type One]"
-        body="[Two to three sentences describing this session type. Who is it for? What does it feel like? What will they walk away with?]"
-        ctaLabel="Learn More"
-        ctaHref="#contact"
-      />
-
-      {/* 6. Session type B — text left, image right */}
-      <SplitSection
-        imageSrc="/placeholder/portrait.svg"
-        imageAlt="Couples session"
-        eyebrow="Couples & Families"
-        headline="[Session Type Two]"
-        body="[Two to three sentences describing this session type. Who is it for? What does it feel like? What will they walk away with?]"
-        ctaLabel="Learn More"
-        ctaHref="#contact"
-        reverse
-      />
-
-      {/* 7. Meet the photographer */}
-      <MeetPhotographer />
-
-      {/* 8. Why people book — dark section */}
-      <WhyBook />
-
-      {/* 9. Process */}
+      {/* 5. How it works — replaces session types */}
       <ProcessSteps />
 
-      {/* 10. What's included */}
+      {/* 6. Meet the photographer */}
+      <MeetPhotographer />
+
+      {/* 7. Why people book — dark section */}
+      <WhyBook />
+
+      {/* 8. What's included */}
       <IncludesGrid />
 
-      {/* 11. Gallery */}
+      {/* 9. Gallery */}
       <GalleryGrid />
 
-      {/* 12. Testimonials carousel */}
+      {/* 10. Testimonials carousel */}
       <TestimonialsCarousel />
+
+      {/* 11. Urgency — closing argument */}
+      <UrgencyBlock />
+
+      {/* 12. Contact form — above FAQ */}
+      <ContactForm />
 
       {/* 13. FAQ */}
       <FAQSection />
 
-      {/* 14. Urgency / closing argument */}
-      <UrgencyBlock />
-
-      {/* 15. Contact form */}
-      <ContactForm />
+      {/* 14. Booking urgency — below FAQ */}
+      <section className="bg-(--color-ink) py-20 px-6 text-center">
+        <div className="max-w-xl mx-auto flex flex-col gap-5">
+          <h2 className="font-serif text-3xl font-normal text-(--color-cream) leading-tight md:text-4xl">
+            Spots Are Filling Fast for{" "}
+            <em className="italic">Spring &amp; Summer 2026</em>
+          </h2>
+          <p className="text-sm text-(--color-muted) leading-relaxed">
+            I take on a limited number of portrait sessions each month to ensure every client gets my full attention. Once the calendar fills, it fills. Don&apos;t wait and wonder — reach out today to hold your date.
+          </p>
+          <div className="flex justify-center pt-2">
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center tracking-widest uppercase text-xs font-medium border border-white/30 text-(--color-cream) px-8 py-3 hover:bg-white/10 transition-colors duration-300"
+            >
+              Inquire Today
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="bg-(--color-ink) py-12 px-6">

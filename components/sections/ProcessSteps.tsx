@@ -1,46 +1,70 @@
+"use client";
+import { motion } from "framer-motion";
+import { stagger, fadeUp } from "@/lib/motion";
+
 const steps = [
   {
     number: "01",
-    title: "Inquire",
-    body: "Fill out the contact form below. I'll respond within 24 hours to check your date and answer any questions.",
+    title: "Reach Out",
+    body: "Fill out the contact form. You'll hear back personally within 24 hours — no automated responses, no pressure. Just a real conversation about what you're looking for.",
   },
   {
     number: "02",
-    title: "Consult",
-    body: "We'll hop on a quick call to talk through your vision, choose a location, and plan your outfits.",
+    title: "We Plan Together",
+    body: "Once you book, you'll get everything you need to prepare — what to wear, what to expect, how to get ready. You will never walk in blind or figure it out alone.",
   },
   {
     number: "03",
-    title: "Shoot",
-    body: "Show up, relax, and let me do the directing. Most sessions last 1–2 hours.",
-  },
-  {
-    number: "04",
-    title: "Receive",
-    body: "Your fully edited gallery arrives in your inbox within 5 business days, ready to download and print.",
+    title: "Show Up & Be You",
+    body: "Every pose, every angle, every expression is guided. Your only job is to show up. The rest is handled. Most people forget they were nervous within the first few minutes.",
   },
 ];
 
 export function ProcessSteps() {
   return (
-    <section className="py-24 px-6 bg-(--color-ink)">
-      <div className="max-w-7xl mx-auto flex flex-col gap-12">
-        <div className="text-center flex flex-col gap-4">
-          <span className="text-xs tracking-widest uppercase text-(--color-accent)">The Process</span>
-          <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-cream)">
-            Four Steps to{" "}
-            <em className="italic">Photos You Love</em>
+    <section className="bg-(--color-cream) py-24 px-6 border-t border-(--color-border)">
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="text-center mb-16"
+        >
+          <span className="text-xs uppercase tracking-widest text-(--color-muted)">How It Works</span>
+          <h2 className="font-serif text-4xl font-normal text-(--color-ink) mt-3 leading-tight md:text-5xl">
+            Here&apos;s What Happens{" "}
+            <em className="italic">After You Reach Out</em>
           </h2>
-        </div>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <p className="mt-4 text-sm text-(--color-muted) max-w-md mx-auto leading-relaxed">
+            The whole experience is designed to feel simple and guided from the very first message.
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid md:grid-cols-3 gap-0 md:divide-x md:divide-(--color-border)"
+        >
           {steps.map((step) => (
-            <div key={step.number} className="flex flex-col gap-4">
-              <span className="font-serif text-5xl text-(--color-accent)/40">{step.number}</span>
-              <h3 className="font-serif text-xl text-(--color-cream)">{step.title}</h3>
-              <p className="text-sm leading-relaxed text-(--color-cream)/60">{step.body}</p>
-            </div>
+            <motion.div
+              key={step.number}
+              variants={fadeUp}
+              className="flex flex-col gap-5 px-8 py-10 first:pl-0 last:pr-0"
+            >
+              <span className="font-serif text-7xl text-(--color-accent) opacity-20 leading-none">
+                {step.number}
+              </span>
+              <div className="w-8 h-px bg-(--color-border)" />
+              <h3 className="font-serif text-2xl text-(--color-ink) font-normal">
+                {step.title}
+              </h3>
+              <p className="text-sm text-(--color-muted) leading-relaxed">{step.body}</p>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
