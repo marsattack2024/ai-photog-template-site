@@ -1,38 +1,88 @@
+"use client";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { stagger, scaleIn, fadeUp } from "@/lib/motion";
+import { Button } from "@/components/ui";
 
-const images = [
-  { src: "https://placehold.co/800x1000/d4c5b2/6b5e4e?text=Portrait+1", alt: "Portrait session 1" },
-  { src: "https://placehold.co/800x600/c8b9a8/6b5e4e?text=Portrait+2", alt: "Portrait session 2" },
-  { src: "https://placehold.co/800x1000/bfae9e/6b5e4e?text=Portrait+3", alt: "Portrait session 3" },
-  { src: "https://placehold.co/800x600/d4c5b2/6b5e4e?text=Portrait+4", alt: "Portrait session 4" },
-  { src: "https://placehold.co/800x1000/c8b9a8/6b5e4e?text=Portrait+5", alt: "Portrait session 5" },
-  { src: "https://placehold.co/800x600/bfae9e/6b5e4e?text=Portrait+6", alt: "Portrait session 6" },
+// 8 images alternating tall/short across 2 columns
+// Left column: tall, short, tall, short
+// Right column: short, tall, short, tall
+const leftCol = [
+  { src: "https://placehold.co/600x800/c8b9a8/ffffff?text=", alt: "Session photo", h: "h-[480px]" },
+  { src: "https://placehold.co/600x500/d4c5b2/ffffff?text=", alt: "Session photo", h: "h-[300px]" },
+  { src: "https://placehold.co/600x900/bfae9e/ffffff?text=", alt: "Session photo", h: "h-[540px]" },
+  { src: "https://placehold.co/600x450/c8b9a8/ffffff?text=", alt: "Session photo", h: "h-[280px]" },
 ];
+
+const rightCol = [
+  { src: "https://placehold.co/600x400/d4c5b2/ffffff?text=", alt: "Session photo", h: "h-[260px]" },
+  { src: "https://placehold.co/600x850/bfae9e/ffffff?text=", alt: "Session photo", h: "h-[510px]" },
+  { src: "https://placehold.co/600x420/c8b9a8/ffffff?text=", alt: "Session photo", h: "h-[260px]" },
+  { src: "https://placehold.co/600x800/d4c5b2/ffffff?text=", alt: "Session photo", h: "h-[480px]" },
+];
+
+function GalleryColumn({ images, delay = 0 }: { images: typeof leftCol; delay?: number }) {
+  return (
+    <motion.div
+      variants={stagger}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.05 }}
+      className="flex flex-col gap-3"
+    >
+      {images.map((img, i) => (
+        <motion.div
+          key={i}
+          variants={scaleIn}
+          className={`relative w-full overflow-hidden ${img.h}`}
+        >
+          <Image
+            src={img.src}
+            alt={img.alt}
+            fill
+            className="object-cover transition-transform duration-700 hover:scale-[1.03]"
+            unoptimized
+          />
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+}
 
 export function GalleryGrid() {
   return (
-    <section id="gallery" className="py-24 px-6 bg-(--color-border)/30">
-      <div className="max-w-7xl mx-auto flex flex-col gap-12">
-        <div className="text-center flex flex-col gap-4">
-          <span className="text-xs tracking-widest uppercase text-(--color-accent)">The Work</span>
-          <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">
-            Real People.{" "}
-            <em className="italic">Real Results.</em>
+    <section className="bg-(--color-cream) py-24 px-6">
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="text-center mb-14"
+        >
+          <span className="text-xs uppercase tracking-widest text-(--color-muted)">The Work</span>
+          <h2 className="font-serif text-4xl font-normal text-(--color-ink) mt-3 md:text-5xl">
+            Real People. <em className="italic">Real Sessions.</em>
           </h2>
+          <p className="mt-4 text-sm text-(--color-muted) max-w-sm mx-auto leading-relaxed">
+            Not models. Not staged. Just everyday people who decided to show up for themselves.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-2 gap-3 md:gap-4">
+          <GalleryColumn images={leftCol} />
+          <GalleryColumn images={rightCol} delay={0.15} />
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          {images.map((img) => (
-            <div key={img.src} className="relative overflow-hidden aspect-[4/5]">
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-500"
-                unoptimized
-              />
-            </div>
-          ))}
-        </div>
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          className="flex justify-center mt-12"
+        >
+          <a href="#contact"><Button variant="ghost">View Full Gallery</Button></a>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,43 +1,52 @@
 import type { Variants } from "framer-motion";
 
-// Fade up — use on most section entries
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 32 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
-// Stagger container
-export const stagger: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
-// Fade in (no movement)
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.9 } },
-};
-
-// Slide in from left
-export const slideLeft: Variants = {
-  hidden: { opacity: 0, x: -60 },
   visible: {
     opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.9, ease: "easeOut" },
   },
 };
 
-// Slide in from right
-export const slideRight: Variants = {
-  hidden: { opacity: 0, x: 60 },
+export const stagger: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+};
+
+export const slideLeft: Variants = {
+  hidden: { opacity: 0, x: -48 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export const slideRight: Variants = {
+  hidden: { opacity: 0, x: 48 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export const scaleIn: Variants = {
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
   },
 };
