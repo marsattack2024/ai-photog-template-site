@@ -22,12 +22,13 @@ export default function Home() {
 
       {/* 1. Hero */}
       <Hero
-        headline="[Your Headline Here]"
-        subline="[One line about what you do and who it's for.]"
+        eyebrow="New Jersey Boudoir Photography"
+        headline={'Boudoir, For The Woman Who Doesn\u2019t Feel \u201cReady\u201d\u2026 Yet'}
+        subline="A boutique boudoir studio in Montclair, NJ for women ready to uplift, reclaim, and celebrate their body exactly as it is."
         ctaLabel="Inquire Today"
         ctaHref="#contact"
-        imageSrc="/placeholder/hero.svg"
-        imageAlt="Photography session"
+        imageSrc="/images/hero.jpg"
+        imageAlt="Boudoir photography session"
       />
 
       {/* 2. Early social proof — 3 review cards */}
