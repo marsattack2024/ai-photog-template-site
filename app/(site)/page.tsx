@@ -25,7 +25,7 @@ export default function Home() {
         subline="[One line about what you do and who it's for.]"
         ctaLabel="Inquire Today"
         ctaHref="#contact"
-        imageSrc="https://placehold.co/1920x1080/d4c5b2/ffffff?text="
+        imageSrc="/placeholder/hero.svg"
         imageAlt="Photography session"
       />
 
@@ -37,7 +37,7 @@ export default function Home() {
 
       {/* 4. Session type A — image left, text right */}
       <SplitSection
-        imageSrc="https://placehold.co/900x1100/c8b9a8/ffffff?text="
+        imageSrc="/placeholder/portrait.svg"
         imageAlt="Portrait session"
         eyebrow="Portraits & Headshots"
         headline="[Session Type One]"
@@ -48,7 +48,7 @@ export default function Home() {
 
       {/* 5. Session type B — text left, image right */}
       <SplitSection
-        imageSrc="https://placehold.co/900x1100/d4c5b2/ffffff?text="
+        imageSrc="/placeholder/portrait.svg"
         imageAlt="Couples session"
         eyebrow="Couples & Families"
         headline="[Session Type Two]"

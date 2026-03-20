@@ -6,11 +6,11 @@ export function MeetPhotographer() {
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="relative aspect-[4/5] w-full overflow-hidden">
           <Image
-            src="https://placehold.co/800x1000/c8b9a8/6b5e4e?text=Photographer"
+            src="/placeholder/portrait.svg"
             alt="Photographer portrait"
             fill
             className="object-cover"
-            unoptimized
+
           />
         </div>
         <div className="flex flex-col gap-6">
