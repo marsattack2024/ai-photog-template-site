@@ -59,9 +59,9 @@ export function TestimonialCards() {
           viewport={{ once: true, amount: 0.1 }}
           className="grid md:grid-cols-3 gap-6"
         >
-          {reviews.map((r) => (
+          {reviews.map((r, i) => (
             <motion.div
-              key={r.name + r.detail}
+              key={i}
               variants={fadeUp}
               className="flex flex-col gap-4 p-8 border border-(--color-border) bg-(--color-cream)"
             >
