@@ -1,7 +1,32 @@
 .DS_Store
-.env
-/node_modules/
 
-# React Router
-/.react-router/
-/build/
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Env — never commit DB credentials or Supabase service role (use .env.example only as template)
+.env*
+!.env.example
+
+# Vercel
+.vercel
+
+# TypeScript build info
+tsconfig.tsbuildinfo
+
+# Supabase CLI (local linked project / temp — migrations under supabase/migrations/ stay tracked)
+supabase/.branches
+supabase/.temp
+
+# Local database files & dumps (SQLite, pg_dump, etc.)
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+
+# Legacy React Router artifacts (safe to remove if unused)
+.react-router/
+build/
