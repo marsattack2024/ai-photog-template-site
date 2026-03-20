@@ -1,15 +1,14 @@
 import { StickyBar } from "@/components/layout/StickyBar";
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
-import { TestimonialCards } from "@/components/sections/TestimonialCards";
+import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
 import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
-import { EmpathyBlock } from "@/components/sections/EmpathyBlock";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { MeetPhotographer } from "@/components/sections/MeetPhotographer";
 import { WhyBook } from "@/components/sections/WhyBook";
 import { IncludesGrid } from "@/components/sections/IncludesGrid";
 import { GalleryGrid } from "@/components/sections/GalleryGrid";
-import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
+import { TestimonialCards } from "@/components/sections/TestimonialCards";
 import { UrgencyBlock } from "@/components/sections/UrgencyBlock";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { FAQSection } from "@/components/sections/FAQSection";
@@ -31,43 +30,40 @@ export default function Home() {
         imageAlt="Boudoir photography session"
       />
 
-      {/* 2. Early social proof — 3 review cards */}
-      <TestimonialCards />
+      {/* 2. Early social proof — 3-card carousel */}
+      <TestimonialsCarousel />
 
       {/* 3. Single pull quote strip */}
       <SocialProofStrip />
 
-      {/* 4. Empathy / "if you've been putting this off" */}
-      <EmpathyBlock />
-
-      {/* 5. How it works — replaces session types */}
+      {/* 4. How it works */}
       <ProcessSteps />
 
-      {/* 6. Meet the photographer */}
+      {/* 5. Meet the photographer */}
       <MeetPhotographer />
 
-      {/* 7. Why people book — dark section */}
+      {/* 6. Why people book — dark section */}
       <WhyBook />
 
-      {/* 8. What's included */}
+      {/* 7. What's included */}
       <IncludesGrid />
 
-      {/* 9. Gallery */}
+      {/* 8. Gallery */}
       <GalleryGrid />
 
-      {/* 10. Testimonials carousel */}
-      <TestimonialsCarousel />
+      {/* 9. Featured testimonial carousel — 5 slides with headshots */}
+      <TestimonialCards />
 
-      {/* 11. Urgency — closing argument */}
+      {/* 10. Urgency — closing argument */}
       <UrgencyBlock />
 
-      {/* 12. Contact form — above FAQ */}
+      {/* 11. Contact form — above FAQ */}
       <ContactForm />
 
-      {/* 13. FAQ */}
+      {/* 12. FAQ */}
       <FAQSection />
 
-      {/* 14. Booking urgency — below FAQ */}
+      {/* 13. Booking urgency — below FAQ */}
       <section className="bg-(--color-ink) py-20 px-6 text-center">
         <div className="max-w-xl mx-auto flex flex-col gap-5">
           <h2 className="font-serif text-3xl font-normal text-(--color-cream) leading-tight md:text-4xl">

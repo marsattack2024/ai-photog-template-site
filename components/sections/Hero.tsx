@@ -15,13 +15,13 @@ interface HeroProps {
 export function Hero({ eyebrow, headline, subline, ctaLabel, ctaHref, imageSrc, imageAlt }: HeroProps) {
   return (
     <section className="relative w-full min-h-[95vh] flex items-end overflow-hidden">
-      {/* Background image — subject sits right-center */}
+      {/* Background image — subject sits right-center, pulled up to show face */}
       <Image
         src={imageSrc}
         alt={imageAlt}
         fill
         priority
-        className="object-cover object-[65%_center]"
+        className="object-cover object-[62%_15%]"
         unoptimized
       />
 
@@ -30,13 +30,13 @@ export function Hero({ eyebrow, headline, subline, ctaLabel, ctaHref, imageSrc, 
       {/* Bottom vignette for text legibility */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-      {/* Text block — bottom-left */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-16 md:pb-24">
+      {/* Text block — bottom-left with generous breathing room */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-10 md:px-16 pb-20 md:pb-28">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-xl flex flex-col gap-5"
+          className="max-w-lg flex flex-col gap-5"
         >
           {eyebrow && (
             <span className="text-xs uppercase tracking-[0.25em] text-white/60 font-medium">
