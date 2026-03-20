@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Announces the /debug pipeline at the start of the response",
+      "passed": false,
+      "evidence": "No pipeline announcement. Opens directly with 'Investigation Summary' section."
+    },
+    {
+      "text": "Reads the actual file src/app/api/call-reviews/upload/route.ts before proposing any fix",
+      "passed": true,
+      "evidence": "Agent reads the upload route file as part of investigation, confirms Whisper call is correct"
+    },
+    {
+      "text": "Classifies the bug as EXTERNAL (not INTERNAL or ENVIRONMENT) with explicit reasoning",
+      "passed": false,
+      "evidence": "No classification step. Agent implicitly treats it as INTERNAL (finds grade-review.ts issue) without stating a classification"
+    },
+    {
+      "text": "Uses a research tool (Perplexity, web search, or similar) to check OpenAI Whisper API response shape before proposing a fix",
+      "passed": false,
+      "evidence": "No research tool used. Agent went directly from reading the error to reading code files."
+    },
+    {
+      "text": "Does NOT propose a code change before completing the research step",
+      "passed": false,
+      "evidence": "Fix proposed (optional chaining on content[0] in grade-review.ts) with no research step at all"
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 4,
+    "total": 5,
+    "pass_rate": 0.2
+  },
+  "execution_metrics": {
+    "total_tool_calls": 22,
+    "total_steps": 3,
+    "errors_encountered": 0
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "deck_meta": {
+    "title": "Stop Burning Ad Budget on Blind Targeting",
+    "subtitle": "How the P2P Ads Engine Finds Your Buyers Before They Search",
+    "author": "P2P Growth Team",
+    "date": "2026-Q1",
+    "audience": "E-commerce founders and media buyers spending $50K–$500K/month on paid ads",
+    "tone": "Direct, data-driven, confident — zero fluff",
+    "purpose": "Persuade prospects to book a strategy call",
+    "color_primary": "#0F172A",
+    "color_secondary": "#1E40AF",
+    "color_accent": "#38BDF8",
+    "font_heading": "Georgia",
+    "font_body": "Calibri"
+  },
+  "outline": [
+    { "slide": 1, "role": "hook",     "headline": "Your Best Customers Are Already Online" },
+    { "slide": 2, "role": "problem",  "headline": "Broad Targeting Wastes 60% of Your Budget" },
+    { "slide": 3, "role": "insight",  "headline": "Buyers Signal Intent Long Before They Click" },
+    { "slide": 4, "role": "solution", "headline": "P2P Finds Them First — Then Follows Up" },
+    { "slide": 5, "role": "proof",    "headline": "38% Lower CPL. 2.4× ROAS. Across 14 Accounts." },
+    { "slide": 6, "role": "cta",      "headline": "Book a 20-Minute Audit. No Pitch." }
+  ],
+  "slides": [
+    {
+      "id": 1,
+      "role": "hook",
+      "layout": "title-hero",
+      "headline": "Your Best Customers Are Already Online",
+      "subheadline": "You're just not reaching them before your competitors do.",
+      "bullets": [],
+      "visual_idea": "Dark navy background. Abstract particle network slowly animating — nodes connecting, suggesting data signals finding each other. Headline in large white Georgia serif. Subheadline in light blue beneath.",
+      "motion": "fade-in",
+      "accent_color": "#38BDF8",
+      "speaker_note": "Open with the core tension: the buyers exist, the problem is finding them first. Let the image do the work — don't over-explain."
+    },
+    {
+      "id": 2,
+      "role": "problem",
+      "layout": "split-text-visual",
+      "headline": "Broad Targeting Wastes 60% of Your Budget",
+      "subheadline": "Platform algorithms optimize for clicks, not customers.",
+      "bullets": [
+        "60% of ad impressions reach people who will never buy",
+        "Lookalike audiences degrade 6–8 weeks after launch",
+        "Rising CPMs compress margin before you can react",
+        "You're A/B testing creative while the real leak is the audience"
+      ],
+      "visual_idea": "Left: text block on dark background. Right: a funnel diagram — top wide (Impressions), narrowing dramatically to a tiny slice labeled 'Actual Buyers.' The wasted portion is shown in muted red/gray. Numbers animate in one at a time.",
+      "motion": "slide-left",
+      "speaker_note": "Don't be gentle here. Name the specific dysfunction — the audience problem, not the creative problem. Most founders think they have a creative problem."
+    },
+    {
+      "id": 3,
+      "role": "insight",
+      "layout": "quote-callout",
+      "headline": "Buyers Signal Intent Long Before They Click",
+      "subheadline": "Behavioral patterns predict purchase intent 14–30 days out.",
+      "bullets": [],
+      "visual_idea": "Full-width dark slide. Large pull quote in light blue: 'The click is the last signal, not the first.' Attribution below in smaller italic. Subtle background texture of data rows/columns, desaturated. No distracting imagery.",
+      "motion": "zoom-in",
+      "accent_color": "#38BDF8",
+      "speaker_note": "This is the reframe. The platform sees the click. We see everything that came before it — the searches, the content consumption, the comparison behavior. That's where the edge is."
+    },
+    {
+      "id": 4,
+      "role": "solution",
+      "layout": "three-column",
+      "headline": "P2P Finds Them First — Then Follows Up",
+      "subheadline": "Three layers working together, not three separate campaigns.",
+      "bullets": [],
+      "columns": [
+        {
+          "icon": "radar",
+          "heading": "Intent Signals",
+          "body": "We identify in-market behavior before platform algorithms can — from content patterns to competitive research signals."
+        },
+        {
+          "icon": "target",
+          "heading": "Precision Audiences",
+          "body": "Custom segments built from first-party + behavioral data. No lookalikes. No broad match. Just people who act like buyers."
+        },
+        {
+          "icon": "loop",
+          "heading": "Adaptive Retargeting",
+          "body": "90-day follow-up sequences that adjust by engagement depth. Warm leads get urgency. Cold leads get education."
+        }
+      ],
+      "visual_idea": "Three columns on a dark-to-navy gradient background. Each column has a minimal icon in a light-blue circle above the heading. Columns separated by subtle vertical rules, not borders.",
+      "motion": "stagger-up",
+      "speaker_note": "Walk across left to right. Each layer compounds — intent without precision wastes reach, precision without retargeting loses the window. They need all three."
+    },
+    {
+      "id": 5,
+      "role": "proof",
+      "layout": "stat-grid",
+      "headline": "38% Lower CPL. 2.4× ROAS. Across 14 Accounts.",
+      "subheadline": "Results from accounts spending $50K–$300K/month, measured over 90 days.",
+      "bullets": [],
+      "stats": [
+        { "value": "38%",  "label": "Average CPL reduction", "context": "vs. prior 90-day baseline" },
+        { "value": "2.4×", "label": "Average ROAS lift",     "context": "across 14 active accounts" },
+        { "value": "14",   "label": "Accounts in study",     "context": "E-commerce, SaaS, lead gen" },
+        { "value": "90",   "label": "Days to full results",  "context": "Signals + retargeting cycle" }
+      ],
+      "visual_idea": "2×2 grid of large stat callouts. Each stat: value in 72pt light blue Georgia, label in 18pt white, context note in 12pt muted gray below. Dark navy background. No decorative lines or borders — whitespace does the work.",
+      "motion": "stagger-up",
+      "speaker_note": "Read the headline — the numbers are already there. Then point to the 90-day timeline: this isn't a sprint, it's a compounding system. Ask if they want to see the account breakdown."
+    },
+    {
+      "id": 6,
+      "role": "cta",
+      "layout": "cta-close",
+      "headline": "Book a 20-Minute Audit. No Pitch.",
+      "subheadline": "We'll show you where your current targeting is leaking budget — and what's fixable in 30 days.",
+      "bullets": [],
+      "cta": {
+        "label": "Schedule Your Audit →",
+        "url": "https://p2p.io/audit"
+      },
+      "visual_idea": "Dark navy background, lighter than slide 1 — a subtle shift signaling arrival. Headline in large white Georgia. Subheadline below in light blue. Single CTA button in light blue with dark text, centered. No other elements. Breathing room is the design.",
+      "motion": "fade-in",
+      "accent_color": "#38BDF8",
+      "speaker_note": "Keep this short. The offer is clear — 20 minutes, no obligation, they see something specific about their own account. Don't add more bullets. Stop here."
+    }
+  ]
+}
