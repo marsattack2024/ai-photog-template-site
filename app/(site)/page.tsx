@@ -1,15 +1,17 @@
 import { StickyBar } from "@/components/layout/StickyBar";
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
+import { TestimonialCards } from "@/components/sections/TestimonialCards";
 import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
 import { EmpathyBlock } from "@/components/sections/EmpathyBlock";
 import { SplitSection } from "@/components/sections/SplitSection";
 import { MeetPhotographer } from "@/components/sections/MeetPhotographer";
 import { WhyBook } from "@/components/sections/WhyBook";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
-import { GalleryGrid } from "@/components/sections/GalleryGrid";
-import { TestimonialsGrid } from "@/components/sections/TestimonialsGrid";
 import { IncludesGrid } from "@/components/sections/IncludesGrid";
+import { GalleryGrid } from "@/components/sections/GalleryGrid";
+import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
+import { FAQSection } from "@/components/sections/FAQSection";
 import { UrgencyBlock } from "@/components/sections/UrgencyBlock";
 import { ContactForm } from "@/components/sections/ContactForm";
 
@@ -29,13 +31,16 @@ export default function Home() {
         imageAlt="Photography session"
       />
 
-      {/* 2. Early social proof */}
+      {/* 2. Testimonial cards — early social proof */}
+      <TestimonialCards />
+
+      {/* 3. Social proof strip */}
       <SocialProofStrip />
 
-      {/* 3. Centered intro / empathy */}
+      {/* 4. Centered intro / empathy */}
       <EmpathyBlock />
 
-      {/* 4. Session type A — image left, text right */}
+      {/* 5. Session type A — image left, text right */}
       <SplitSection
         imageSrc="/placeholder/portrait.svg"
         imageAlt="Portrait session"
@@ -46,7 +51,7 @@ export default function Home() {
         ctaHref="#contact"
       />
 
-      {/* 5. Session type B — text left, image right */}
+      {/* 6. Session type B — text left, image right */}
       <SplitSection
         imageSrc="/placeholder/portrait.svg"
         imageAlt="Couples session"
@@ -58,28 +63,31 @@ export default function Home() {
         reverse
       />
 
-      {/* 6. Meet the photographer */}
+      {/* 7. Meet the photographer */}
       <MeetPhotographer />
 
-      {/* 7. Why people book — dark section */}
+      {/* 8. Why people book — dark section */}
       <WhyBook />
 
-      {/* 8. Process */}
+      {/* 9. Process */}
       <ProcessSteps />
 
-      {/* 9. What's included */}
+      {/* 10. What's included */}
       <IncludesGrid />
 
-      {/* 10. Gallery */}
+      {/* 11. Gallery */}
       <GalleryGrid />
 
-      {/* 11. Testimonials */}
-      <TestimonialsGrid />
+      {/* 12. Testimonials carousel */}
+      <TestimonialsCarousel />
 
-      {/* 12. Urgency / closing argument */}
+      {/* 13. FAQ */}
+      <FAQSection />
+
+      {/* 14. Urgency / closing argument */}
       <UrgencyBlock />
 
-      {/* 13. Contact form */}
+      {/* 15. Contact form */}
       <ContactForm />
 
       {/* Footer */}
