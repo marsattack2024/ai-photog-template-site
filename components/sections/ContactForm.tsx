@@ -1,145 +1,122 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-import { fadeUp } from "@/lib/motion";
-import { Button } from "@/components/ui";
-import { Input } from "@/components/ui";
-import { Textarea } from "@/components/ui";
-
-interface FormData {
-  name: string;
-  email: string;
-  message: string;
-}
-
-interface FormErrors {
-  name?: string;
-  email?: string;
-  message?: string;
-}
-
-type FormStatus = "idle" | "submitting" | "error";
-
-function validateForm(data: FormData): FormErrors {
-  const errors: FormErrors = {};
-  if (!data.name.trim()) errors.name = "Name is required";
-  if (!data.email.trim()) errors.email = "Email is required";
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
-    errors.email = "Please enter a valid email";
-  if (!data.message.trim()) errors.message = "Message is required";
-  return errors;
-}
 
 export function ContactForm() {
-  const router = useRouter();
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<FormStatus>("idle");
-  const [serverError, setServerError] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleChange =
-    (field: keyof FormData) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setFormData((prev) => ({ ...prev, [field]: e.target.value }));
-      if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMsg("");
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
     };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const validationErrors = validateForm(formData);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-    setStatus("submitting");
-    setServerError("");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       });
+      const json = await res.json();
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error ?? "Something went wrong");
+        setStatus("error");
+        setErrorMsg(json.error ?? "Something went wrong.");
+      } else {
+        setStatus("success");
+        form.reset();
       }
-      router.push("/thank-you");
-    } catch (err) {
-      setServerError(err instanceof Error ? err.message : "Something went wrong");
+    } catch {
       setStatus("error");
+      setErrorMsg("Network error. Please try again.");
     }
-  };
+  }
 
   return (
-    <section id="contact" className="bg-(--color-cream) py-24 px-6">
-      <div className="max-w-2xl mx-auto">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="flex flex-col gap-10"
-        >
-          <div className="text-center">
-            <h2 className="font-serif text-4xl font-normal text-(--color-ink) md:text-5xl">
-              Let&apos;s Work Together
-            </h2>
-            <p className="mt-4 text-sm text-(--color-muted) leading-relaxed">
-              Tell me a little about yourself and what you&apos;re looking for.
-              I&apos;d love to hear from you.
+    <section id="contact" className="py-24 px-6 bg-(--color-cream)">
+      <div className="max-w-2xl mx-auto flex flex-col gap-10">
+        <div className="text-center flex flex-col gap-4">
+          <span className="text-xs tracking-widest uppercase text-(--color-accent)">Get In Touch</span>
+          <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">
+            Ready to Book Your{" "}
+            <em className="italic">Session?</em>
+          </h2>
+          <p className="text-sm leading-relaxed text-(--color-muted)">
+            Fill out the form below and I&apos;ll get back to you within 24 hours to confirm
+            availability and answer any questions.
+          </p>
+        </div>
+
+        {status === "success" ? (
+          <div className="border border-(--color-border) p-8 text-center flex flex-col gap-3">
+            <p className="font-serif text-2xl text-(--color-ink)">Message Received!</p>
+            <p className="text-sm text-(--color-muted)">
+              Thank you for reaching out. I&apos;ll be in touch within 24 hours.
             </p>
           </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="name" className="text-xs tracking-widest uppercase text-(--color-muted)">
+                Full Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                placeholder="Jane Smith"
+                className="w-full border border-(--color-border) bg-transparent px-4 py-3 text-sm text-(--color-ink) placeholder:text-(--color-muted)/50 focus:outline-none focus:border-(--color-ink) transition-colors"
+              />
+            </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
-            <Input
-              label="Full Name"
-              type="text"
-              placeholder="Jane Smith"
-              value={formData.name}
-              onChange={handleChange("name")}
-              error={errors.name}
-              autoComplete="name"
-            />
-            <Input
-              label="Email Address"
-              type="email"
-              placeholder="jane@example.com"
-              value={formData.email}
-              onChange={handleChange("email")}
-              error={errors.email}
-              autoComplete="email"
-            />
-            <Textarea
-              label="Message"
-              placeholder="Tell me about your vision..."
-              value={formData.message}
-              onChange={handleChange("message")}
-              error={errors.message}
-            />
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="email" className="text-xs tracking-widest uppercase text-(--color-muted)">
+                Email Address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="jane@example.com"
+                className="w-full border border-(--color-border) bg-transparent px-4 py-3 text-sm text-(--color-ink) placeholder:text-(--color-muted)/50 focus:outline-none focus:border-(--color-ink) transition-colors"
+              />
+            </div>
 
-            {serverError && (
-              <p className="text-sm text-red-500">{serverError}</p>
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="message" className="text-xs tracking-widest uppercase text-(--color-muted)">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={5}
+                placeholder="Tell me about your session — what you're envisioning, your date, any questions..."
+                className="w-full border border-(--color-border) bg-transparent px-4 py-3 text-sm text-(--color-ink) placeholder:text-(--color-muted)/50 focus:outline-none focus:border-(--color-ink) transition-colors resize-none"
+              />
+            </div>
+
+            {status === "error" && (
+              <p className="text-xs text-red-600">{errorMsg}</p>
             )}
 
-            <div className="pt-2">
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                disabled={status === "submitting"}
-                className="w-full md:w-auto"
-              >
-                {status === "submitting" ? "Sending..." : "Send Message"}
-              </Button>
-            </div>
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="w-full tracking-widest uppercase text-xs font-medium bg-(--color-ink) text-(--color-cream) px-8 py-4 hover:bg-(--color-accent) transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {status === "loading" ? "Sending..." : "Send Inquiry"}
+            </button>
           </form>
-        </motion.div>
+        )}
       </div>
     </section>
   );
