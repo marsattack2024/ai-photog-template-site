@@ -30,10 +30,10 @@ export default function Home() {
         imageAlt="Boudoir photography session"
       />
 
-      {/* 2. Early social proof — 3-card carousel */}
-      <TestimonialsCarousel />
+      {/* 2. Featured testimonial carousel — 5 slides with headshots */}
+      <TestimonialCards />
 
-      {/* 3. Single pull quote strip */}
+      {/* 3. Pull quote strip */}
       <SocialProofStrip />
 
       {/* 4. How it works */}
@@ -51,8 +51,8 @@ export default function Home() {
       {/* 8. Gallery */}
       <GalleryGrid />
 
-      {/* 9. Featured testimonial carousel — 5 slides with headshots */}
-      <TestimonialCards />
+      {/* 9. Testimonials carousel — 3-card dark */}
+      <TestimonialsCarousel />
 
       {/* 10. Urgency — closing argument */}
       <UrgencyBlock />
