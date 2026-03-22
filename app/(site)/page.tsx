@@ -1,6 +1,10 @@
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
 import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
+import { buildPageMetadata } from "@/lib/seo";
+import { buildLocalBusinessSchema } from "@/lib/schema";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 // Below-fold: deferred until after hero paints
 const TestimonialCards = dynamic(() =>
@@ -34,9 +38,16 @@ const FAQSection = dynamic(() =>
   import("@/components/sections/FAQSection").then((m) => ({ default: m.FAQSection }))
 );
 
+export const metadata: Metadata = buildPageMetadata({
+  title: process.env.NEXT_PUBLIC_SITE_NAME ?? "Studio Name",
+  path: "/",
+});
+
 export default function Home() {
   return (
     <>
+      <JsonLd data={buildLocalBusinessSchema()} />
+
       {/* 1. Hero — static import, server component, LCP paints before hydration */}
       <Hero
         eyebrow="New Jersey Boudoir Photography"
