@@ -1,34 +1,105 @@
 "use client";
+import { useState } from "react";
+import Link from "next/link";
 
 interface NavbarProps {
   brandName?: string;
 }
 
+const NAV_ITEMS = [
+  { label: "Gallery", href: "#gallery" },
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Contact", href: "#contact" },
+];
+
 export function Navbar({ brandName = "[Studio Name]" }: NavbarProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <header className="w-full bg-(--color-cream) border-b border-(--color-border) px-6 py-4">
+    <header className="w-full bg-(--color-cream) border-b border-(--color-border) px-6 py-4 relative z-40">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" className="font-serif text-2xl tracking-widest text-(--color-ink)">
+        {/* Brand */}
+        <Link href="/" className="font-serif text-2xl tracking-widest text-(--color-ink)">
           {brandName}
-        </a>
-        <nav className="hidden md:flex items-center gap-8">
-          {["Gallery", "About", "Services", "Contact"].map((item) => (
+        </Link>
+
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+          {NAV_ITEMS.map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={item.label}
+              href={item.href}
               className="text-xs tracking-widest uppercase text-(--color-muted) hover:text-(--color-ink) transition-colors"
             >
-              {item}
+              {item.label}
             </a>
           ))}
         </nav>
+
+        {/* Desktop CTA */}
         <a
           href="#contact"
-          className="text-xs tracking-widest uppercase border border-(--color-ink) px-5 py-2 hover:bg-(--color-ink) hover:text-(--color-cream) transition-colors"
+          className="hidden md:inline-flex text-xs tracking-widest uppercase border border-(--color-ink) px-5 py-2 hover:bg-(--color-ink) hover:text-(--color-cream) transition-colors"
         >
           Inquire
         </a>
+
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
+          aria-controls="mobile-nav"
+          className="md:hidden p-2 text-(--color-ink)"
+        >
+          <span className="sr-only">{isOpen ? "Close" : "Open"} menu</span>
+          {/* Animated hamburger icon */}
+          <div className="w-5 flex flex-col gap-1.5" aria-hidden="true">
+            <span
+              className={`block h-px bg-(--color-ink) transition-transform duration-300 origin-center ${isOpen ? "rotate-45 translate-y-2" : ""}`}
+            />
+            <span
+              className={`block h-px bg-(--color-ink) transition-opacity duration-300 ${isOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block h-px bg-(--color-ink) transition-transform duration-300 origin-center ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}
+            />
+          </div>
+        </button>
       </div>
+
+      {/* Mobile nav drawer */}
+      <nav
+        id="mobile-nav"
+        aria-hidden={!isOpen}
+        aria-label="Mobile navigation"
+        className={`md:hidden absolute top-full left-0 right-0 bg-(--color-cream) border-b border-(--color-border) px-6 overflow-hidden transition-all duration-300 ${
+          isOpen ? "max-h-64 py-6" : "max-h-0 py-0"
+        }`}
+      >
+        <div className="flex flex-col gap-5">
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={() => setIsOpen(false)}
+              className="text-xs tracking-widest uppercase text-(--color-muted) hover:text-(--color-ink) transition-colors"
+              tabIndex={isOpen ? 0 : -1}
+            >
+              {item.label}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            onClick={() => setIsOpen(false)}
+            className="text-xs tracking-widest uppercase border border-(--color-ink) px-5 py-2 text-center hover:bg-(--color-ink) hover:text-(--color-cream) transition-colors"
+            tabIndex={isOpen ? 0 : -1}
+          >
+            Inquire
+          </a>
+        </div>
+      </nav>
     </header>
   );
 }

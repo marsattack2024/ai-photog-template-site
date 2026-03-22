@@ -1,6 +1,4 @@
 import dynamic from "next/dynamic";
-import { StickyBar } from "@/components/layout/StickyBar";
-import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
 
@@ -39,9 +37,6 @@ const FAQSection = dynamic(() =>
 export default function Home() {
   return (
     <>
-      <StickyBar />
-      <Navbar brandName="[Studio Name]" />
-
       {/* 1. Hero — static import, server component, LCP paints before hydration */}
       <Hero
         eyebrow="New Jersey Boudoir Photography"
