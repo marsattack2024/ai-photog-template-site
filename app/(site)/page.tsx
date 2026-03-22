@@ -1,17 +1,40 @@
+import dynamic from "next/dynamic";
 import { StickyBar } from "@/components/layout/StickyBar";
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
-import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
 import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
-import { ProcessSteps } from "@/components/sections/ProcessSteps";
-import { MeetPhotographer } from "@/components/sections/MeetPhotographer";
-import { WhyBook } from "@/components/sections/WhyBook";
-import { IncludesGrid } from "@/components/sections/IncludesGrid";
-import { GalleryGrid } from "@/components/sections/GalleryGrid";
-import { TestimonialCards } from "@/components/sections/TestimonialCards";
-import { UrgencyBlock } from "@/components/sections/UrgencyBlock";
-import { ContactForm } from "@/components/sections/ContactForm";
-import { FAQSection } from "@/components/sections/FAQSection";
+
+// Below-fold: deferred until after hero paints
+const TestimonialCards = dynamic(() =>
+  import("@/components/sections/TestimonialCards").then((m) => ({ default: m.TestimonialCards }))
+);
+const ProcessSteps = dynamic(() =>
+  import("@/components/sections/ProcessSteps").then((m) => ({ default: m.ProcessSteps }))
+);
+const MeetPhotographer = dynamic(() =>
+  import("@/components/sections/MeetPhotographer").then((m) => ({ default: m.MeetPhotographer }))
+);
+const WhyBook = dynamic(() =>
+  import("@/components/sections/WhyBook").then((m) => ({ default: m.WhyBook }))
+);
+const IncludesGrid = dynamic(() =>
+  import("@/components/sections/IncludesGrid").then((m) => ({ default: m.IncludesGrid }))
+);
+const GalleryGrid = dynamic(() =>
+  import("@/components/sections/GalleryGrid").then((m) => ({ default: m.GalleryGrid }))
+);
+const TestimonialsCarousel = dynamic(() =>
+  import("@/components/sections/TestimonialsCarousel").then((m) => ({ default: m.TestimonialsCarousel }))
+);
+const UrgencyBlock = dynamic(() =>
+  import("@/components/sections/UrgencyBlock").then((m) => ({ default: m.UrgencyBlock }))
+);
+const ContactForm = dynamic(() =>
+  import("@/components/sections/ContactForm").then((m) => ({ default: m.ContactForm }))
+);
+const FAQSection = dynamic(() =>
+  import("@/components/sections/FAQSection").then((m) => ({ default: m.FAQSection }))
+);
 
 export default function Home() {
   return (
@@ -19,7 +42,7 @@ export default function Home() {
       <StickyBar />
       <Navbar brandName="[Studio Name]" />
 
-      {/* 1. Hero */}
+      {/* 1. Hero — static import, server component, LCP paints before hydration */}
       <Hero
         eyebrow="New Jersey Boudoir Photography"
         headline={'Boudoir, For The Woman Who Doesn\u2019t Feel \u201cReady\u201d\u2026 Yet'}
@@ -30,11 +53,12 @@ export default function Home() {
         imageAlt="Boudoir photography session"
       />
 
-      {/* 2. Featured testimonial carousel — 5 slides with headshots */}
-      <TestimonialCards />
-
-      {/* 3. Pull quote strip */}
+      {/* 2. Social proof strip — static import, above fold on most screens */}
       <SocialProofStrip />
+
+      {/* Below-fold — all dynamically imported */}
+      {/* 3. Featured testimonial carousel */}
+      <TestimonialCards />
 
       {/* 4. How it works */}
       <ProcessSteps />
@@ -42,7 +66,7 @@ export default function Home() {
       {/* 5. Meet the photographer */}
       <MeetPhotographer />
 
-      {/* 6. Why people book — dark section */}
+      {/* 6. Why people book */}
       <WhyBook />
 
       {/* 7. What's included */}
@@ -54,10 +78,10 @@ export default function Home() {
       {/* 9. Testimonials carousel — 3-card dark */}
       <TestimonialsCarousel />
 
-      {/* 10. Urgency — closing argument */}
+      {/* 10. Urgency */}
       <UrgencyBlock />
 
-      {/* 11. Contact form — above FAQ */}
+      {/* 11. Contact form */}
       <ContactForm />
 
       {/* 12. FAQ */}

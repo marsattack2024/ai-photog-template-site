@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { stagger, fadeIn, slideRight } from "@/lib/motion";
+import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { Button } from "@/components/ui";
 
 interface AboutTeaserProps {
@@ -27,30 +24,22 @@ export function AboutTeaser({
   return (
     <section className="grid md:grid-cols-2 min-h-[600px] bg-(--color-cream)">
       {/* Photo collage */}
-      <motion.div
-        variants={stagger}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="relative grid grid-cols-2 gap-3 p-10 md:p-16"
-      >
-        <motion.div variants={fadeIn} className="relative col-span-2 h-64">
+      <div className="relative grid grid-cols-2 gap-3 p-10 md:p-16">
+        <AnimateOnScroll delay={0} className="relative col-span-2 h-64">
           <Image src={images[0]} alt={imageAlts[0]} fill className="object-cover" />
-        </motion.div>
-        <motion.div variants={fadeIn} className="relative h-48">
+        </AnimateOnScroll>
+        <AnimateOnScroll delay={100} className="relative h-48">
           <Image src={images[1]} alt={imageAlts[1]} fill className="object-cover" />
-        </motion.div>
-        <motion.div variants={fadeIn} className="relative h-48 mt-6">
+        </AnimateOnScroll>
+        <AnimateOnScroll delay={180} className="relative h-48 mt-6">
           <Image src={images[2]} alt={imageAlts[2]} fill className="object-cover" />
-        </motion.div>
-      </motion.div>
+        </AnimateOnScroll>
+      </div>
 
       {/* Text */}
-      <motion.div
-        variants={slideRight}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+      <AnimateOnScroll
+        from="right"
+        delay={80}
         className="flex flex-col justify-center gap-6 px-10 py-16 md:px-16"
       >
         <h2 className="font-serif text-5xl font-normal leading-tight text-(--color-ink) md:text-6xl">
@@ -64,7 +53,7 @@ export function AboutTeaser({
             <Button variant="ghost">{ctaLabel}</Button>
           </a>
         </div>
-      </motion.div>
+      </AnimateOnScroll>
     </section>
   );
 }

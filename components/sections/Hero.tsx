@@ -1,6 +1,5 @@
-"use client";
-import Image from "next/image";
-import { motion } from "framer-motion";
+// Server component — poster <img> renders in initial HTML for fastest LCP
+import { HeroOverlay } from "./HeroOverlay";
 
 interface HeroProps {
   eyebrow?: string;
@@ -15,53 +14,29 @@ interface HeroProps {
 export function Hero({ eyebrow, headline, subline, ctaLabel, ctaHref, imageSrc, imageAlt }: HeroProps) {
   return (
     <section className="relative w-full min-h-[95vh] flex items-end overflow-hidden">
-      {/* Background image — subject sits right-center, pulled up to show face */}
-      <Image
+      {/* LCP image — raw <img> in server component so it paints before hydration */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={imageSrc}
         alt={imageAlt}
-        fill
-        priority
-        className="object-cover object-[62%_15%]"
-        unoptimized
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover object-[62%_15%]"
       />
 
-      {/* Left-to-right gradient — text side dark, photo side clear */}
+      {/* Left-to-right gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
-      {/* Bottom vignette for text legibility */}
+      {/* Bottom vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-      {/* Text block — bottom-left with generous breathing room */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-10 md:px-16 pb-20 md:pb-28">
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-lg flex flex-col gap-5"
-        >
-          {eyebrow && (
-            <span className="text-xs uppercase tracking-[0.25em] text-white/60 font-medium">
-              {eyebrow}
-            </span>
-          )}
-
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.1] text-white">
-            {headline}
-          </h1>
-
-          <p className="text-sm md:text-base leading-relaxed text-white/75 max-w-sm">
-            {subline}
-          </p>
-
-          <div className="pt-2">
-            <a
-              href={ctaHref}
-              className="inline-flex items-center justify-center tracking-widest uppercase text-xs font-medium border border-white/40 text-white px-8 py-4 hover:bg-white hover:text-(--color-ink) transition-colors duration-300"
-            >
-              {ctaLabel}
-            </a>
-          </div>
-        </motion.div>
-      </div>
+      {/* Client component handles motion entrance animation */}
+      <HeroOverlay
+        eyebrow={eyebrow}
+        headline={headline}
+        subline={subline}
+        ctaLabel={ctaLabel}
+        ctaHref={ctaHref}
+      />
     </section>
   );
 }

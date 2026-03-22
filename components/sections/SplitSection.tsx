@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { slideLeft, slideRight } from "@/lib/motion";
+import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { Button } from "@/components/ui";
 
 interface SplitSectionProps {
@@ -26,17 +23,11 @@ export function SplitSection({
   ctaHref = "#",
   reverse = false,
 }: SplitSectionProps) {
-  const imageVariant = reverse ? slideRight : slideLeft;
-  const textVariant = reverse ? slideLeft : slideRight;
-
   return (
     <section className="grid md:grid-cols-2 min-h-[600px]">
       {/* Image */}
-      <motion.div
-        variants={imageVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+      <AnimateOnScroll
+        from={reverse ? "right" : "left"}
         className={`relative min-h-[400px] md:min-h-full ${reverse ? "md:order-2" : ""}`}
       >
         <Image
@@ -45,14 +36,12 @@ export function SplitSection({
           fill
           className="object-cover"
         />
-      </motion.div>
+      </AnimateOnScroll>
 
       {/* Text */}
-      <motion.div
-        variants={textVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+      <AnimateOnScroll
+        from={reverse ? "left" : "right"}
+        delay={120}
         className={`flex flex-col justify-center gap-6 px-10 py-16 md:px-16 bg-(--color-cream) ${
           reverse ? "md:order-1" : ""
         }`}
@@ -73,7 +62,7 @@ export function SplitSection({
             </a>
           </div>
         )}
-      </motion.div>
+      </AnimateOnScroll>
     </section>
   );
 }
