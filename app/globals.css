@@ -1,19 +1,38 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════
+   LAYER 1 — PRIMITIVES
+   Swap this block per client. One block. One file.
+   All values use oklch() for perceptual uniformity.
+   ═══════════════════════════════════════════════ */
+:root {
+  /* Brand palette — override these per client */
+  --primitive-ink:    oklch(15% 0.005 280);   /* near-black */
+  --primitive-cream:  oklch(97% 0.008 90);    /* warm white */
+  --primitive-accent: oklch(68% 0.10 80);     /* brand color (decorative use) */
+  --primitive-accent-text: oklch(50% 0.10 80); /* brand color darkened for text — passes 4.5:1 on cream */
+  --primitive-muted:  oklch(52% 0.010 280);   /* secondary text */
+  --primitive-border: oklch(88% 0.006 280);   /* subtle borders */
+}
+
+/* ═══════════════════════════════════════════════
+   LAYER 2 — SEMANTIC TOKENS (mapped to Tailwind)
+   Components reference these — NEVER the primitives.
+   Never hardcode hex in a component file.
+   Audit: grep -r "#[0-9a-fA-F]" --include="*.tsx" .
+   ═══════════════════════════════════════════════ */
 @theme {
-  /* Colors */
-  --color-cream: #faf9f7;
-  --color-ink: #1a1a1a;
-  --color-muted: #6b6b6b;
-  --color-accent: #c9a96e;
-  --color-border: #e8e4de;
-  --color-white: #ffffff;
+  --color-ink:          var(--primitive-ink);
+  --color-cream:        var(--primitive-cream);
+  --color-accent:       var(--primitive-accent);
+  --color-accent-text:  var(--primitive-accent-text);
+  --color-muted:        var(--primitive-muted);
+  --color-border:       var(--primitive-border);
+  --color-white:        oklch(100% 0 0);
 
-  /* Typography */
-  --font-serif: var(--font-playfair), Georgia, serif;
-  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-serif:  var(--font-playfair), Georgia, serif;
+  --font-sans:   var(--font-dm-sans), system-ui, sans-serif;
 
-  /* Transitions */
   --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
