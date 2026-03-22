@@ -1,39 +1,113 @@
 // lib/data.ts
-// STUB: Real Supabase queries wired in Task 10.
-// These stubs let the build pass before the database exists.
+import { createClient } from "@supabase/supabase-js";
 
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) {
+    return null;
+  }
+  return createClient(url, key);
+}
+
+// ── Testimonials ──────────────────────────────────────────────────────────
 export async function getTestimonials() {
-  return [];
+  const client = getSupabaseClient();
+  if (!client) return [];
+  const { data } = await client
+    .from("testimonials")
+    .select("*")
+    .eq("active", true)
+    .order("display_order");
+  return data ?? [];
 }
 
+// ── Galleries ─────────────────────────────────────────────────────────────
 export async function getGalleries() {
-  return [];
+  const client = getSupabaseClient();
+  if (!client) return [];
+  const { data } = await client
+    .from("galleries")
+    .select("*")
+    .eq("published", true)
+    .order("display_order");
+  return data ?? [];
 }
 
-export async function getGalleryBySlug(_slug: string) {
-  return null;
+export async function getGalleryBySlug(slug: string) {
+  const client = getSupabaseClient();
+  if (!client) return null;
+  const { data } = await client
+    .from("galleries")
+    .select("*, gallery_images(*)")
+    .eq("slug", slug)
+    .single();
+  return data ?? null;
 }
 
 export async function getGallerySlugs(): Promise<string[]> {
-  return [];
+  const client = getSupabaseClient();
+  if (!client) return [];
+  const { data } = await client
+    .from("galleries")
+    .select("slug")
+    .eq("published", true);
+  return data?.map((g: { slug: string }) => g.slug) ?? [];
 }
 
+// ── Blog ──────────────────────────────────────────────────────────────────
 export async function getPosts() {
-  return [];
+  const client = getSupabaseClient();
+  if (!client) return [];
+  const { data } = await client
+    .from("posts")
+    .select("*")
+    .eq("published", true)
+    .order("published_at", { ascending: false });
+  return data ?? [];
 }
 
-export async function getPostBySlug(_slug: string) {
-  return null;
+export async function getPostBySlug(slug: string) {
+  const client = getSupabaseClient();
+  if (!client) return null;
+  const { data } = await client
+    .from("posts")
+    .select("*")
+    .eq("slug", slug)
+    .eq("published", true)
+    .single();
+  return data ?? null;
 }
 
 export async function getPostSlugs(): Promise<string[]> {
-  return [];
+  const client = getSupabaseClient();
+  if (!client) return [];
+  const { data } = await client
+    .from("posts")
+    .select("slug")
+    .eq("published", true);
+  return data?.map((p: { slug: string }) => p.slug) ?? [];
 }
 
+// ── Services ──────────────────────────────────────────────────────────────
 export async function getServices() {
-  return [];
+  const client = getSupabaseClient();
+  if (!client) return [];
+  const { data } = await client
+    .from("services")
+    .select("*")
+    .eq("active", true)
+    .order("display_order");
+  return data ?? [];
 }
 
+// ── Site config ────────────────────────────────────────────────────────────
 export async function getSiteConfig() {
-  return null;
+  const client = getSupabaseClient();
+  if (!client) return null;
+  const { data } = await client
+    .from("site_config")
+    .select("*")
+    .single();
+  return data ?? null;
 }
