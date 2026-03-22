@@ -1,1 +1,5 @@
-{"node":{"60f67805efe544d5930ca8b1e191658e2f239fd477":{"workers":{"app/(site)/page":{"moduleId":"81014","async":false}},"layer":{"app/(site)/page":"action-browser"},"filename":"app/actions/submitInquiry.ts","exportedName":"submitInquiry"}},"edge":{},"encryptionKey":"iYzrw2F9detmRVEYEeLI9nnvMbj3SXCFV12BCHfQ8qc="}
+{
+  "node": {},
+  "edge": {},
+  "encryptionKey": "iYzrw2F9detmRVEYEeLI9nnvMbj3SXCFV12BCHfQ8qc="
+}
