@@ -1,41 +1,23 @@
 "use client";
+import { useActionState } from "react";
+import { submitInquiry } from "@/app/actions/submitInquiry";
 
-import { useState } from "react";
+const initialState = { success: false as const, errors: {} as Record<string, string[]> };
 
 export function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [state, formAction, isPending] = useActionState(submitInquiry, initialState);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("loading");
-    setErrorMsg("");
-
-    const form = e.currentTarget;
-    const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-    };
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const json = await res.json();
-      if (!res.ok) {
-        setStatus("error");
-        setErrorMsg(json.error ?? "Something went wrong.");
-      } else {
-        setStatus("success");
-        form.reset();
-      }
-    } catch {
-      setStatus("error");
-      setErrorMsg("Network error. Please try again.");
-    }
+  if (state.success) {
+    return (
+      <section id="contact" className="py-24 px-6 bg-(--color-cream)">
+        <div className="max-w-2xl mx-auto border border-(--color-border) p-12 text-center flex flex-col gap-4">
+          <p className="font-serif text-3xl text-(--color-ink)">Message Received</p>
+          <p className="text-sm text-(--color-muted) max-w-sm mx-auto leading-relaxed">
+            Thank you for reaching out. You&apos;ll hear back personally within 24 hours.
+          </p>
+        </div>
+      </section>
+    );
   }
 
   return (
@@ -44,79 +26,69 @@ export function ContactForm() {
         <div className="text-center flex flex-col gap-4">
           <span className="text-xs tracking-widest uppercase text-(--color-accent)">Get In Touch</span>
           <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">
-            Ready to Book Your{" "}
-            <em className="italic">Session?</em>
+            Ready to Book Your <em className="italic">Session?</em>
           </h2>
           <p className="text-sm leading-relaxed text-(--color-muted)">
-            Fill out the form below and I&apos;ll get back to you within 24 hours to confirm
-            availability and answer any questions.
+            Fill out the form and you&apos;ll hear back within 24 hours.
           </p>
         </div>
 
-        {status === "success" ? (
-          <div className="border border-(--color-border) p-8 text-center flex flex-col gap-3">
-            <p className="font-serif text-2xl text-(--color-ink)">Message Received!</p>
-            <p className="text-sm text-(--color-muted)">
-              Thank you for reaching out. I&apos;ll be in touch within 24 hours.
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="name" className="text-xs tracking-widest uppercase text-(--color-muted)">
-                Full Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                placeholder="Jane Smith"
-                className="w-full border border-(--color-border) bg-transparent px-4 py-3 text-sm text-(--color-ink) placeholder:text-(--color-muted)/50 focus:outline-none focus:border-(--color-ink) transition-colors"
-              />
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="email" className="text-xs tracking-widest uppercase text-(--color-muted)">
-                Email Address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                placeholder="jane@example.com"
-                className="w-full border border-(--color-border) bg-transparent px-4 py-3 text-sm text-(--color-ink) placeholder:text-(--color-muted)/50 focus:outline-none focus:border-(--color-ink) transition-colors"
-              />
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="message" className="text-xs tracking-widest uppercase text-(--color-muted)">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                placeholder="Tell me about your session — what you're envisioning, your date, any questions..."
-                className="w-full border border-(--color-border) bg-transparent px-4 py-3 text-sm text-(--color-ink) placeholder:text-(--color-muted)/50 focus:outline-none focus:border-(--color-ink) transition-colors resize-none"
-              />
-            </div>
-
-            {status === "error" && (
-              <p className="text-xs text-red-600">{errorMsg}</p>
+        <form action={formAction} className="flex flex-col gap-5">
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="name" className="text-xs tracking-widest uppercase text-(--color-muted)">
+              Full Name
+            </label>
+            <input
+              id="name" name="name" type="text" required
+              className="w-full border border-(--color-border) bg-transparent px-4 py-3 text-sm text-(--color-ink) focus:outline-none focus:border-(--color-ink) transition-colors"
+              aria-describedby={state.errors?.name ? "name-error" : undefined}
+            />
+            {state.errors?.name && (
+              <p id="name-error" className="text-xs text-red-600">{state.errors.name[0]}</p>
             )}
+          </div>
 
-            <button
-              type="submit"
-              disabled={status === "loading"}
-              className="w-full tracking-widest uppercase text-xs font-medium bg-(--color-ink) text-(--color-cream) px-8 py-4 hover:bg-(--color-accent) transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {status === "loading" ? "Sending..." : "Send Inquiry"}
-            </button>
-          </form>
-        )}
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="email" className="text-xs tracking-widest uppercase text-(--color-muted)">
+              Email Address
+            </label>
+            <input
+              id="email" name="email" type="email" required
+              className="w-full border border-(--color-border) bg-transparent px-4 py-3 text-sm text-(--color-ink) focus:outline-none focus:border-(--color-ink) transition-colors"
+              aria-describedby={state.errors?.email ? "email-error" : undefined}
+            />
+            {state.errors?.email && (
+              <p id="email-error" className="text-xs text-red-600">{state.errors.email[0]}</p>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="message" className="text-xs tracking-widest uppercase text-(--color-muted)">
+              Message
+            </label>
+            <textarea
+              id="message" name="message" required rows={5}
+              placeholder="Tell me about what you're envisioning..."
+              className="w-full border border-(--color-border) bg-transparent px-4 py-3 text-sm text-(--color-ink) focus:outline-none focus:border-(--color-ink) transition-colors resize-none"
+              aria-describedby={state.errors?.message ? "message-error" : undefined}
+            />
+            {state.errors?.message && (
+              <p id="message-error" className="text-xs text-red-600">{state.errors.message[0]}</p>
+            )}
+          </div>
+
+          {state.errors?.root && (
+            <p className="text-xs text-red-600">{state.errors.root[0]}</p>
+          )}
+
+          <button
+            type="submit"
+            disabled={isPending}
+            className="w-full tracking-widest uppercase text-xs font-medium bg-(--color-ink) text-(--color-cream) px-8 py-4 hover:bg-(--color-accent-text) transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isPending ? "Sending..." : "Send Inquiry"}
+          </button>
+        </form>
       </div>
     </section>
   );

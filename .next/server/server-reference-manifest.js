@@ -1,1 +1,1 @@
-self.__RSC_SERVER_MANIFEST="{\"node\":{},\"edge\":{},\"encryptionKey\":\"process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY\"}"
+self.__RSC_SERVER_MANIFEST="{\"node\":{\"60f67805efe544d5930ca8b1e191658e2f239fd477\":{\"workers\":{\"app/(site)/page\":{\"moduleId\":\"81014\",\"async\":false}},\"layer\":{\"app/(site)/page\":\"action-browser\"},\"filename\":\"app/actions/submitInquiry.ts\",\"exportedName\":\"submitInquiry\"}},\"edge\":{},\"encryptionKey\":\"process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY\"}"
