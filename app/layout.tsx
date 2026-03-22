@@ -18,8 +18,15 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Photographer | [City]",
-  description: "Wedding and portrait photographer based in [City]. Timeless, editorial imagery.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://yourdomain.com"),
+  title: {
+    default: process.env.NEXT_PUBLIC_SITE_NAME ?? "Studio Name",
+    template: `%s | ${process.env.NEXT_PUBLIC_SITE_NAME ?? "Studio Name"}`,
+  },
+  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
+  openGraph: {
+    images: [{ url: "/og-default.jpg", width: 1200, height: 630 }],
+  },
 };
 
 export default function RootLayout({
