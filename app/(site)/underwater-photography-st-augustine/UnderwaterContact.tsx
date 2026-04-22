@@ -145,8 +145,15 @@ export function UnderwaterContact() {
           </button>
 
           <p className="text-xs text-(--color-muted) text-center leading-relaxed">
-            Jennifer reads every inquiry personally. She will never cold-call you
-            or share your information. Sessions book 4\u20136 weeks out.
+            Jennifer reads every inquiry personally and texts you to confirm.
+            She will never cold-call you or share your information.
+            Sessions book 4&ndash;6 weeks out.
+          </p>
+          <p className="text-xs text-(--color-muted) text-center">
+            Prefer to text?{" "}
+            <a href="tel:9045933220" className="text-(--color-ink) underline underline-offset-2 hover:text-(--color-accent) transition-colors">
+              (904) 593-3220
+            </a>
           </p>
         </form>
       </div>

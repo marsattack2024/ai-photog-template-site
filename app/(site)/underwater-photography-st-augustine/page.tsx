@@ -48,6 +48,9 @@ const UnderwaterMeetJennifer = dynamic(() =>
 const UnderwaterImageQuote = dynamic(() =>
   import("./UnderwaterImageQuote").then((m) => ({ default: m.UnderwaterImageQuote }))
 );
+const UnderwaterWhoItsFor = dynamic(() =>
+  import("./UnderwaterWhoItsFor").then((m) => ({ default: m.UnderwaterWhoItsFor }))
+);
 
 /* ── SEO ── */
 const underwaterFaqs = [
@@ -99,10 +102,7 @@ export default function UnderwaterPhotographyPage() {
         objectPosition="center 30%"
       />
 
-      {/* 5. Empathy — Jennifer's personal letter */}
-      <UnderwaterEmpathy />
-
-      {/* 6. How it works */}
+      {/* 5. How it works */}
       <UnderwaterProcess />
 
       {/* 6. St. Augustine split */}
@@ -110,6 +110,9 @@ export default function UnderwaterPhotographyPage() {
 
       {/* 7. Why book */}
       <UnderwaterWhyBook />
+
+      {/* 8. Who it's for */}
+      <UnderwaterWhoItsFor />
 
       {/* 9. What's included */}
       <UnderwaterIncludes />
@@ -126,7 +129,10 @@ export default function UnderwaterPhotographyPage() {
       {/* 11. Gallery */}
       <UnderwaterGallery />
 
-      {/* 10. Meet Jennifer */}
+      {/* 12. Jennifer's personal letter — after the work speaks for itself */}
+      <UnderwaterEmpathy />
+
+      {/* 13. Meet Jennifer */}
       <UnderwaterMeetJennifer />
 
       {/* 11. Testimonials carousel — 3-card dark */}
