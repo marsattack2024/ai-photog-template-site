@@ -83,7 +83,7 @@ export default function UnderwaterPhotographyPage() {
         subline="Fully guided underwater portrait sessions in St. Augustine, FL. No swimming experience needed. No held-breath panic. Just you, the water, and images that look like they came from another world."
         ctaLabel="Book My Underwater Session"
         ctaHref="#contact"
-        imageSrc="/images/underwater/gallery-02.webp"
+        imageSrc="/images/underwater/gallery-10.webp"
         imageAlt="Underwater portrait photography session in St. Augustine Florida crystal springs"
       />
 
@@ -114,10 +114,7 @@ export default function UnderwaterPhotographyPage() {
       {/* 8. Who it's for */}
       <UnderwaterWhoItsFor />
 
-      {/* 9. What's included */}
-      <UnderwaterIncludes />
-
-      {/* 10. Quote banner — break before gallery */}
+      {/* 9. Quote banner — dark break before gallery */}
       <UnderwaterImageQuote
         src="/images/underwater/empathy-section.webp"
         alt="Mermaid underwater portrait in Florida natural springs"
@@ -126,10 +123,13 @@ export default function UnderwaterPhotographyPage() {
         objectPosition="center 40%"
       />
 
-      {/* 11. Gallery */}
+      {/* 10. Gallery — cream break between the two dark sections */}
       <UnderwaterGallery />
 
-      {/* 12. Jennifer's personal letter — after the work speaks for itself */}
+      {/* 11. What's included — dark section, now separated from quote banner by gallery */}
+      <UnderwaterIncludes />
+
+      {/* 12. Jennifer's personal letter */}
       <UnderwaterEmpathy />
 
       {/* 13. Meet Jennifer */}

@@ -38,7 +38,7 @@ export function UnderwaterIncludes() {
     <section className="py-24 px-6 bg-(--color-ink)">
       <div className="max-w-7xl mx-auto flex flex-col gap-14">
         <AnimateOnScroll className="text-center flex flex-col gap-4">
-          <span className="text-xs tracking-widest uppercase text-(--color-accent)">What\u2019s Included</span>
+          <span className="text-xs tracking-widest uppercase text-(--color-accent)">What&apos;s Included</span>
           <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-cream)">
             No Surprises.{" "}
             <em className="italic">Just Results.</em>
@@ -61,7 +61,7 @@ export function UnderwaterIncludes() {
               <ul className="flex flex-col gap-3">
                 {col.items.map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <span className="text-(--color-accent) mt-0.5 shrink-0">\u2713</span>
+                    <span className="text-(--color-accent) mt-0.5 shrink-0">✓</span>
                     <span className="text-sm text-(--color-cream)/80 leading-relaxed">{item}</span>
                   </li>
                 ))}

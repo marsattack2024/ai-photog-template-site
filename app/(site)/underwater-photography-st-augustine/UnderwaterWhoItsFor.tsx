@@ -46,7 +46,7 @@ export function UnderwaterWhoItsFor() {
         <AnimateOnScroll className="text-center flex flex-col gap-4">
           <span className="text-xs tracking-widest uppercase text-(--color-accent)">Who Books</span>
           <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">
-            You\u2019ll Recognize Yourself{" "}
+            You&apos;ll Recognize Yourself{" "}
             <em className="italic">in One of These.</em>
           </h2>
           <p className="text-sm text-(--color-muted) max-w-md mx-auto leading-relaxed">

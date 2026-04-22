@@ -1,21 +1,8 @@
-import Image from "next/image";
-
 export function UnderwaterEmpathy() {
   return (
     <section className="bg-(--color-cream)">
-      {/* Leading image — sets the mood before the letter */}
-      <div className="relative w-full h-[360px] md:h-[460px] overflow-hidden">
-        <Image
-          src="/images/underwater/gallery-05.webp"
-          alt="Woman floating weightlessly in a pool during underwater portrait session"
-          fill
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-(--color-cream)" />
-      </div>
-
       {/* Letter */}
-      <div className="pt-4 pb-20 px-6">
+      <div className="py-24 px-6">
         <div className="max-w-2xl mx-auto flex flex-col gap-7">
           <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">
             For the person reading this.

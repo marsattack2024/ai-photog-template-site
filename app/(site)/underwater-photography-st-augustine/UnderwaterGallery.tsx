@@ -6,7 +6,7 @@ const leftCol = [
   { src: "/images/underwater/gallery-01.webp", alt: "Underwater portrait — two women in flowing gowns, golden springs", h: "h-[500px]" },
   { src: "/images/underwater/gallery-09.webp", alt: "Underwater portrait — woman in shell corset with fish in crystal springs", h: "h-[460px]" },
   { src: "/images/underwater/gallery-03.webp", alt: "Underwater session — freediver ascending through light and bubbles", h: "h-[440px]" },
-  { src: "/images/underwater/gallery-10.webp", alt: "Underwater portrait — woman in white dress reclining in blue pool", h: "h-[380px]" },
+  { src: "/images/underwater/gallery-02.webp", alt: "Underwater portrait — woman in blue dress looking up through pool water", h: "h-[420px]" },
 ];
 
 const rightCol = [
