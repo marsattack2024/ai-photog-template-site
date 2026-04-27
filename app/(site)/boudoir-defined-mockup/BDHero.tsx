@@ -7,7 +7,7 @@ export function BDHero() {
       {/* Full-bleed LCP image — raw img for fastest paint */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="https://www.boudoirdefined.com/wp-content/uploads/2023/03/BoudoirDefinedPhotographyBoiseIdaho_0021-686x1024.jpg"
+        src="https://www.boudoirdefined.com/wp-content/uploads/2025/10/230406_JosieBatz_080-768x516.jpg"
         alt="Luxury boudoir photography session at Boudoir Defined studio in Meridian Idaho"
         fetchPriority="high"
         decoding="async"
