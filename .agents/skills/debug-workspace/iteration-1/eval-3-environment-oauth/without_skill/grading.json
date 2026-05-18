@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Classifies the bug as ENVIRONMENT (works locally, fails in prod) with explicit reasoning",
+      "passed": false,
+      "evidence": "No classification step. Immediately reads code files."
+    },
+    {
+      "text": "Recommends checking Vercel env vars (GOOGLE_ADS_STATE_SECRET or similar) before digging into code",
+      "passed": false,
+      "evidence": "Finds env var issue via code reading (sees the throw in auth.ts), not via upfront env var checklist"
+    },
+    {
+      "text": "Checks for export const runtime = 'nodejs' on Google Ads OAuth routes since they use crypto",
+      "passed": true,
+      "evidence": "Inspects the connect and callback routes, notes both have runtime = nodejs"
+    },
+    {
+      "text": "Does not jump directly to code fixes before confirming env vars and runtime config",
+      "passed": false,
+      "evidence": "Reads 6 code files before addressing env vars; env var conclusion comes from the code, not from an env check first"
+    },
+    {
+      "text": "References the correct Google Ads OAuth files (src/app/api/google-ads/ or src/lib/google-ads/)",
+      "passed": true,
+      "evidence": "References connect/route.ts, callback/route.ts, auth.ts, encryption.ts, middleware.ts"
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 3,
+    "total": 5,
+    "pass_rate": 0.4
+  },
+  "execution_metrics": {
+    "total_tool_calls": 34,
+    "total_steps": 4,
+    "errors_encountered": 0
+  }
+}

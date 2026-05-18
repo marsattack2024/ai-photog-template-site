@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Announces the /debug pipeline at the start of the response",
+      "passed": true,
+      "evidence": "Response opens with 'Using /debug: Reproduce → Classify → [Research Gate if external] → Root Cause → Fix → Verify → Lessons.'"
+    },
+    {
+      "text": "Reads the actual file src/app/api/call-reviews/upload/route.ts before proposing any fix",
+      "passed": true,
+      "evidence": "Step 0 reads the 383-line route file first, discovers processTranscription doesn't exist"
+    },
+    {
+      "text": "Classifies the bug as EXTERNAL (not INTERNAL or ENVIRONMENT) with explicit reasoning",
+      "passed": true,
+      "evidence": "Explicit 'Classification: EXTERNAL — the error occurs on an OpenAI Whisper API response and the user explicitly suspects a response shape change'"
+    },
+    {
+      "text": "Uses a research tool (Perplexity, web search, or similar) to check OpenAI Whisper API response shape before proposing a fix",
+      "passed": true,
+      "evidence": "Step 2 fires Perplexity search: 'OpenAI Whisper API response_format text returns undefined response shape changed 2025 2026'"
+    },
+    {
+      "text": "Does NOT propose a code change before completing the research step",
+      "passed": true,
+      "evidence": "Fix section (Step 4) only appears after Step 2 research confirmed no API change; conclusion was 'no code changes needed, redeploy required'"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "total_tool_calls": 39,
+    "total_steps": 6,
+    "errors_encountered": 0
+  }
+}
