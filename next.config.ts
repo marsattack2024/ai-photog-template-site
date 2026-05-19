@@ -17,6 +17,7 @@ const LINK_HEADER = [
   '</api/openapi.json>; rel="service-desc"; type="application/json"',
   '</llms.txt>; rel="llms-txt"; type="text/plain"',
   '</llms-full.txt>; rel="llms-full-txt"; type="text/plain"',
+  '</.well-known/mcp/server-card.json>; rel="mcp-server-card"; type="application/json"',
 ].join(", ");
 
 const securityHeaders = [
