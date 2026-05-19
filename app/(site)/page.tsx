@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
 import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
+import { ImageQuote } from "@/components/sections/ImageQuote";
 import { buildPageMetadata } from "@/lib/seo";
 import { buildLocalBusinessSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -63,34 +64,63 @@ export default function Home() {
       <SocialProofStrip />
 
       {/* Below-fold — all dynamically imported */}
-      {/* 3. Featured testimonial carousel */}
+      {/* 3. Featured testimonial cards (cream) */}
       <TestimonialCards />
 
-      {/* 4. How it works */}
+      {/* 4. Breaker — image quote between two cream sections */}
+      <ImageQuote
+        src="/images/underwater/empathy-section.webp"
+        alt="Editorial portrait session — intimate moment captured by a real photographer"
+        quote="I almost cancelled three different times. I'm so glad I didn't. Walking out of that session I felt like a completely different person."
+        attribution="Portrait Session Client"
+        objectPosition="center 30%"
+      />
+
+      {/* 5. How it works (cream) */}
       <ProcessSteps />
 
-      {/* 5. Meet the photographer */}
-      <MeetPhotographer />
+      {/* 6. Meet the photographer (DARK — inversion to create rhythm) */}
+      <MeetPhotographer variant="dark" />
 
-      {/* 6. Why people book */}
+      {/* 7. Why people book (cream) */}
       <WhyBook />
 
-      {/* 7. What's included */}
+      {/* 8. What's included (cream) */}
       <IncludesGrid />
 
-      {/* 8. Gallery */}
+      {/* 9. Breaker — image quote between two cream sections */}
+      <ImageQuote
+        src="/images/family/family-cta-bg.jpg"
+        alt="Family session — three generations laughing together in natural light"
+        quote="She made me feel like I belonged in front of the camera. Every shot looks like me on my best day."
+        attribution="Family Session Client"
+        objectPosition="center 35%"
+        align="right"
+      />
+
+      {/* 10. Gallery (cream) */}
       <GalleryGrid />
 
-      {/* 9. Testimonials carousel — 3-card dark */}
+      {/* 11. Testimonials carousel — 3-card dark */}
       <TestimonialsCarousel />
 
-      {/* 10. Urgency */}
+      {/* 12. Urgency (accent color) */}
       <UrgencyBlock />
 
-      {/* 11. Contact form */}
+      {/* 13. Contact form (cream) */}
       <ContactForm />
 
-      {/* 12. FAQ */}
+      {/* 14. Breaker — image quote between two cream sections */}
+      <ImageQuote
+        src="/images/underwater/jennifer-portrait.jpg"
+        alt="Close-up portrait — quiet moment, soft natural light"
+        quote="I cried at the viewing. Not because they were sad — because for the first time I saw myself the way the people who love me see me."
+        attribution="Portrait Session Client"
+        objectPosition="center 25%"
+        align="left"
+      />
+
+      {/* 15. FAQ (cream) */}
       <FAQSection />
 
       {/* 13. Booking urgency — below FAQ */}
