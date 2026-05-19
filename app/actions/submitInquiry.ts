@@ -1,7 +1,9 @@
 // app/actions/submitInquiry.ts
 "use server";
+import { headers } from "next/headers";
 import { InquirySchema } from "@/lib/validators";
 import { upsertContact } from "@/lib/ghl/contacts";
+import { rateLimit, getClientIpFromHeaders } from "@/lib/rate-limit";
 
 export type SubmitInquiryState =
   | { success: true }
@@ -17,6 +19,22 @@ export async function submitInquiry(
   // Bots that auto-fill every input get a silent success so they don't retry.
   if (typeof raw.hp === "string" && raw.hp.length > 0) {
     return { success: true };
+  }
+
+  // Rate limit: 5 submissions / minute / IP. Same key namespace as the REST
+  // endpoint so a single IP can't get 10 by mixing form + curl.
+  const hdrs = await headers();
+  const ip = getClientIpFromHeaders(hdrs);
+  const limit = rateLimit(`inquiry:${ip}`, { max: 5, windowMs: 60_000 });
+  if (!limit.ok) {
+    return {
+      success: false,
+      errors: {
+        root: [
+          `Too many submissions. Please try again in ${limit.retryAfter} seconds.`,
+        ],
+      },
+    };
   }
 
   const parsed = InquirySchema.safeParse(raw);
