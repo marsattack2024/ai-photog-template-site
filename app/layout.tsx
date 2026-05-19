@@ -6,8 +6,17 @@ import { siteConfig } from "@/lib/site.config";
 import "./globals.css";
 
 // Analytics IDs: prefer siteConfig, fall back to env vars at runtime.
-const GTM_ID = siteConfig.analytics?.gtmId || process.env.NEXT_PUBLIC_GTM_ID;
-const GA_ID = siteConfig.analytics?.gaId || process.env.NEXT_PUBLIC_GA_ID;
+// Production-only by design: localhost + Vercel preview deploys never load
+// analytics so we don't pollute the photographer's data with test traffic.
+// VERCEL_ENV is "production" | "preview" | "development" on Vercel; undefined
+// locally. Missing ID still no-ops gracefully — never blocks the build/launch.
+const IS_PRODUCTION = process.env.VERCEL_ENV === "production";
+const GTM_ID = IS_PRODUCTION
+  ? siteConfig.analytics?.gtmId || process.env.NEXT_PUBLIC_GTM_ID
+  : undefined;
+const GA_ID = IS_PRODUCTION
+  ? siteConfig.analytics?.gaId || process.env.NEXT_PUBLIC_GA_ID
+  : undefined;
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
