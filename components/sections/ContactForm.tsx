@@ -1,8 +1,8 @@
 "use client";
 import { useActionState } from "react";
-import { submitInquiry } from "@/app/actions/submitInquiry";
+import { submitInquiry, type SubmitInquiryState } from "@/app/actions/submitInquiry";
 
-const initialState = { success: false as const, errors: {} as Record<string, string[]> };
+const initialState: SubmitInquiryState = { success: false, errors: {} };
 
 export function ContactForm() {
   const [state, formAction, isPending] = useActionState(submitInquiry, initialState);
@@ -33,7 +33,16 @@ export function ContactForm() {
           </p>
         </div>
 
-        <form action={formAction} className="flex flex-col gap-5">
+        <form action={formAction} className="relative flex flex-col gap-5">
+          {/* Honeypot — visually hidden, must stay empty. */}
+          <input
+            type="text"
+            name="hp"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute -left-[9999px] w-px h-px opacity-0"
+          />
           <div className="flex flex-col gap-1.5">
             <label htmlFor="name" className="text-xs tracking-widest uppercase text-(--color-muted)">
               Full Name

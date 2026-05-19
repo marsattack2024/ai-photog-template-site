@@ -1,34 +1,47 @@
 // app/actions/submitInquiry.ts
 "use server";
 import { InquirySchema } from "@/lib/validators";
-import { getServerSupabase } from "@/lib/supabase-server";
+import { upsertContact } from "@/lib/ghl/contacts";
 
-type ActionResult =
+export type SubmitInquiryState =
   | { success: true }
   | { success: false; errors: Record<string, string[]> };
 
 export async function submitInquiry(
-  _prevState: ActionResult | { success: false; errors: Record<string, string[]> },
+  _prevState: SubmitInquiryState,
   formData: FormData
-): Promise<ActionResult> {
+): Promise<SubmitInquiryState> {
   const raw = Object.fromEntries(formData.entries());
-  const parsed = InquirySchema.safeParse(raw);
 
-  if (!parsed.success) {
-    return { success: false, errors: parsed.error.flatten().fieldErrors };
+  // Honeypot: real users don't fill the hp field (it's visually hidden).
+  // Bots that auto-fill every input get a silent success so they don't retry.
+  if (typeof raw.hp === "string" && raw.hp.length > 0) {
+    return { success: true };
   }
 
-  const supabase = getServerSupabase();
-  const { error } = await supabase.from("inquiries").insert({
-    ...parsed.data,
-    status: "new",
-  });
-
-  if (error) {
-    console.error("[submitInquiry] Supabase error:", error.message);
+  const parsed = InquirySchema.safeParse(raw);
+  if (!parsed.success) {
     return {
       success: false,
-      errors: { root: ["Submission failed. Please try again."] },
+      errors: parsed.error.flatten().fieldErrors,
+    };
+  }
+
+  const sourcePage =
+    typeof raw.sourcePage === "string" && raw.sourcePage ? raw.sourcePage : undefined;
+
+  const result = await upsertContact({
+    ...parsed.data,
+    sourcePage,
+    sourceName: process.env.NEXT_PUBLIC_SITE_NAME ?? "Website",
+  });
+
+  if (!result.ok) {
+    return {
+      success: false,
+      errors: {
+        root: ["Submission failed. Please try again, or call/text directly."],
+      },
     };
   }
 

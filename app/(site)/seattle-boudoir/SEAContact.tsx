@@ -1,28 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useActionState } from "react";
+import { submitInquiry, type SubmitInquiryState } from "@/app/actions/submitInquiry";
+
+const initialState: SubmitInquiryState = {
+  success: false,
+  errors: {},
+};
 
 export function SEAContact() {
-  const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    sessionType: "",
-    message: "",
-  });
-
-  function handleChange(
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
+  const [state, formAction, isPending] = useActionState(submitInquiry, initialState);
 
   return (
     <section id="book" className="bg-(--color-ink) py-24 px-6">
@@ -51,7 +37,7 @@ export function SEAContact() {
           </p>
         </div>
 
-        {submitted ? (
+        {state.success ? (
           <div className="text-center py-12 flex flex-col gap-4 bg-(--color-cream) p-10">
             <span className="text-3xl text-(--color-accent)">✦</span>
             <h3 className="font-serif text-2xl text-(--color-ink)">
@@ -65,63 +51,97 @@ export function SEAContact() {
           </div>
         ) : (
           <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-6 bg-(--color-cream) p-8 md:p-14"
+            action={formAction}
+            className="relative flex flex-col gap-6 bg-(--color-cream) p-8 md:p-14"
           >
+            {/* Honeypot — visually hidden, screen-reader-hidden, must stay empty.
+                Real users won't fill this; bots that auto-fill every input will
+                trigger a silent success so they don't retry. */}
+            <input
+              type="text"
+              name="hp"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute -left-[9999px] w-px h-px opacity-0"
+            />
+            <input type="hidden" name="sourcePage" value="/seattle-boudoir" />
+
             <div className="grid sm:grid-cols-2 gap-5">
               <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-widest uppercase text-(--color-muted)">
+                <label
+                  htmlFor="sea-name"
+                  className="text-xs tracking-widest uppercase text-(--color-muted)"
+                >
                   Your Name
                 </label>
                 <input
+                  id="sea-name"
                   type="text"
                   name="name"
-                  value={form.name}
-                  onChange={handleChange}
                   required
                   placeholder="First & last name"
+                  aria-describedby={!state.success && state.errors?.name ? "sea-name-error" : undefined}
                   className="bg-white border border-(--color-border) px-4 py-3.5 text-sm text-(--color-ink) placeholder:text-(--color-muted)/50 focus:outline-none focus:border-(--color-accent) focus:ring-1 focus:ring-(--color-accent)/30 transition-all duration-200"
                 />
+                {!state.success && state.errors?.name && (
+                  <p id="sea-name-error" className="text-xs text-red-600">
+                    {state.errors.name[0]}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-widest uppercase text-(--color-muted)">
+                <label
+                  htmlFor="sea-email"
+                  className="text-xs tracking-widest uppercase text-(--color-muted)"
+                >
                   Email Address
                 </label>
                 <input
+                  id="sea-email"
                   type="email"
                   name="email"
-                  value={form.email}
-                  onChange={handleChange}
                   required
                   placeholder="you@email.com"
+                  aria-describedby={!state.success && state.errors?.email ? "sea-email-error" : undefined}
                   className="bg-white border border-(--color-border) px-4 py-3.5 text-sm text-(--color-ink) placeholder:text-(--color-muted)/50 focus:outline-none focus:border-(--color-accent) focus:ring-1 focus:ring-(--color-accent)/30 transition-all duration-200"
                 />
+                {!state.success && state.errors?.email && (
+                  <p id="sea-email-error" className="text-xs text-red-600">
+                    {state.errors.email[0]}
+                  </p>
+                )}
               </div>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-5">
               <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-widest uppercase text-(--color-muted)">
+                <label
+                  htmlFor="sea-phone"
+                  className="text-xs tracking-widest uppercase text-(--color-muted)"
+                >
                   Phone Number
                 </label>
                 <input
+                  id="sea-phone"
                   type="tel"
                   name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
                   placeholder="For your consultation call"
                   className="bg-white border border-(--color-border) px-4 py-3.5 text-sm text-(--color-ink) placeholder:text-(--color-muted)/50 focus:outline-none focus:border-(--color-accent) focus:ring-1 focus:ring-(--color-accent)/30 transition-all duration-200"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-widest uppercase text-(--color-muted)">
+                <label
+                  htmlFor="sea-session-type"
+                  className="text-xs tracking-widest uppercase text-(--color-muted)"
+                >
                   Session Type
                 </label>
                 <select
+                  id="sea-session-type"
                   name="sessionType"
-                  value={form.sessionType}
-                  onChange={handleChange}
+                  defaultValue=""
                   className="bg-white border border-(--color-border) px-4 py-3.5 text-sm text-(--color-ink) focus:outline-none focus:border-(--color-accent) focus:ring-1 focus:ring-(--color-accent)/30 transition-all duration-200"
                 >
                   <option value="">Select one (optional)</option>
@@ -136,24 +156,33 @@ export function SEAContact() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-xs tracking-widest uppercase text-(--color-muted)">
+              <label
+                htmlFor="sea-message"
+                className="text-xs tracking-widest uppercase text-(--color-muted)"
+              >
                 Tell Molly about your vision
               </label>
               <textarea
+                id="sea-message"
                 name="message"
-                value={form.message}
-                onChange={handleChange}
                 rows={4}
                 placeholder="What's the occasion? What excites you? What are you nervous about? (optional)"
                 className="bg-white border border-(--color-border) px-4 py-3.5 text-sm text-(--color-ink) placeholder:text-(--color-muted)/50 focus:outline-none focus:border-(--color-accent) focus:ring-1 focus:ring-(--color-accent)/30 transition-all duration-200 resize-none"
               />
             </div>
 
+            {!state.success && state.errors?.root && (
+              <p className="text-center text-xs text-red-600">
+                {state.errors.root[0]}
+              </p>
+            )}
+
             <button
               type="submit"
-              className="self-center mt-2 inline-flex items-center justify-center tracking-widest uppercase text-xs font-medium bg-(--color-accent) text-(--color-cream) px-12 py-4.5 hover:opacity-90 transition-opacity duration-300"
+              disabled={isPending}
+              className="self-center mt-2 inline-flex items-center justify-center tracking-widest uppercase text-xs font-medium bg-(--color-accent) text-(--color-cream) px-12 py-4.5 hover:opacity-90 transition-opacity duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Send My Request
+              {isPending ? "Sending…" : "Send My Request"}
             </button>
 
             <p className="text-center text-[10px] text-(--color-muted) tracking-wide">
