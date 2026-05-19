@@ -70,7 +70,7 @@ Default sitelink set:
 7. Client Resources
 8. Contact The Studio
 
-P2P override:
+Studio conversion standard:
 - Do not create a public "Pricing" or "Investment" sitelink by default.
 - Use consult, FAQ, experience, or product education instead.
 - If the user explicitly requires a pricing/investment sitelink, include a risk note.

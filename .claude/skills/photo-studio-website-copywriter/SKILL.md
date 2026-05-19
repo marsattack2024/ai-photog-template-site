@@ -1,6 +1,6 @@
 ---
 name: photo-studio-website-copywriter
-description: create, rewrite, audit, and improve conversion-focused website copy for portrait photography studios using storybrand, p2p revenue formula strategy, genre-specific buyer psychology, proof mining, and mobile-first page architecture. use when the user asks for photography studio homepage copy, service page copy, landing page copy, about pages, inquiry pages, faqs, website audits, website rewrites, storybrand messaging maps, or any website-related copy for boudoir, newborn, maternity, family, branding, headshot, senior, pet, wedding, or kids fantasy photographers.
+description: create, rewrite, audit, and improve conversion-focused website copy for portrait photography studios using storybrand, studio revenue strategy, genre-specific buyer psychology, proof mining, and mobile-first page architecture. use when the user asks for photography studio homepage copy, service page copy, landing page copy, about pages, inquiry pages, faqs, website audits, website rewrites, storybrand messaging maps, or any website-related copy for boudoir, newborn, maternity, family, branding, headshot, senior, pet, wedding, or kids fantasy photographers.
 ---
 
 # Photo Studio Website Copywriter

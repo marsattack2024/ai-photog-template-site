@@ -96,12 +96,12 @@ When character limits matter, check the character count manually before finalizi
 - Use location insertion only in headlines, not descriptions.
 - Pin only when necessary for brand/legal clarity. Otherwise leave RSA assets flexible.
 
-## P2P Overrides
+## Studio Conversion Standards
 
 - Do not put pricing on public website or landing page copy unless the user explicitly overrides this standard for the specific client.
 - Do not create "view pricing" sitelinks by default. Use consultation, portfolio, experience, FAQ, testimonials, or availability instead.
 - Do not make claims like "#1", "best", "guaranteed", "award-winning", or exact review counts unless the user provides proof.
-- If the Google Ads handbook example conflicts with P2P conversion rules, follow P2P rules and flag the conflict.
+- If the Google Ads handbook example conflicts with studio conversion standards, follow studio conversion standards and flag the conflict.
 
 ## Genre Handling
 

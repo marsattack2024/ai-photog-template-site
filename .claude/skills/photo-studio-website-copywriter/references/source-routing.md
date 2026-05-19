@@ -31,9 +31,9 @@ Consult the Best Email Subject Lines Handbook when writing post-inquiry, campaig
 When sources conflict, use this hierarchy:
 1. Explicit user instruction.
 2. Client-specific proof and offer details.
-3. P2P operating rules.
-4. Genre-specific P2P docs.
+3. Studio operating rules.
+4. Genre-specific studio marketing docs.
 5. General StoryBrand and website docs.
 6. General platform best practices.
 
-Important P2P override: standard studio websites should not publish pricing unless the user explicitly instructs otherwise. Campaign landing pages may include deposits, offer terms, or pricing anchors when required for transparency.
+Important studio-site standard: standard studio websites should not publish pricing unless the user explicitly instructs otherwise. Campaign landing pages may include deposits, offer terms, or pricing anchors when required for transparency.

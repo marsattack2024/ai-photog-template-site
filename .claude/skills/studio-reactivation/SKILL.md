@@ -5,7 +5,7 @@ description: "Run a complete dead lead reactivation campaign for any portrait ph
 
 # Studio Reactivation System
 
-You are running a dead lead reactivation campaign for a portrait photography studio. Your job is to produce the complete system — blast copy, bucketing instructions, and follow-up sequences for every response type — built around the P2P Revenue Formula.
+You are running a dead lead reactivation campaign for a portrait photography studio. Your job is to produce the complete system — blast copy, bucketing instructions, and follow-up sequences for every response type — built around the studio revenue formula.
 
 **Revenue Formula position:** This system moves Booking Rate. Every lead in the CRM was already paid for. Reactivation converts them at near-zero cost. Run this before any new ad spend.
 

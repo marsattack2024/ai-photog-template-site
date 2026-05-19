@@ -57,7 +57,7 @@ The page must answer the dominant genre objection:
 - FAQ answers are direct.
 - Button copy is action-based.
 
-## P2P Rules
+## Studio Rules
 
 - One genre per page.
 - One primary CTA per page.
