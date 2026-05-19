@@ -20,13 +20,15 @@ export function Hero({ eyebrow, headline, subline, ctaLabel, ctaHref, imageSrc, 
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[62%_15%]"
+        className="object-cover object-[center_15%] md:object-[62%_15%]"
       />
 
-      {/* Left-to-right gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
-      {/* Bottom vignette */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+      {/* Desktop: left-to-right gradient — darkness sits behind left-aligned text */}
+      <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
+      {/* Mobile: bottom-up gradient — darkness sits behind centered text at the bottom */}
+      <div className="absolute inset-0 md:hidden bg-gradient-to-t from-black/85 via-black/45 to-transparent" />
+      {/* Bottom vignette (both viewports, stronger on mobile already covered above) */}
+      <div className="absolute inset-0 hidden md:block bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
       {/* Client component handles motion entrance animation */}
       <HeroOverlay

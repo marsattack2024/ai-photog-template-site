@@ -11,12 +11,12 @@ interface HeroOverlayProps {
 
 export function HeroOverlay({ eyebrow, headline, subline, ctaLabel, ctaHref }: HeroOverlayProps) {
   return (
-    <div className="relative z-10 w-full max-w-7xl mx-auto px-10 md:px-16 pb-20 md:pb-28">
+    <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-16 pb-16 md:pb-28 flex justify-center md:justify-start">
       <motion.div
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="max-w-lg flex flex-col gap-5"
+        className="max-w-lg flex flex-col gap-5 text-center md:text-left items-center md:items-start"
       >
         {eyebrow && (
           <span className="text-xs uppercase tracking-[0.25em] text-white/60 font-medium">
