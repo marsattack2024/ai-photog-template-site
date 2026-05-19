@@ -45,6 +45,27 @@ export interface SiteAnnouncement {
   ctaHref?: string;
 }
 
+export interface SiteImage {
+  src: string;
+  alt: string;
+  /** Optional CSS object-position (e.g. "center 25%"). */
+  position?: string;
+}
+
+export interface SiteImageQuote extends SiteImage {
+  quote: string;
+  attribution?: string;
+  /** Horizontal alignment of the quote within the image. */
+  align?: "left" | "center" | "right";
+}
+
+export interface SiteImages {
+  /** Bio portrait — used by MeetPhotographer when no override is passed. */
+  portrait: SiteImage;
+  /** Image-quote breakers — sprinkled between cream sections for rhythm. */
+  imageQuotes: SiteImageQuote[];
+}
+
 export interface SiteConfig {
   brand: {
     name: string;
@@ -79,6 +100,12 @@ export interface SiteConfig {
   announcement?: SiteAnnouncement;
   hero: SiteHero;
   bookingCTA?: SiteBookingCTA;
+  /**
+   * Canonical asset registry. Sections that don't take their own image
+   * props pull from here. Hero image lives on `hero.imageSrc` (it's part
+   * of hero copy, not a reusable asset).
+   */
+  images: SiteImages;
 }
 
 export const siteConfig: SiteConfig = {
@@ -94,7 +121,7 @@ export const siteConfig: SiteConfig = {
     description:
       process.env.NEXT_PUBLIC_SITE_DESCRIPTION ??
       "A boutique portrait and editorial photography studio. Guided sessions, same-week delivery, every body welcome.",
-    defaultOgImage: "/og-default.jpg",
+    // OG image is auto-generated from brand name + tagline by app/opengraph-image.tsx
     titleTemplate: "%s | [Studio Name]",
     aiBotPolicy: {
       allowSearch: true,
@@ -135,5 +162,40 @@ export const siteConfig: SiteConfig = {
       </>
     ),
     body: "I take on a limited number of portrait sessions each month to ensure every client gets my full attention. Once the calendar fills, it fills. Don't wait and wonder — reach out today to hold your date.",
+  },
+  images: {
+    portrait: {
+      src: "/placeholder/portrait.svg",
+      alt: "Photographer portrait",
+    },
+    imageQuotes: [
+      {
+        src: "/images/underwater/empathy-section.webp",
+        alt: "Editorial portrait session — intimate moment captured by a real photographer",
+        position: "center 30%",
+        quote:
+          "I almost cancelled three different times. I'm so glad I didn't. Walking out of that session I felt like a completely different person.",
+        attribution: "Portrait Session Client",
+        align: "left",
+      },
+      {
+        src: "/images/family/family-cta-bg.jpg",
+        alt: "Family session — three generations laughing together in natural light",
+        position: "center 35%",
+        quote:
+          "She made me feel like I belonged in front of the camera. Every shot looks like me on my best day.",
+        attribution: "Family Session Client",
+        align: "right",
+      },
+      {
+        src: "/images/underwater/jennifer-portrait.jpg",
+        alt: "Close-up portrait — quiet moment, soft natural light",
+        position: "center 25%",
+        quote:
+          "I cried at the viewing. Not because they were sad — because for the first time I saw myself the way the people who love me see me.",
+        attribution: "Portrait Session Client",
+        align: "left",
+      },
+    ],
   },
 };

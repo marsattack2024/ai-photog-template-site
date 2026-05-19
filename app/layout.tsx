@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import { MotionConfig } from "framer-motion";
+import { siteConfig } from "@/lib/site.config";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -19,15 +20,14 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://yourdomain.com"),
+  metadataBase: new URL(siteConfig.seo.baseUrl),
   title: {
-    default: process.env.NEXT_PUBLIC_SITE_NAME ?? "Studio Name",
-    template: `%s | ${process.env.NEXT_PUBLIC_SITE_NAME ?? "Studio Name"}`,
+    default: siteConfig.brand.name,
+    template:
+      siteConfig.seo.titleTemplate ?? `%s | ${siteConfig.brand.name}`,
   },
-  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
-  openGraph: {
-    images: [{ url: "/og-default.jpg", width: 1200, height: 630 }],
-  },
+  description: siteConfig.seo.description,
+  // openGraph.images falls through to app/opengraph-image.tsx (auto-generated).
 };
 
 export default function RootLayout({

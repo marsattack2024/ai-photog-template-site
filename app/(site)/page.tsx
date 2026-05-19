@@ -62,14 +62,17 @@ export default function Home() {
       {/* 3. Featured testimonial cards (cream) */}
       <TestimonialCards />
 
-      {/* 4. Breaker — image quote between two cream sections */}
-      <ImageQuote
-        src="/images/underwater/empathy-section.webp"
-        alt="Editorial portrait session — intimate moment captured by a real photographer"
-        quote="I almost cancelled three different times. I'm so glad I didn't. Walking out of that session I felt like a completely different person."
-        attribution="Portrait Session Client"
-        objectPosition="center 30%"
-      />
+      {/* 4. Breaker — image quote (cream → image → cream) */}
+      {siteConfig.images.imageQuotes[0] && (
+        <ImageQuote
+          src={siteConfig.images.imageQuotes[0].src}
+          alt={siteConfig.images.imageQuotes[0].alt}
+          quote={siteConfig.images.imageQuotes[0].quote}
+          attribution={siteConfig.images.imageQuotes[0].attribution}
+          objectPosition={siteConfig.images.imageQuotes[0].position}
+          align={siteConfig.images.imageQuotes[0].align}
+        />
+      )}
 
       {/* 5. How it works (cream) */}
       <ProcessSteps />
@@ -83,15 +86,17 @@ export default function Home() {
       {/* 8. What's included (cream) */}
       <IncludesGrid />
 
-      {/* 9. Breaker — image quote between two cream sections */}
-      <ImageQuote
-        src="/images/family/family-cta-bg.jpg"
-        alt="Family session — three generations laughing together in natural light"
-        quote="She made me feel like I belonged in front of the camera. Every shot looks like me on my best day."
-        attribution="Family Session Client"
-        objectPosition="center 35%"
-        align="right"
-      />
+      {/* 9. Breaker — image quote (cream → image → cream) */}
+      {siteConfig.images.imageQuotes[1] && (
+        <ImageQuote
+          src={siteConfig.images.imageQuotes[1].src}
+          alt={siteConfig.images.imageQuotes[1].alt}
+          quote={siteConfig.images.imageQuotes[1].quote}
+          attribution={siteConfig.images.imageQuotes[1].attribution}
+          objectPosition={siteConfig.images.imageQuotes[1].position}
+          align={siteConfig.images.imageQuotes[1].align}
+        />
+      )}
 
       {/* 10. Gallery (cream) */}
       <GalleryGrid />
@@ -105,15 +110,17 @@ export default function Home() {
       {/* 13. Contact form (cream) */}
       <ContactForm />
 
-      {/* 14. Breaker — image quote between two cream sections */}
-      <ImageQuote
-        src="/images/underwater/jennifer-portrait.jpg"
-        alt="Close-up portrait — quiet moment, soft natural light"
-        quote="I cried at the viewing. Not because they were sad — because for the first time I saw myself the way the people who love me see me."
-        attribution="Portrait Session Client"
-        objectPosition="center 25%"
-        align="left"
-      />
+      {/* 14. Breaker — image quote (cream → image → cream) */}
+      {siteConfig.images.imageQuotes[2] && (
+        <ImageQuote
+          src={siteConfig.images.imageQuotes[2].src}
+          alt={siteConfig.images.imageQuotes[2].alt}
+          quote={siteConfig.images.imageQuotes[2].quote}
+          attribution={siteConfig.images.imageQuotes[2].attribution}
+          objectPosition={siteConfig.images.imageQuotes[2].position}
+          align={siteConfig.images.imageQuotes[2].align}
+        />
+      )}
 
       {/* 15. FAQ (cream) */}
       <FAQSection />

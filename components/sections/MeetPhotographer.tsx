@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { siteConfig } from "@/lib/site.config";
 
 export interface MeetPhotographerProps {
   /** Eyebrow above the headline. */
@@ -27,8 +28,8 @@ export function MeetPhotographer({
   eyebrow = "Meet Your Photographer",
   name = "[Name]",
   bioParagraphs = DEFAULT_BIO,
-  photoSrc = "/placeholder/portrait.svg",
-  photoAlt = "Photographer portrait",
+  photoSrc = siteConfig.images.portrait.src,
+  photoAlt = siteConfig.images.portrait.alt,
   ctaLabel = "Work With Me",
   ctaHref = "#contact",
   variant = "light",
