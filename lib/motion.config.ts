@@ -20,13 +20,17 @@ export const motionDurations = {
   hero: 0.9, // hero headline fade-in, fadeIn
 } as const;
 
+/** Cubic-bezier control points: [x1, y1, x2, y2]. Framer Motion compatible. */
+type CubicBezier = [number, number, number, number];
+
 export const motionEasings = {
   /** Primary entrance easing — used 12+ places across the codebase. */
-  out: [0.22, 1, 0.36, 1] as const,
-} as const;
+  out: [0.22, 1, 0.36, 1] as CubicBezier,
+};
 
 export const motionOffsets = {
-  sm: 28, // hero entrance translate-y
+  xs: 20, // AnimateOnScroll bottom translate
+  sm: 28, // hero entrance translate-y, AnimateOnScroll side translate
   md: 32, // standard fadeUp distance
   lg: 48, // slide-left/right distance
 } as const;
