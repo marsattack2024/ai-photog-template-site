@@ -45,13 +45,13 @@ export function Navbar({ brandName = "[Studio Name]" }: NavbarProps) {
           Inquire
         </a>
 
-        {/* Mobile hamburger */}
+        {/* Mobile hamburger — WCAG-compliant 44x44 touch target */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close menu" : "Open menu"}
           aria-expanded={isOpen}
           aria-controls="mobile-nav"
-          className="md:hidden p-2 text-(--color-ink)"
+          className="md:hidden p-3 -mr-3 min-h-[44px] min-w-[44px] flex items-center justify-center text-(--color-ink)"
         >
           <span className="sr-only">{isOpen ? "Close" : "Open"} menu</span>
           {/* Animated hamburger icon */}
