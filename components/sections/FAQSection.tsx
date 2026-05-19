@@ -2,9 +2,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
+import { motionDurations, motionEasings } from "@/lib/motion.config";
 import { Button } from "@/components/ui";
 
-const faqs = [
+export interface FAQ {
+  q: string;
+  a: string;
+}
+
+export const DEFAULT_FAQS: FAQ[] = [
   {
     q: "Do I need experience in front of a camera?",
     a: "Not at all. Most clients have never done a session like this before. Every pose, every expression, every angle is guided — you simply follow along. By the end, most people forget they were ever nervous.",
@@ -31,7 +37,7 @@ const faqs = [
   },
 ];
 
-function FAQItem({ q, a }: { q: string; a: string }) {
+function FAQItem({ q, a }: FAQ) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -46,7 +52,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         </span>
         <motion.span
           animate={{ rotate: open ? 45 : 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: motionDurations.xs }}
           className="text-2xl leading-none text-(--color-muted) shrink-0"
         >
           +
@@ -59,7 +65,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: motionDurations.sm, ease: motionEasings.out }}
             className="overflow-hidden"
           >
             <p className="text-sm text-(--color-muted) leading-relaxed pb-6 max-w-2xl">
@@ -72,7 +78,27 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-export function FAQSection() {
+export interface FAQSectionProps {
+  eyebrow?: string;
+  headline?: React.ReactNode;
+  faqs?: FAQ[];
+  footerText?: string;
+  footerCtaLabel?: string;
+  footerCtaHref?: string;
+}
+
+export function FAQSection({
+  eyebrow = "Got Questions",
+  headline = (
+    <>
+      Frequently Asked <em className="italic">Questions</em>
+    </>
+  ),
+  faqs = DEFAULT_FAQS,
+  footerText = "Still have questions? Reach out — happy to help.",
+  footerCtaLabel = "Get In Touch",
+  footerCtaHref = "#contact",
+}: FAQSectionProps = {}) {
   return (
     <section className="bg-(--color-cream) py-[var(--space-section-y)] px-[var(--space-section-x)]">
       <div className="max-w-3xl mx-auto">
@@ -83,9 +109,11 @@ export function FAQSection() {
           viewport={{ once: true, amount: 0.15 }}
           className="text-center mb-[var(--space-heading-body-gap)]"
         >
-          <span className="text-xs uppercase tracking-widest text-(--color-muted)">Got Questions</span>
+          <span className="text-xs uppercase tracking-widest text-(--color-muted)">
+            {eyebrow}
+          </span>
           <h2 className="font-serif text-4xl font-normal text-(--color-ink) mt-[var(--space-heading-eyebrow-gap)] md:text-5xl">
-            Frequently Asked <em className="italic">Questions</em>
+            {headline}
           </h2>
         </motion.div>
 
@@ -107,8 +135,14 @@ export function FAQSection() {
           viewport={{ once: true, amount: 0.5 }}
           className="text-center mt-12"
         >
-          <p className="text-sm text-(--color-muted) mb-4">Still have questions? Reach out — happy to help.</p>
-          <a href="#contact"><Button variant="ghost">Get In Touch</Button></a>
+          {footerText && (
+            <p className="text-sm text-(--color-muted) mb-4">{footerText}</p>
+          )}
+          {footerCtaLabel && footerCtaHref && (
+            <a href={footerCtaHref}>
+              <Button variant="ghost">{footerCtaLabel}</Button>
+            </a>
+          )}
         </motion.div>
       </div>
     </section>

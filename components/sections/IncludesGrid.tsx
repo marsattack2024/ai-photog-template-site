@@ -1,4 +1,4 @@
-const items = [
+export const DEFAULT_INCLUDES_ITEMS: string[] = [
   "Pre-session style consultation",
   "Full posing direction throughout",
   "Location scouting & recommendations",
@@ -10,15 +10,30 @@ const items = [
   "5-business-day turnaround",
 ];
 
-export function IncludesGrid() {
+export interface IncludesGridProps {
+  eyebrow?: string;
+  headline?: React.ReactNode;
+  items?: string[];
+}
+
+export function IncludesGrid({
+  eyebrow = "What's Included",
+  headline = (
+    <>
+      Everything in <em className="italic">Every Session</em>
+    </>
+  ),
+  items = DEFAULT_INCLUDES_ITEMS,
+}: IncludesGridProps = {}) {
   return (
     <section className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-cream)">
       <div className="max-w-7xl mx-auto flex flex-col gap-12">
         <div className="text-center flex flex-col gap-4">
-          <span className="text-xs tracking-widest uppercase text-(--color-accent)">What&apos;s Included</span>
+          <span className="text-xs tracking-widest uppercase text-(--color-accent)">
+            {eyebrow}
+          </span>
           <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">
-            Everything in{" "}
-            <em className="italic">Every Session</em>
+            {headline}
           </h2>
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
