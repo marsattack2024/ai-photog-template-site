@@ -3,6 +3,8 @@ import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
 import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
 import { ImageQuote } from "@/components/sections/ImageQuote";
+import { BookingUrgencyCTA } from "@/components/sections/BookingUrgencyCTA";
+import { Footer } from "@/components/layout/Footer";
 import { buildPageMetadata } from "@/lib/seo";
 import { buildLocalBusinessSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -123,45 +125,19 @@ export default function Home() {
       {/* 15. FAQ (cream) */}
       <FAQSection />
 
-      {/* 13. Booking urgency — below FAQ */}
-      <section className="bg-(--color-ink) py-20 px-6 text-center">
-        <div className="max-w-xl mx-auto flex flex-col gap-5">
-          <h2 className="font-serif text-3xl font-normal text-(--color-cream) leading-tight md:text-4xl">
+      {/* 16. Booking urgency CTA — compact dark scarcity strip */}
+      <BookingUrgencyCTA
+        headline={
+          <>
             Spots Are Filling Fast for{" "}
             <em className="italic">Spring &amp; Summer 2026</em>
-          </h2>
-          <p className="text-sm text-(--color-muted) leading-relaxed">
-            I take on a limited number of portrait sessions each month to ensure every client gets my full attention. Once the calendar fills, it fills. Don&apos;t wait and wonder — reach out today to hold your date.
-          </p>
-          <div className="flex justify-center pt-2">
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center tracking-widest uppercase text-xs font-medium border border-white/30 text-(--color-cream) px-8 py-3 hover:bg-white/10 transition-colors duration-300"
-            >
-              Inquire Today
-            </a>
-          </div>
-        </div>
-      </section>
+          </>
+        }
+        body="I take on a limited number of portrait sessions each month to ensure every client gets my full attention. Once the calendar fills, it fills. Don't wait and wonder — reach out today to hold your date."
+      />
 
-      {/* Footer */}
-      <footer className="bg-(--color-ink) py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="font-serif text-2xl tracking-[0.2em] text-(--color-cream)">
-            [Studio Name]
-          </p>
-          <p className="text-xs text-(--color-muted) tracking-widest uppercase text-center">
-            &copy; {new Date().getFullYear()} [Studio Name] Photography. All rights reserved.
-          </p>
-          <div className="flex gap-8">
-            {["Instagram", "Pinterest", "TikTok"].map((s) => (
-              <a key={s} href="#" className="text-xs text-(--color-muted) hover:text-(--color-cream) uppercase tracking-widest transition-colors duration-300">
-                {s}
-              </a>
-            ))}
-          </div>
-        </div>
-      </footer>
+      {/* 17. Footer */}
+      <Footer studioName="[Studio Name]" />
     </>
   );
 }
