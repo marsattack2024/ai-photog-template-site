@@ -16,11 +16,41 @@ Write as a skeptical conversion copywriter, not an order-taker. The client is th
 Before writing or auditing full website, landing page, funnel, or campaign copy, look for relevant project sources or connected client materials when available. Prioritize:
 
 1. User-provided brief, website, reviews, testimonials, call notes, or existing copy.
-2. Project source docs, especially StoryBrand Copywriting for Photography Studios and Website Setup for Photographers.
-3. Genre-specific references, especially THE BOUDOIR BUYER BIBLE for boudoir work.
-4. Campaign-specific guides, quiz guides, ad handbooks, or review-mining docs when the website page connects to those assets.
+2. **`docs/P2P Copy Bible.md`** (this template's local copy) — canonical voice,
+   frameworks, and conversion patterns used across every studio. Read it
+   before writing if you haven't seen it this session.
+3. Project source docs, especially StoryBrand Copywriting for Photography Studios and Website Setup for Photographers.
+4. Genre-specific references, especially THE BOUDOIR BUYER BIBLE for boudoir work (the `boudoir-copywriter` skill loads it).
+5. Campaign-specific guides, quiz guides, ad handbooks, or review-mining docs when the website page connects to those assets.
 
 Never invent testimonials, statistics, awards, client results, press mentions, package details, or differentiators. Mark missing proof or claims with `<!-- TODO: confirm -->`.
+
+## Where output lands (this template)
+
+When working inside this Next.js template, your copy goes into:
+
+- **`lib/site.config.tsx`** — hero (eyebrow, headline JSX, subline, CTA),
+  bookingCTA (headline JSX, body), brand tagline, optional announcement bar.
+  Headlines are `React.ReactNode` so you can include `<em className="italic">`
+  for accent words.
+- **`lib/content.config.ts`** — FAQs, process steps, why-book reasons,
+  what's-included items, featured/carousel testimonials. Typed arrays;
+  shapes in `components/sections/types.ts`.
+- **Per-page metadata** — page-level title/description via
+  `buildPageMetadata({ title, description, path })` from `lib/seo.ts`. Don't
+  edit metadata strings directly in page files when they can flow from
+  siteConfig.
+
+**Output format**: prefer the TS object the file expects when the copy
+goes into a config file (saves the dev a transcription step). For
+hero/page-specific copy, output clean markdown for review, then dev
+moves it into siteConfig. If the user wants a Google Doc deliverable,
+output markdown with `# H1` + `## H2` so it pastes cleanly into Docs.
+
+**Image alt text** is copywriter work too. For every hero / service page
+image, draft alt text in the asset-intake handoff. Standards live in the
+`asset-intake` skill — describe what's in the frame, 40-120 chars, no
+keyword stuffing.
 
 ## Workflow Decision Tree
 

@@ -25,6 +25,41 @@ Then load only the additional reference files needed for the task:
 - `references/ad-platform-playbook.md` for deliverable counts, platform formatting, compliance, and campaign-ops expectations
 - `references/output-templates.md` for strong default output structures across deliverable types
 
+## Project sources + where output lands (this template)
+
+When operating inside this Next.js photography-site template, reference:
+
+- **`docs/P2P Copy Bible.md`** — the canonical brand-voice + framework doc.
+  Read this BEFORE writing if you haven't seen it this session; it's the
+  source of truth for tone, frames, and conversion patterns the team uses
+  across every studio.
+- **`lib/site.config.tsx`** — your hero copy + bookingCTA copy + brand
+  tagline + announcement bar copy land here as `siteConfig.hero.headline`
+  (JSX), `siteConfig.hero.subline`, `siteConfig.brand.tagline`, etc.
+- **`lib/content.config.ts`** — your FAQs, process steps, why-book reasons,
+  what's-included items, featured/carousel testimonials land here as typed
+  arrays. The shapes are defined in `components/sections/types.ts`.
+
+**Output as the TS object the file expects** when the copywriter is
+writing into this template — not as a markdown table the dev has to
+transcribe. Example for FAQs:
+
+```ts
+// drop directly into lib/content.config.ts
+export const faqs: FAQ[] = [
+  { q: "...", a: "..." },
+  // ...
+];
+```
+
+For sections that don't have a config file home (hero, custom
+service-page copy), output as **clean markdown** for review-first; the
+dev will move it into the right `metadata` export or page JSX.
+
+If the user asks for a Google Doc deliverable instead, output markdown
+with `# H1` and `## H2` — they can paste into Docs and use "Format from
+markdown."
+
 ## Non-negotiable operating rules
 
 1. Start with the buyer’s inner monologue, not the studio’s self-description.
