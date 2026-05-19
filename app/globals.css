@@ -69,6 +69,14 @@
   --min-h-split:                  600px;
   --min-h-image-col:              400px;
 
+  /* Compact section variant (BookingUrgencyCTA — reads as a final nudge, py-20) */
+  --space-section-y-compact:      5rem;
+
+  /* Full-width image breaker heights (ImageQuote section) */
+  --h-breaker-sm:                 380px;   /* mobile */
+  --h-breaker-md:                 560px;   /* tablet */
+  --h-breaker-lg:                 620px;   /* desktop */
+
   /* ── Motion ── (mirror of lib/motion.config.ts — keep in sync)
      Used by CSS transitions (e.g., AnimateOnScroll). Framer Motion
      consumes the TS constants directly since it cannot read CSS vars. */

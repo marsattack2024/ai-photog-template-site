@@ -22,7 +22,7 @@ export function AboutTeaser({
   ctaHref = "#about",
 }: AboutTeaserProps) {
   return (
-    <section className="grid md:grid-cols-2 min-h-[600px] bg-(--color-cream)">
+    <section className="grid md:grid-cols-2 min-h-[var(--min-h-split)] bg-(--color-cream)">
       {/* Photo collage */}
       <div className="relative grid grid-cols-2 gap-3 p-10 md:p-16">
         <AnimateOnScroll delay={0} className="relative col-span-2 h-64">

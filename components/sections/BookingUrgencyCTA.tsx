@@ -17,7 +17,7 @@ export function BookingUrgencyCTA({
   ctaHref = "#contact",
 }: BookingUrgencyCTAProps) {
   return (
-    <section className="bg-(--color-ink) py-20 px-[var(--space-section-x)] text-center">
+    <section className="bg-(--color-ink) py-[var(--space-section-y-compact)] px-[var(--space-section-x)] text-center">
       <div className="max-w-xl mx-auto flex flex-col gap-5">
         <h2 className="font-serif text-3xl font-normal text-(--color-cream) leading-tight md:text-4xl">
           {headline}

@@ -13,7 +13,7 @@ interface HeroProps {
 
 export function Hero({ eyebrow, headline, subline, ctaLabel, ctaHref, imageSrc, imageAlt }: HeroProps) {
   return (
-    <section className="relative w-full min-h-[95vh] flex items-end overflow-hidden">
+    <section className="relative w-full min-h-[var(--min-h-hero)] flex items-end overflow-hidden">
       <Image
         src={imageSrc}
         alt={imageAlt}

@@ -24,11 +24,11 @@ export function SplitSection({
   reverse = false,
 }: SplitSectionProps) {
   return (
-    <section className="grid md:grid-cols-2 min-h-[600px]">
+    <section className="grid md:grid-cols-2 min-h-[var(--min-h-split)]">
       {/* Image */}
       <AnimateOnScroll
         from={reverse ? "right" : "left"}
-        className={`relative min-h-[400px] md:min-h-full ${reverse ? "md:order-2" : ""}`}
+        className={`relative min-h-[var(--min-h-image-col)] md:min-h-full ${reverse ? "md:order-2" : ""}`}
       >
         <Image
           src={imageSrc}

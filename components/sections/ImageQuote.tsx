@@ -47,7 +47,7 @@ export function ImageQuote({
         : "text-center md:text-left items-center md:items-start";
 
   return (
-    <div className="relative w-full h-[380px] md:h-[560px] lg:h-[620px] overflow-hidden">
+    <div className="relative w-full h-[var(--h-breaker-sm)] md:h-[var(--h-breaker-md)] lg:h-[var(--h-breaker-lg)] overflow-hidden">
       <Image
         src={src}
         alt={alt}
