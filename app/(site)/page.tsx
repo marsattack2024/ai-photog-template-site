@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { buildPageMetadata } from "@/lib/seo";
 import { buildLocalBusinessSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { siteConfig } from "@/lib/site.config";
 
 // Below-fold: deferred until after hero paints
 const TestimonialCards = dynamic(() =>
@@ -42,7 +43,8 @@ const FAQSection = dynamic(() =>
 );
 
 export const metadata: Metadata = buildPageMetadata({
-  title: process.env.NEXT_PUBLIC_SITE_NAME ?? "Studio Name",
+  title: siteConfig.brand.name,
+  description: siteConfig.seo.description,
   path: "/",
 });
 
@@ -52,15 +54,7 @@ export default function Home() {
       <JsonLd data={buildLocalBusinessSchema()} />
 
       {/* 1. Hero — static import, server component, LCP paints before hydration */}
-      <Hero
-        eyebrow="New Jersey Boudoir Photography"
-        headline={'Boudoir, For The Woman Who Doesn\u2019t Feel \u201cReady\u201d\u2026 Yet'}
-        subline="A boutique boudoir studio in Montclair, NJ for women ready to uplift, reclaim, and celebrate their body exactly as it is."
-        ctaLabel="Inquire Today"
-        ctaHref="#contact"
-        imageSrc="/images/hero.jpg"
-        imageAlt="Boudoir photography session"
-      />
+      <Hero {...siteConfig.hero} />
 
       {/* 2. Social proof strip — static import, above fold on most screens */}
       <SocialProofStrip />
@@ -126,18 +120,10 @@ export default function Home() {
       <FAQSection />
 
       {/* 16. Booking urgency CTA — compact dark scarcity strip */}
-      <BookingUrgencyCTA
-        headline={
-          <>
-            Spots Are Filling Fast for{" "}
-            <em className="italic">Spring &amp; Summer 2026</em>
-          </>
-        }
-        body="I take on a limited number of portrait sessions each month to ensure every client gets my full attention. Once the calendar fills, it fills. Don't wait and wonder — reach out today to hold your date."
-      />
+      {siteConfig.bookingCTA && <BookingUrgencyCTA {...siteConfig.bookingCTA} />}
 
       {/* 17. Footer */}
-      <Footer studioName="[Studio Name]" />
+      <Footer studioName={siteConfig.brand.name} socials={siteConfig.socials} />
     </>
   );
 }

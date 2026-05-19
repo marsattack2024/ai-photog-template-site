@@ -3,7 +3,7 @@ import { HeroOverlay } from "./HeroOverlay";
 
 interface HeroProps {
   eyebrow?: string;
-  headline: string;
+  headline: React.ReactNode;
   subline: string;
   ctaLabel: string;
   ctaHref: string;

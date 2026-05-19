@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 interface HeroOverlayProps {
   eyebrow?: string;
-  headline: string;
+  headline: React.ReactNode;
   subline: string;
   ctaLabel: string;
   ctaHref: string;
