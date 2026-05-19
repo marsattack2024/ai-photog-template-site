@@ -1,16 +1,17 @@
 "use client";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 export function SEAHero() {
   return (
     <section className="relative w-full min-h-[95vh] flex items-end overflow-hidden">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src="/seattle/sbc-5.webp"
         alt="Luxury boudoir photography session at Seattle Boudoir & Co in downtown Seattle Washington"
-        fetchPriority="high"
-        decoding="async"
-        className="absolute inset-0 w-full h-full object-cover object-[center_25%]"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-[center_25%]"
       />
 
       {/* Right-to-left gradient (subject is on the left) */}

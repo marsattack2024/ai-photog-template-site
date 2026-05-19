@@ -1,4 +1,4 @@
-// Server component — poster <img> renders in initial HTML for fastest LCP
+import Image from "next/image";
 import { HeroOverlay } from "./HeroOverlay";
 
 interface HeroProps {
@@ -14,14 +14,13 @@ interface HeroProps {
 export function Hero({ eyebrow, headline, subline, ctaLabel, ctaHref, imageSrc, imageAlt }: HeroProps) {
   return (
     <section className="relative w-full min-h-[95vh] flex items-end overflow-hidden">
-      {/* LCP image — raw <img> in server component so it paints before hydration */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={imageSrc}
         alt={imageAlt}
-        fetchPriority="high"
-        decoding="async"
-        className="absolute inset-0 w-full h-full object-cover object-[62%_15%]"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-[62%_15%]"
       />
 
       {/* Left-to-right gradient */}
