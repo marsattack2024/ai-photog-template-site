@@ -1,36 +1,39 @@
 import type { MetadataRoute } from "next";
-import { getGallerySlugs, getPostSlugs } from "@/lib/data";
+import { siteConfig } from "@/lib/site.config";
 
-export const revalidate = 3600;
+export const revalidate = 3600; // 1h
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://yourdomain.com";
-
-  const [gallerySlugs, postSlugs] = await Promise.all([
-    getGallerySlugs(),
-    getPostSlugs(),
-  ]);
-
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { url: BASE, changeFrequency: "weekly", priority: 1.0, lastModified: new Date() },
-    { url: `${BASE}/galleries`, changeFrequency: "weekly", priority: 0.9, lastModified: new Date() },
-    { url: `${BASE}/blog`, changeFrequency: "weekly", priority: 0.8, lastModified: new Date() },
-    { url: `${BASE}/contact`, changeFrequency: "monthly", priority: 0.7, lastModified: new Date() },
-  ];
+/**
+ * Generates /sitemap.xml from the routes that actually exist in the app.
+ * Add new routes here as the template grows (about, services, blog, etc.).
+ *
+ * Priority tiers:
+ *   1.0 — homepage
+ *   0.5 — reference pages (seattle-boudoir; bump in the forked client repo)
+ *   0.3 — utility (thank-you)
+ */
+export default function sitemap(): MetadataRoute.Sitemap {
+  const base = siteConfig.seo.baseUrl.replace(/\/$/, "");
+  const now = new Date();
 
   return [
-    ...staticRoutes,
-    ...gallerySlugs.map((slug) => ({
-      url: `${BASE}/galleries/${slug}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-      lastModified: new Date(),
-    })),
-    ...postSlugs.map((slug) => ({
-      url: `${BASE}/blog/${slug}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-      lastModified: new Date(),
-    })),
+    {
+      url: `${base}/`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 1.0,
+    },
+    {
+      url: `${base}/seattle-boudoir`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${base}/thank-you`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 }
