@@ -1,7 +1,6 @@
 import {
   MD_HEADERS,
   buildHomeMarkdown,
-  buildSeaMarkdown,
   buildThankYouMarkdown,
 } from "@/lib/llms/page-markdown";
 
@@ -9,16 +8,15 @@ import {
  * /md/[...slug] — markdown views of known pages.
  *
  * Reached two ways:
- *   1. Direct: agents request /md/seattle-boudoir (or /md/ for home)
- *   2. Negotiated: middleware.ts rewrites GET /seattle-boudoir with
- *      Accept: text/markdown → /md/seattle-boudoir transparently
+ *   1. Direct: agents request /md/thank-you (or /md/ for home)
+ *   2. Negotiated: middleware.ts rewrites GET /thank-you with
+ *      Accept: text/markdown → /md/thank-you transparently
  *
  * To add a new page: add an entry to PAGE_MARKDOWN.
  */
 
 const PAGE_MARKDOWN: Record<string, () => string> = {
   "": buildHomeMarkdown,
-  "seattle-boudoir": buildSeaMarkdown,
   "thank-you": buildThankYouMarkdown,
 };
 

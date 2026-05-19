@@ -39,7 +39,7 @@ const securityHeaders = [
       // dev: unsafe-eval required for React Fast Refresh (webpack HMR uses eval)
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
       "style-src 'self' 'unsafe-inline'",    // required: Tailwind v4 inline styles
-      `img-src 'self' data: blob: https://${supabaseProjectRef} https://www.boudoirdefined.com https://static.wixstatic.com`,
+      `img-src 'self' data: blob: https://${supabaseProjectRef}`,
       `connect-src 'self' https://${supabaseProjectRef} wss://${supabaseProjectRef}${isDev ? " ws://localhost:* http://localhost:*" : ""}`,
       "font-src 'self'",
       "frame-ancestors 'none'",
@@ -59,16 +59,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: supabaseProjectRef,
         pathname: "/storage/v1/object/public/**",
-      },
-      {
-        protocol: "https",
-        hostname: "www.boudoirdefined.com",
-        pathname: "/wp-content/uploads/**",
-      },
-      {
-        protocol: "https",
-        hostname: "static.wixstatic.com",
-        pathname: "/media/**",
       },
     ],
   },

@@ -27,11 +27,6 @@ export const LLMS_PAGES: LlmsPage[] = [
     description: "Homepage with hero, social proof, photographer bio, process, gallery, testimonials, and contact form.",
   },
   {
-    path: "/seattle-boudoir",
-    title: "Seattle Boudoir reference page",
-    description: "Reference layout demonstrating the template applied to a luxury boudoir studio (Molly Blair / Seattle Boudoir & Co.).",
-  },
-  {
     path: "/thank-you",
     title: "Thank You",
     description: "Post-form confirmation page.",

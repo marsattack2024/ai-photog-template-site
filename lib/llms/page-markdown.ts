@@ -80,34 +80,6 @@ export function buildHomeMarkdown(): string {
   return lines.join("\n");
 }
 
-/** Reference page demonstrating the template applied to Seattle Boudoir & Co. */
-export function buildSeaMarkdown(): string {
-  const url = `${siteConfig.seo.baseUrl}/seattle-boudoir`;
-  return [
-    "---",
-    "title: Seattle Boudoir & Co. (reference page)",
-    `canonical: ${url}`,
-    "description: Reference layout — the photographer template applied to a luxury boudoir studio (Seattle Boudoir & Co. / Molly Blair).",
-    "---",
-    "",
-    "# Seattle Boudoir & Co. (reference page)",
-    "",
-    "> Reference layout demonstrating the template applied to a luxury boudoir studio in downtown Seattle, WA.",
-    "",
-    "This page is shipped as a reference inside the template repo. When the repo is forked for the real Seattle Boudoir client, the content moves into that fork's siteConfig and this reference page is removed.",
-    "",
-    "## What this page demonstrates",
-    "- A custom palette applied per-page via inline style on the wrapper div",
-    "- Niche-specific sections (ImageQuote breakers, narrative empathy block, session-type scenes)",
-    "- A real GoHighLevel form integration on the inquiry form",
-    "",
-    `For full content scope see ${siteConfig.seo.baseUrl}/llms-full.txt`,
-    "",
-    "---",
-    `*Source: ${url} · Served as markdown via Accept: text/markdown negotiation.*`,
-  ].join("\n");
-}
-
 /** Thank-you page. */
 export function buildThankYouMarkdown(): string {
   const url = `${siteConfig.seo.baseUrl}/thank-you`;
