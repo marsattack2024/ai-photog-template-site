@@ -162,34 +162,9 @@ export default function SeattleBoudoirPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-(--color-ink) border-t border-white/8 py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex flex-col items-center md:items-start gap-1">
-            <p className="font-serif text-2xl tracking-[0.15em] text-(--color-cream)">
-              Seattle Boudoir &amp; Co.
-            </p>
-            <p className="text-xs text-(--color-muted) tracking-widest">
-              Downtown Seattle, Washington &middot; (206) 552-0981
-            </p>
-          </div>
-          <p className="text-xs text-(--color-muted) tracking-widest uppercase text-center">
-            &copy; {new Date().getFullYear()} Seattle Boudoir &amp; Co. All
-            rights reserved.
-          </p>
-          <div className="flex gap-8">
-            {["Instagram", "Facebook", "TikTok", "Pinterest"].map((s) => (
-              <a
-                key={s}
-                href="#"
-                className="text-xs text-(--color-muted) hover:text-(--color-cream) uppercase tracking-widest transition-colors duration-300"
-              >
-                {s}
-              </a>
-            ))}
-          </div>
-        </div>
-      </footer>
+      {/* Footer rendered globally by app/(site)/layout.tsx
+          (Seattle Boudoir's branded footer with phone + location lives in the
+          forked repo's siteConfig; the template repo shows the default footer.) */}
     </div>
   );
 }

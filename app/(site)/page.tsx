@@ -4,7 +4,6 @@ import { Hero } from "@/components/sections/Hero";
 import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
 import { ImageQuote } from "@/components/sections/ImageQuote";
 import { BookingUrgencyCTA } from "@/components/sections/BookingUrgencyCTA";
-import { Footer } from "@/components/layout/Footer";
 import { buildPageMetadata } from "@/lib/seo";
 import { buildLocalBusinessSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -122,8 +121,7 @@ export default function Home() {
       {/* 16. Booking urgency CTA — compact dark scarcity strip */}
       {siteConfig.bookingCTA && <BookingUrgencyCTA {...siteConfig.bookingCTA} />}
 
-      {/* 17. Footer */}
-      <Footer studioName={siteConfig.brand.name} socials={siteConfig.socials} />
+      {/* Footer rendered globally by app/(site)/layout.tsx */}
     </>
   );
 }

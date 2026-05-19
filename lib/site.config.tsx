@@ -37,6 +37,14 @@ export interface SiteBookingCTA {
   ctaHref?: string;
 }
 
+export interface SiteAnnouncement {
+  /** Short text — keep under ~60 chars. */
+  text: string;
+  /** Optional inline link. */
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
 export interface SiteConfig {
   brand: {
     name: string;
@@ -67,6 +75,8 @@ export interface SiteConfig {
     };
   };
   socials: SiteSocial[];
+  /** Optional thin top bar (scarcity / launch / seasonal). Omit to hide entirely. */
+  announcement?: SiteAnnouncement;
   hero: SiteHero;
   bookingCTA?: SiteBookingCTA;
 }
@@ -96,6 +106,11 @@ export const siteConfig: SiteConfig = {
     { label: "Pinterest", href: "#" },
     { label: "TikTok", href: "#" },
   ],
+  announcement: {
+    text: "Limited spots available for 2026",
+    ctaLabel: "Inquire today",
+    ctaHref: "#contact",
+  },
   hero: {
     eyebrow: "Editorial Portrait Photography",
     headline: (
