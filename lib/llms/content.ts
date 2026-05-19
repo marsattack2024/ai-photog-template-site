@@ -1,8 +1,10 @@
 import { siteConfig } from "@/lib/site.config";
-import { DEFAULT_FAQS } from "@/components/sections/faq-data";
-import { DEFAULT_PROCESS_STEPS } from "@/components/sections/ProcessSteps";
-import { DEFAULT_INCLUDES_ITEMS } from "@/components/sections/IncludesGrid";
-import { DEFAULT_WHY_BOOK_REASONS } from "@/components/sections/WhyBook";
+import {
+  faqs as DEFAULT_FAQS,
+  processSteps as DEFAULT_PROCESS_STEPS,
+  includesItems as DEFAULT_INCLUDES_ITEMS,
+  whyBookReasons as DEFAULT_WHY_BOOK_REASONS,
+} from "@/lib/content.config";
 
 /**
  * Centralized content for /llms.txt and /llms-full.txt.

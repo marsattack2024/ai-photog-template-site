@@ -1,14 +1,6 @@
-export const DEFAULT_INCLUDES_ITEMS: string[] = [
-  "Pre-session style consultation",
-  "Full posing direction throughout",
-  "Location scouting & recommendations",
-  "1–2 hour session",
-  "50+ fully edited images",
-  "Private online gallery",
-  "High-resolution digital downloads",
-  "Unlimited personal print rights",
-  "5-business-day turnaround",
-];
+import { includesItems as DEFAULT_INCLUDES_ITEMS } from "@/lib/content.config";
+
+export { DEFAULT_INCLUDES_ITEMS };
 
 export interface IncludesGridProps {
   eyebrow?: string;

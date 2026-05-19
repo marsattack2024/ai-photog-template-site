@@ -4,9 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
 import { motionDurations, motionEasings } from "@/lib/motion.config";
 import { Button } from "@/components/ui";
-import { DEFAULT_FAQS, type FAQ } from "./faq-data";
+import { faqs as DEFAULT_FAQS } from "@/lib/content.config";
+import type { FAQ } from "./types";
 
-export { DEFAULT_FAQS, type FAQ };
+export { DEFAULT_FAQS };
+export type { FAQ };
 
 function FAQItem({ q, a }: FAQ) {
   const [open, setOpen] = useState(false);

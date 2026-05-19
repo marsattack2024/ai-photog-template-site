@@ -1,34 +1,8 @@
-export interface WhyBookReason {
-  title: string;
-  body: string;
-}
+import { whyBookReasons as DEFAULT_WHY_BOOK_REASONS } from "@/lib/content.config";
+import type { WhyBookReason } from "./types";
 
-export const DEFAULT_WHY_BOOK_REASONS: WhyBookReason[] = [
-  {
-    title: "Fully Guided Sessions",
-    body: "No awkward silences or blank stares. I direct every pose so you always know what to do.",
-  },
-  {
-    title: "Style Consultation Included",
-    body: "Before your session, we'll talk outfits, locations, and vision so nothing is left to chance.",
-  },
-  {
-    title: "Same-Week Gallery Delivery",
-    body: "Your edited gallery arrives within 5 business days — not months.",
-  },
-  {
-    title: "Unlimited Print Rights",
-    body: "Print wherever, whenever. Your images are yours to keep forever.",
-  },
-  {
-    title: "Natural Light Expertise",
-    body: "Every session is timed and located to maximize the most flattering light for your skin tone.",
-  },
-  {
-    title: "100% Satisfaction Guarantee",
-    body: "If you're not in love with your gallery, I'll reshoot — no questions asked.",
-  },
-];
+export { DEFAULT_WHY_BOOK_REASONS };
+export type { WhyBookReason };
 
 export interface WhyBookProps {
   eyebrow?: string;

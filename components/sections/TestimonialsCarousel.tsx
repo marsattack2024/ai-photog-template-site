@@ -3,51 +3,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
 import { motionEasings } from "@/lib/motion.config";
+import { carouselTestimonials as DEFAULT_CAROUSEL_TESTIMONIALS } from "@/lib/content.config";
+import type { CarouselTestimonial } from "./types";
 
-export interface CarouselTestimonial {
-  quote: string;
-  name: string;
-  detail: string;
-}
-
-export const DEFAULT_CAROUSEL_TESTIMONIALS: CarouselTestimonial[] = [
-  {
-    quote:
-      "Words truly cannot describe how incredible this experience was. I walked in nervous and walked out feeling like myself again — only better.",
-    name: "[Client Name]",
-    detail: "Portrait Session",
-  },
-  {
-    quote:
-      "From the first message to the final gallery delivery, everything was thoughtful, personal, and completely exceeded my expectations.",
-    name: "[Client Name]",
-    detail: "Couples Session",
-  },
-  {
-    quote:
-      "I've been putting this off for years. I finally said yes and I cannot believe I waited so long. This is the best thing I've done for myself.",
-    name: "[Client Name]",
-    detail: "Portrait Session",
-  },
-  {
-    quote:
-      "She guided me through everything. I never once felt unsure of what to do. The whole experience felt like it was designed just for me.",
-    name: "[Client Name]",
-    detail: "Portrait Session",
-  },
-  {
-    quote:
-      "I turned 50 and wanted a way to celebrate myself for once. This was it. I cannot recommend this enough to every woman who keeps putting herself last.",
-    name: "[Client Name]",
-    detail: "Milestone Session",
-  },
-  {
-    quote:
-      "I almost cancelled three times. I am so glad I didn't. This was the most I have ever felt like myself in a photograph.",
-    name: "[Client Name]",
-    detail: "Portrait Session",
-  },
-];
+export { DEFAULT_CAROUSEL_TESTIMONIALS };
+export type { CarouselTestimonial };
 
 export interface TestimonialsCarouselProps {
   eyebrow?: string;

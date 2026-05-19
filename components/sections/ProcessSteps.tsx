@@ -1,28 +1,9 @@
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
+import { processSteps as DEFAULT_PROCESS_STEPS } from "@/lib/content.config";
+import type { ProcessStep } from "./types";
 
-export interface ProcessStep {
-  number: string;
-  title: string;
-  body: string;
-}
-
-export const DEFAULT_PROCESS_STEPS: ProcessStep[] = [
-  {
-    number: "01",
-    title: "Reach Out",
-    body: "Fill out the contact form. You'll hear back personally within 24 hours — no automated responses, no pressure. Just a real conversation about what you're looking for.",
-  },
-  {
-    number: "02",
-    title: "We Plan Together",
-    body: "Once you book, you'll get everything you need to prepare — what to wear, what to expect, how to get ready. You will never walk in blind or figure it out alone.",
-  },
-  {
-    number: "03",
-    title: "Show Up & Be You",
-    body: "Every pose, every angle, every expression is guided. Your only job is to show up. The rest is handled. Most people forget they were nervous within the first few minutes.",
-  },
-];
+export { DEFAULT_PROCESS_STEPS };
+export type { ProcessStep };
 
 export interface ProcessStepsProps {
   eyebrow?: string;

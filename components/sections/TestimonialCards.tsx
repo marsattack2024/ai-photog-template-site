@@ -3,53 +3,11 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
+import { featuredTestimonials as DEFAULT_FEATURED_TESTIMONIALS } from "@/lib/content.config";
+import type { FeaturedTestimonial } from "./types";
 
-export interface FeaturedTestimonial {
-  quote: string;
-  name: string;
-  detail: string;
-  stars?: number;
-  /** Optional headshot — defaults to /placeholder/square.svg. */
-  photoSrc?: string;
-}
-
-export const DEFAULT_FEATURED_TESTIMONIALS: FeaturedTestimonial[] = [
-  {
-    quote:
-      "I walked in nervous and walked out feeling like a completely different person. The experience was thoughtful, guided, and honestly one of the best things I've done for myself. I cried when I saw my images. It was that good.",
-    name: "[Client Name]",
-    detail: "Portrait Session",
-    stars: 5,
-  },
-  {
-    quote:
-      "From the first message to the final gallery, everything felt personal and easy. I didn't have to figure anything out — it was all handled. The photos took my breath away.",
-    name: "[Client Name]",
-    detail: "Couples Session",
-    stars: 5,
-  },
-  {
-    quote:
-      "I kept putting this off for years. I finally said yes and I cannot believe I waited so long. Every woman deserves to feel this way about herself.",
-    name: "[Client Name]",
-    detail: "Portrait Session",
-    stars: 5,
-  },
-  {
-    quote:
-      "She made me feel completely at ease from the moment I walked in. I went in thinking I wasn't photogenic. I left knowing that was never true.",
-    name: "[Client Name]",
-    detail: "Milestone Session",
-    stars: 5,
-  },
-  {
-    quote:
-      "I turned 50 and wanted to finally do something just for me. This was it. The most seen and celebrated I have ever felt in my life.",
-    name: "[Client Name]",
-    detail: "Milestone Session",
-    stars: 5,
-  },
-];
+export { DEFAULT_FEATURED_TESTIMONIALS };
+export type { FeaturedTestimonial };
 
 function Stars({ count }: { count: number }) {
   return (
