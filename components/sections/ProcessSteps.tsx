@@ -20,15 +20,15 @@ const steps = [
 
 export function ProcessSteps() {
   return (
-    <section className="bg-(--color-cream) py-24 px-6 border-t border-(--color-border)">
+    <section className="bg-(--color-cream) py-[var(--space-section-y)] px-[var(--space-section-x)] border-t border-(--color-border)">
       <div className="max-w-5xl mx-auto">
         <AnimateOnScroll className="text-center mb-16">
           <span className="text-xs uppercase tracking-widest text-(--color-muted)">How It Works</span>
-          <h2 className="font-serif text-4xl font-normal text-(--color-ink) mt-3 leading-tight md:text-5xl">
+          <h2 className="font-serif text-4xl font-normal text-(--color-ink) mt-[var(--space-heading-eyebrow-gap)] leading-tight md:text-5xl">
             Here&apos;s What Happens{" "}
             <em className="italic">After You Reach Out</em>
           </h2>
-          <p className="mt-4 text-sm text-(--color-muted) max-w-md mx-auto leading-relaxed">
+          <p className="mt-[var(--space-subheading-gap)] text-sm text-(--color-muted) max-w-md mx-auto leading-relaxed">
             The whole experience is designed to feel simple and guided from the very first message.
           </p>
         </AnimateOnScroll>

@@ -1,6 +1,6 @@
 export function EmpathyBlock() {
   return (
-    <section className="py-24 px-6 bg-(--color-cream)">
+    <section className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-cream)">
       <div className="max-w-2xl mx-auto text-center flex flex-col gap-6">
         <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">
           You hate how you look in photos.

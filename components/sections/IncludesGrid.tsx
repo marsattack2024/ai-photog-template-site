@@ -12,7 +12,7 @@ const items = [
 
 export function IncludesGrid() {
   return (
-    <section className="py-24 px-6 bg-(--color-cream)">
+    <section className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-cream)">
       <div className="max-w-7xl mx-auto flex flex-col gap-12">
         <div className="text-center flex flex-col gap-4">
           <span className="text-xs tracking-widest uppercase text-(--color-accent)">What&apos;s Included</span>

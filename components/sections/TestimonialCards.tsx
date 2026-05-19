@@ -63,7 +63,7 @@ export function TestimonialCards() {
   const next = () => setCurrent((c) => (c + 1) % total);
 
   return (
-    <section className="bg-(--color-cream) py-24 px-6 border-t border-(--color-border)">
+    <section className="bg-(--color-cream) py-[var(--space-section-y)] px-[var(--space-section-x)] border-t border-(--color-border)">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <motion.div

@@ -51,17 +51,17 @@ export function TestimonialsCarousel() {
   ];
 
   return (
-    <section className="bg-(--color-ink) py-24 px-6 overflow-hidden">
+    <section className="bg-(--color-ink) py-[var(--space-section-y)] px-[var(--space-section-x)] overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          className="text-center mb-14"
+          className="text-center mb-[var(--space-heading-body-gap)]"
         >
           <span className="text-xs uppercase tracking-widest text-(--color-muted)">Lovely Words</span>
-          <h2 className="font-serif text-4xl font-normal text-(--color-cream) mt-3 md:text-5xl">
+          <h2 className="font-serif text-4xl font-normal text-(--color-cream) mt-[var(--space-heading-eyebrow-gap)] md:text-5xl">
             The Experience They <em className="italic">Talk About</em>
           </h2>
         </motion.div>

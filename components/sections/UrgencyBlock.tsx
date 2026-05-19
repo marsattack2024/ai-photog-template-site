@@ -1,6 +1,6 @@
 export function UrgencyBlock() {
   return (
-    <section className="py-24 px-6 bg-(--color-accent)">
+    <section className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-accent)">
       <div className="max-w-2xl mx-auto text-center flex flex-col gap-6">
         <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-white">
           Spots Are Filling Fast for{" "}

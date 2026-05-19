@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function MeetPhotographer() {
   return (
-    <section className="py-24 px-6 bg-(--color-border)/30">
+    <section className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-border)/30">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="relative aspect-[4/5] w-full overflow-hidden">
           <Image

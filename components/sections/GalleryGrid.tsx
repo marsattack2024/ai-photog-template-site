@@ -35,14 +35,14 @@ function GalleryColumn({ images, baseDelay = 0 }: { images: typeof leftCol; base
 
 export function GalleryGrid() {
   return (
-    <section className="bg-(--color-cream) py-24 px-6">
+    <section className="bg-(--color-cream) py-[var(--space-section-y)] px-[var(--space-section-x)]">
       <div className="max-w-5xl mx-auto">
-        <AnimateOnScroll className="text-center mb-14">
+        <AnimateOnScroll className="text-center mb-[var(--space-heading-body-gap)]">
           <span className="text-xs uppercase tracking-widest text-(--color-muted)">The Work</span>
-          <h2 className="font-serif text-4xl font-normal text-(--color-ink) mt-3 md:text-5xl">
+          <h2 className="font-serif text-4xl font-normal text-(--color-ink) mt-[var(--space-heading-eyebrow-gap)] md:text-5xl">
             Real People. <em className="italic">Real Sessions.</em>
           </h2>
-          <p className="mt-4 text-sm text-(--color-muted) max-w-sm mx-auto leading-relaxed">
+          <p className="mt-[var(--space-subheading-gap)] text-sm text-(--color-muted) max-w-sm mx-auto leading-relaxed">
             Not models. Not staged. Just everyday people who decided to show up for themselves.
           </p>
         </AnimateOnScroll>

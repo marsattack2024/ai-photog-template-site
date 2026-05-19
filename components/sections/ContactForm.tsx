@@ -9,7 +9,7 @@ export function ContactForm() {
 
   if (state.success) {
     return (
-      <section id="contact" className="py-24 px-6 bg-(--color-cream)">
+      <section id="contact" className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-cream)">
         <div className="max-w-2xl mx-auto border border-(--color-border) p-12 text-center flex flex-col gap-4">
           <p className="font-serif text-3xl text-(--color-ink)">Message Received</p>
           <p className="text-sm text-(--color-muted) max-w-sm mx-auto leading-relaxed">
@@ -21,7 +21,7 @@ export function ContactForm() {
   }
 
   return (
-    <section id="contact" className="py-24 px-6 bg-(--color-cream)">
+    <section id="contact" className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-cream)">
       <div className="max-w-2xl mx-auto flex flex-col gap-10">
         <div className="text-center flex flex-col gap-4">
           <span className="text-xs tracking-widest uppercase text-(--color-accent)">Get In Touch</span>
