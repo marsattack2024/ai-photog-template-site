@@ -1,0 +1,24 @@
+interface:
+  display_name: studio booking event
+  short_description: Build a complete Booking Event (Group Bonanza) system for any
+    portrait photography studio — a live in-studio preview night that converts warm
+    leads and maybes into booked sessions in a single evening. Produces the event
+    structure, three-tier offer stack, all invite copy, RSVP landing page copy, same-night
+    close scripts, and post-event follow-up sequences. Use whenever a photographer
+    wants to run a live booking event, studio preview night, open house, in-person
+    campaign, group demo, or says things like 'I want to bring leads into the studio,'
+    'how do I convert my maybes,' 'I want to do a group event,' 'run a preview night,'
+    'fill my calendar from one event,' 'Group Bonanza,' 'studio open house,' or 'how
+    do I close leads who won't book over the phone.' Also trigger when the studio-reactivation
+    skill has produced a bucket of maybes and the studio wants to convert them in
+    person. Works for boudoir, newborn, maternity, family, branding, and senior studios.
+    Genre-aware.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

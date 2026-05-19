@@ -1,0 +1,23 @@
+interface:
+  display_name: studio reactivation
+  short_description: Run a complete dead lead reactivation campaign for any portrait
+    photography studio — blast copy, lead bucketing, follow-up sequences for each
+    response type, and event invitation bridge for maybes. Use whenever a photographer
+    asks to reactivate old leads, wake up a dead CRM, run a $20K Friday, text their
+    list, send a reactivation campaign, recover unbooked leads, or says things like
+    'I have a bunch of leads that never booked,' 'I want to reach back out to my old
+    inquiries,' 'how do I fill my calendar from leads I already have,' 'my CRM is
+    full of cold leads,' 'I want to text my list,' 'how do I get old leads to book,'
+    or 'I paid for these leads and nothing happened.' Also trigger when a new studio
+    client is onboarded and has any existing leads — reactivation is the first campaign
+    to run before spending a dollar on new ads. Genre-aware. Works for boudoir, newborn,
+    maternity, family, branding, wedding, and senior studios.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

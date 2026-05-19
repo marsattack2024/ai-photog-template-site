@@ -1,0 +1,104 @@
+{
+  "studio": {
+    "name": null,
+    "genre_primary": null,
+    "genre_complementary": null,
+    "location": null,
+    "years_operating": null,
+    "website_url": null,
+    "find_your_stage": null,
+    "current_lead_sources": [],
+    "monthly_lead_count": null
+  },
+  "pricing": {
+    "session_fee": null,
+    "ips_model": null,
+    "average_ips_sale": null,
+    "average_total_client_value": null,
+    "collection_tiers": [],
+    "payment_plans_offered": null
+  },
+  "audience": {
+    "genre_buyer_persona": null,
+    "three_am_thoughts": [],
+    "genre_objections_ranked": [],
+    "buying_triggers": [],
+    "demand_type": null
+  },
+  "usp": {
+    "statement": null,
+    "differentiators": [],
+    "so_what_conversions": [],
+    "competitor_gaps": []
+  },
+  "offer": {
+    "name": null,
+    "session_fee": null,
+    "door_opener_type": null,
+    "door_opener_value": null,
+    "experience_stack": [],
+    "next_seasonal_campaign": null
+  },
+  "messaging": {
+    "positioning_statement": null,
+    "brand_promise": null,
+    "voice_adjectives": [],
+    "supporting_claims": [],
+    "objection_map": [],
+    "story_proofs": []
+  },
+  "campaign": {
+    "platforms": [],
+    "monthly_budget": null,
+    "budget_tier": null,
+    "ad_angles_chosen": [],
+    "landing_page_headline": null,
+    "quiz_question_count": null,
+    "quiz_voucher_amount": null
+  },
+  "revenue_formula": {
+    "current": {
+      "leads_per_month": null,
+      "booking_rate": null,
+      "average_sale": null,
+      "monthly_revenue": null
+    },
+    "target": {
+      "leads_per_month": null,
+      "booking_rate": null,
+      "average_sale": null,
+      "monthly_revenue": null
+    }
+  },
+  "social_proof": {
+    "written_testimonials": null,
+    "video_testimonials": null,
+    "google_review_count": null,
+    "google_rating": null,
+    "before_afters": null,
+    "named_clients": []
+  },
+  "website_audit": {
+    "current_headlines": [],
+    "current_taglines": [],
+    "has_quiz": null,
+    "has_clear_cta": null,
+    "pricing_visible": null,
+    "mobile_friendly": null,
+    "issues_found": [],
+    "strengths_found": []
+  },
+  "competitors": [
+    {
+      "name": null,
+      "positioning": null,
+      "strengths": null,
+      "gaps": null
+    }
+  ],
+  "session": {
+    "stages_completed": [],
+    "current_phase": 1,
+    "skipped_stages": []
+  }
+}

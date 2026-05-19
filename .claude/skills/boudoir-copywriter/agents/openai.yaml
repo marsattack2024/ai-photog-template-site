@@ -1,0 +1,20 @@
+interface:
+  display_name: Boudoir Copywriter
+  short_description: boudoir-first copywriting system for photography studios. use
+    when chatgpt needs to write, rewrite, review, critique, or brainstorm boudoir
+    marketing copy including facebook or meta ads, instagram ads, google ads, landing
+    pages, websites, quiz funnels, advertorials, email sequences, sms, video scripts,
+    testimonial scripts, carousel ads, retargeting copy, sales scripts, offer messaging,
+    nurture content, or website sections. also use when the request involves boudoir
+    buyer psychology, objections, personas, transformation-driven messaging, privacy
+    reassurance, testimonial deployment, or turning studio features into buyer-facing
+    benefits and identity shifts.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

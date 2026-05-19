@@ -1,0 +1,21 @@
+interface:
+  display_name: studio gtm strategy
+  short_description: Build a complete go-to-market system for portrait photography
+    studios — USP excavation, ad copy, Quiz Inquiry Machine, follow-up sequences,
+    phone scripts, and Revenue Formula math. Genre-aware, built on the P2P Client
+    Machine methodology. Use whenever a photographer asks to build a marketing system,
+    create ads, write a phone script, build a quiz, develop their USP, get more bookings,
+    or says 'help me get more clients,' 'build my funnel,' 'write my ads,' 'I need
+    more leads,' 'fix my marketing,' 'build my quiz,' 'what should my offer be,' or
+    'I want to hit $30K months.' Also trigger when someone mentions they're a photographer
+    and asks about marketing, paid ads, lead generation, or booking rates. Photography-studio-specific
+    — for non-photography businesses, use acquiring-clients instead.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
