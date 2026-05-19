@@ -96,6 +96,11 @@ export interface SiteConfig {
     };
   };
   socials: SiteSocial[];
+  /**
+   * Secondary footer links (Privacy, Terms, Sitemap, etc.). Omit or pass an
+   * empty array to hide the "Quick Links" column entirely.
+   */
+  footerLinks?: SiteSocial[];
   /** Optional thin top bar (scarcity / launch / seasonal). Omit to hide entirely. */
   announcement?: SiteAnnouncement;
   hero: SiteHero;
@@ -132,6 +137,11 @@ export const siteConfig: SiteConfig = {
     { label: "Instagram", href: "#" },
     { label: "Pinterest", href: "#" },
     { label: "TikTok", href: "#" },
+  ],
+  footerLinks: [
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
+    { label: "Sitemap", href: "/sitemap.xml" },
   ],
   announcement: {
     text: "Limited spots available for 2026",
