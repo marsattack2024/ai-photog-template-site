@@ -1,0 +1,89 @@
+import { InquirySchema } from "@/lib/validators";
+import { upsertContact } from "@/lib/ghl/contacts";
+import { siteConfig } from "@/lib/site.config";
+
+/**
+ * POST /api/v1/inquiry — public REST endpoint for agent-submitted contacts.
+ *
+ * Same contract as the browser-side server action (submitInquiry) but JSON
+ * in / JSON out. Lets AI agents ("book me a consultation") submit inquiries
+ * directly. Discoverable via /.well-known/api-catalog and /api/openapi.json.
+ *
+ * Tags the GHL contact with `source-agent:<name>` so the photographer can
+ * see which agent referred the lead. CORS open (Access-Control-Allow-Origin: *)
+ * because the endpoint is intentionally public — same data anyone could
+ * submit through the website form.
+ */
+
+const CORS_HEADERS: HeadersInit = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Accept",
+  "Access-Control-Max-Age": "86400",
+};
+
+const MAX_BODY_BYTES = 8192;
+
+function json(payload: unknown, status = 200): Response {
+  return new Response(JSON.stringify(payload), {
+    status,
+    headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+  });
+}
+
+export async function OPTIONS() {
+  return new Response(null, { status: 204, headers: CORS_HEADERS });
+}
+
+export async function POST(req: Request) {
+  // Size guard
+  const cl = req.headers.get("content-length");
+  if (cl && Number(cl) > MAX_BODY_BYTES) {
+    return json({ ok: false, error: "body_too_large" }, 413);
+  }
+
+  let body: Record<string, unknown>;
+  try {
+    body = (await req.json()) as Record<string, unknown>;
+  } catch {
+    return json({ ok: false, error: "invalid_json" }, 400);
+  }
+
+  // Honeypot — silent success so bots don't retry
+  if (typeof body.hp === "string" && body.hp.length > 0) {
+    return json({ ok: true, contactId: null, note: "ignored" }, 200);
+  }
+
+  const parsed = InquirySchema.safeParse(body);
+  if (!parsed.success) {
+    return json(
+      {
+        ok: false,
+        error: "validation_failed",
+        details: parsed.error.flatten().fieldErrors,
+      },
+      400
+    );
+  }
+
+  const sourceAgent =
+    typeof body.source_agent === "string" && body.source_agent
+      ? body.source_agent.slice(0, 80)
+      : "unknown";
+
+  const sourcePage =
+    typeof body.sourcePage === "string" ? body.sourcePage : undefined;
+
+  const result = await upsertContact({
+    ...parsed.data,
+    sourcePage,
+    sourceName: `${siteConfig.brand.name} (API · ${sourceAgent})`,
+    extraTags: [`source-agent:${sourceAgent}`],
+  });
+
+  if (!result.ok) {
+    return json({ ok: false, error: result.error }, 502);
+  }
+
+  return json({ ok: true, contactId: result.contactId }, 200);
+}
