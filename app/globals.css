@@ -22,6 +22,7 @@
    Audit: grep -r "#[0-9a-fA-F]" --include="*.tsx" .
    ═══════════════════════════════════════════════ */
 @theme {
+  /* ── Brand colors ── */
   --color-ink:          var(--primitive-ink);
   --color-cream:        var(--primitive-cream);
   --color-accent:       var(--primitive-accent);
@@ -30,8 +31,55 @@
   --color-border:       var(--primitive-border);
   --color-white:        oklch(100% 0 0);
 
+  /* ── Overlay colors (for text/UI on dark images) ── */
+  --color-overlay-dark-heavy:    oklch(0% 0 0 / 0.75);
+  --color-overlay-dark-medium:   oklch(0% 0 0 / 0.5);
+  --color-overlay-dark-light:    oklch(0% 0 0 / 0.4);
+  --color-on-dark-primary:       oklch(100% 0 0);
+  --color-on-dark-secondary:     oklch(100% 0 0 / 0.75);
+  --color-on-dark-muted:         oklch(100% 0 0 / 0.6);
+  --color-border-on-dark:        oklch(100% 0 0 / 0.4);
+  --color-border-on-dark-hover:  oklch(100% 0 0 / 0.6);
+  --color-indicator-inactive:    oklch(100% 0 0 / 0.3);
+  --color-card-on-dark-bg:       oklch(100% 0 0 / 0.05);
+  --color-card-on-dark-border:   oklch(100% 0 0 / 0.1);
+
+  /* ── Typography ── */
   --font-serif:  var(--font-playfair), Georgia, serif;
   --font-sans:   var(--font-dm-sans), system-ui, sans-serif;
+  --tracking-eyebrow: 0.25em;
+  --tracking-label:   0.2em;
+  --leading-hero:     1.1;
+
+  /* ── Spacing (vertical rhythm) ──
+     Section padding consistent across all sections. Heading-block rhythm
+     tokens fix the mt-3 / mt-4 / gap-6 inconsistency flagged in the audit. */
+  --space-section-y:              6rem;     /* py-24 */
+  --space-section-x:              1.5rem;   /* px-6  */
+  --space-heading-eyebrow-gap:    0.75rem;  /* eyebrow → h2 */
+  --space-heading-body-gap:       3.5rem;   /* h2 → body content */
+  --space-subheading-gap:         1rem;     /* subhead spacing */
+  --space-element-gap:            1.5rem;   /* gap-6 */
+  --space-element-gap-sm:         1rem;     /* gap-4 (forms) */
+  --space-element-gap-lg:         3rem;     /* gap-12 (grid cols) */
+  --space-button-py:              1rem;     /* py-4 */
+  --space-button-px:              2rem;     /* px-8 */
+  --space-input-py:               0.75rem;  /* py-3 */
+  --min-h-hero:                   95vh;
+  --min-h-split:                  600px;
+  --min-h-image-col:              400px;
+
+  /* ── Motion ── (mirror of lib/motion.config.ts — keep in sync)
+     Used by CSS transitions (e.g., AnimateOnScroll). Framer Motion
+     consumes the TS constants directly since it cannot read CSS vars. */
+  --motion-duration-xs:    0.2s;
+  --motion-duration-sm:    0.35s;
+  --motion-duration-base:  0.3s;
+  --motion-duration-md:    0.7s;
+  --motion-duration-lg:    0.75s;
+  --motion-duration-xl:    0.85s;
+  --motion-duration-hero:  0.9s;
+  --motion-ease-out:       cubic-bezier(0.22, 1, 0.36, 1);
 
   --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
@@ -56,4 +104,22 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
+}
+
+/* ═══════════════════════════════════════════════
+   ACCESSIBILITY — prefers-reduced-motion
+   WCAG 2.1 SC 2.3.3: collapse motion durations to near-zero and disable
+   transforms/animations for users who have reduced motion enabled.
+   Framer Motion variants check this via useReducedMotion() in JS;
+   this block covers everything CSS-driven (AnimateOnScroll, hover zooms).
+   ═══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
