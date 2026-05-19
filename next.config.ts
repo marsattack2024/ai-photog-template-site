@@ -7,7 +7,20 @@ const supabaseProjectRef = process.env.NEXT_PUBLIC_SUPABASE_URL
 
 const isDev = process.env.NODE_ENV === "development";
 
+/**
+ * Link response headers (RFC 8288) for agent discovery.
+ * Lets AI agents auto-discover the site's API surfaces, llms.txt index,
+ * and (future) MCP server card without manual config.
+ */
+const LINK_HEADER = [
+  '</.well-known/api-catalog>; rel="api-catalog"',
+  '</api/openapi.json>; rel="service-desc"; type="application/json"',
+  '</llms.txt>; rel="llms-txt"; type="text/plain"',
+  '</llms-full.txt>; rel="llms-full-txt"; type="text/plain"',
+].join(", ");
+
 const securityHeaders = [
+  { key: "Link", value: LINK_HEADER },
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
