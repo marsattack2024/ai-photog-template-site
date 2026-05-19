@@ -35,7 +35,7 @@ for _, f in files[:5]: print(f)
 
 Use the `Read` tool with the **full absolute path** returned by the python command above.
 
-Claude Code renders images visually when read — AM/PM in filenames and spaces both work fine.
+Codex renders images visually when read — AM/PM in filenames and spaces both work fine.
 
 ## Step 3: Confirm and Proceed
 
@@ -50,4 +50,4 @@ Then proceed with whatever the user asked you to do with it.
 If no files are found, or Desktop-only files are blocked:
 1. Ask the user to move the file to `~/Downloads`
 2. Or drag the file directly into the chat
-3. Or paste a screenshot directly into the chat (Claude Code supports this)
+3. Or paste a screenshot directly into the chat (Codex supports this)

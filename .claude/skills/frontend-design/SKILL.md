@@ -1,54 +1,46 @@
 ---
 name: frontend-design
-description: Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, or applications. Generates creative, polished code that avoids generic AI aesthetics.
-license: Complete terms in LICENSE.txt
+description: >
+  Use when designing or refining frontend pages and components for this
+  photography-site template. Focus on premium editorial quality, responsive
+  composition, reusable components, and current framework documentation when
+  implementation details are uncertain.
 ---
 
-This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.
+# Frontend Design
 
-The user provides frontend requirements: a component, page, application, or interface to build. They may include context about the purpose, audience, or technical constraints.
+Use this for visual implementation work that affects what visitors see. The
+standard is a polished photography studio website, not a generic web app.
 
-## Tailwind Plus Component Library
+## Design Approach
 
-Before building any component from scratch, check if a matching reference exists:
+- Start from the client genre, imagery, offer, and emotional buying context.
+- Make photography the primary visual asset.
+- Pair expressive type with clean readable body text.
+- Build section rhythm with enough whitespace for the images and copy to breathe.
+- Reuse existing layout, section, and UI primitives before adding new ones.
+- When a pattern repeats, promote it into a shared component or token.
+- Keep unique editorial moments possible; not every visual decision needs to
+  become an abstraction.
 
-1. Read `.claude/components/tailwindplus/_index.md` to find the right subcategory file
-2. Read that file and copy the relevant code snippet
-3. Adapt it to the project's stack and design system — don't use it verbatim
+## Implementation Guardrails
 
-Available subcategories include: Buttons, Badges, Avatars, Dropdowns, Input Groups, Modals, Drawers, Navbars, Tabs, Tables, Stacked Lists, Cards, Forms, Alerts, Stats, Hero Sections, Feature Sections, CTA Sections, and 75+ more.
+- Use `next/image` for images and `next/font/google` for fonts.
+- Follow the current project structure and installed package versions.
+- Search current documentation for framework/library behavior that may have
+  changed, especially Next.js, React, Tailwind, Framer Motion, and Supabase.
+- Keep mobile composition first: no clipped text, hidden CTAs, cramped forms, or
+  awkward image crops.
+- Avoid introducing new UI libraries unless the user explicitly asks.
 
----
+## Visual Review
 
-## Design Thinking
+Before calling a visual change done, check:
 
-Before coding, understand the context and commit to a BOLD aesthetic direction:
-- **Purpose**: What problem does this interface solve? Who uses it?
-- **Tone**: Pick an extreme: brutally minimal, maximalist chaos, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco/geometric, soft/pastel, industrial/utilitarian, etc. There are so many flavors to choose from. Use these for inspiration but design one that is true to the aesthetic direction.
-- **Constraints**: Technical requirements (framework, performance, accessibility).
-- **Differentiation**: What makes this UNFORGETTABLE? What's the one thing someone will remember?
-
-**CRITICAL**: Choose a clear conceptual direction and execute it with precision. Bold maximalism and refined minimalism both work - the key is intentionality, not intensity.
-
-Then implement working code (HTML/CSS/JS, React, Vue, etc.) that is:
-- Production-grade and functional
-- Visually striking and memorable
-- Cohesive with a clear aesthetic point-of-view
-- Meticulously refined in every detail
-
-## Frontend Aesthetics Guidelines
-
-Focus on:
-- **Typography**: Choose fonts that are beautiful, unique, and interesting. Avoid generic fonts like Arial and Inter; opt instead for distinctive choices that elevate the frontend's aesthetics; unexpected, characterful font choices. Pair a distinctive display font with a refined body font.
-- **Color & Theme**: Commit to a cohesive aesthetic. Use CSS variables for consistency. Dominant colors with sharp accents outperform timid, evenly-distributed palettes.
-- **Motion**: Use animations for effects and micro-interactions. Prioritize CSS-only solutions for HTML. Use `motion/react` (from the `motion` npm package) for React — NOT `framer-motion` directly, even if it's installed. Focus on high-impact moments: one well-orchestrated page load with staggered reveals (animation-delay) creates more delight than scattered micro-interactions. Use scroll-triggering and hover states that surprise.
-- **Spatial Composition**: Unexpected layouts. Asymmetry. Overlap. Diagonal flow. Grid-breaking elements. Generous negative space OR controlled density.
-- **Backgrounds & Visual Details**: Create atmosphere and depth rather than defaulting to solid colors. Add contextual effects and textures that match the overall aesthetic. Apply creative forms like gradient meshes, noise textures, geometric patterns, layered transparencies, dramatic shadows, decorative borders, custom cursors, and grain overlays.
-
-NEVER use generic AI-generated aesthetics like overused font families (Inter, Roboto, Arial, system fonts), cliched color schemes (particularly purple gradients on white backgrounds), predictable layouts and component patterns, and cookie-cutter design that lacks context-specific character.
-
-Interpret creatively and make unexpected choices that feel genuinely designed for the context. No design should be the same. Vary between light and dark themes, different fonts, different aesthetics. NEVER converge on common choices (Space Grotesk, for example) across generations.
-
-**IMPORTANT**: Match implementation complexity to the aesthetic vision. Maximalist designs need elaborate code with extensive animations and effects. Minimalist or refined designs need restraint, precision, and careful attention to spacing, typography, and subtle details. Elegance comes from executing the vision well.
-
-Remember: Claude is capable of extraordinary creative work. Don't hold back, show what can truly be created when thinking outside the box and committing fully to a distinctive vision.
+- first viewport clarity
+- image crop quality
+- heading scale on mobile and desktop
+- CTA visibility
+- spacing rhythm
+- contrast and focus states
+- consistency with existing tokens/components
