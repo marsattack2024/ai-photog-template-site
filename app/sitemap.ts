@@ -11,18 +11,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.seo.baseUrl.replace(/\/$/, "");
   const now = new Date();
 
+  // /thank-you is intentionally omitted — it's noindex (see thank-you/page.tsx
+  // metadata.robots) and shouldn't be advertised to search crawlers either.
   return [
     {
       url: `${base}/`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1.0,
-    },
-    {
-      url: `${base}/thank-you`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.3,
     },
   ];
 }

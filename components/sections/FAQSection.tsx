@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useId, useState } from "react";
+import { m, AnimatePresence } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
 import { motionDurations, motionEasings } from "@/lib/motion.config";
 import { Button } from "@/components/ui";
@@ -12,29 +12,34 @@ export type { FAQ };
 
 function FAQItem({ q, a }: FAQ) {
   const [open, setOpen] = useState(false);
+  const panelId = useId();
 
   return (
-    <motion.div variants={fadeUp} className="border-b border-(--color-border)">
+    <m.div variants={fadeUp} className="border-b border-(--color-border)">
       <button
         onClick={() => setOpen((o) => !o)}
         className="w-full flex items-center justify-between py-5 text-left gap-4 cursor-pointer group"
         aria-expanded={open}
+        aria-controls={panelId}
       >
-        <span className="font-serif text-lg font-normal text-(--color-ink) group-hover:text-(--color-accent) transition-colors">
+        <span className="font-serif text-lg font-normal text-(--color-ink) group-hover:text-(--color-accent-text) transition-colors">
           {q}
         </span>
-        <motion.span
+        <m.span
           animate={{ rotate: open ? 45 : 0 }}
           transition={{ duration: motionDurations.xs }}
           className="text-2xl leading-none text-(--color-muted) shrink-0"
+          aria-hidden="true"
         >
           +
-        </motion.span>
+        </m.span>
       </button>
 
       <AnimatePresence initial={false}>
         {open && (
-          <motion.div
+          <m.div
+            id={panelId}
+            role="region"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -44,10 +49,10 @@ function FAQItem({ q, a }: FAQ) {
             <p className="text-sm text-(--color-muted) leading-relaxed pb-6 max-w-2xl">
               {a}
             </p>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -75,7 +80,7 @@ export function FAQSection({
   return (
     <section className="bg-(--color-cream) py-[var(--space-section-y)] px-[var(--space-section-x)]">
       <div className="max-w-3xl mx-auto">
-        <motion.div
+        <m.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -88,9 +93,9 @@ export function FAQSection({
           <h2 className="font-serif text-4xl font-normal text-(--color-ink) mt-[var(--space-heading-eyebrow-gap)] md:text-5xl">
             {headline}
           </h2>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           variants={stagger}
           initial="hidden"
           whileInView="visible"
@@ -99,9 +104,9 @@ export function FAQSection({
           {faqs.map((faq) => (
             <FAQItem key={faq.q} q={faq.q} a={faq.a} />
           ))}
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -114,7 +119,7 @@ export function FAQSection({
           {footerCtaLabel && footerCtaHref && (
             <Button variant="ghost" href={footerCtaHref}>{footerCtaLabel}</Button>
           )}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

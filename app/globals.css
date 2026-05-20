@@ -121,7 +121,9 @@ h1, h2, h3, h4 {
    triggers the ring (mouse clicks don't get the indicator).
    ═══════════════════════════════════════════════ */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  /* accent-text (darkened) instead of decorative --color-accent so the
+     focus indicator passes WCAG AA 3:1 non-text contrast on cream. */
+  outline: 2px solid var(--color-accent-text);
   outline-offset: 2px;
   border-radius: 2px;
 }

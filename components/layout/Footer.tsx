@@ -42,11 +42,10 @@ export interface FooterProps {
   navLinks?: FooterNavLink[];
 }
 
-const DEFAULT_SOCIALS: FooterSocial[] = [
-  { label: "Instagram", href: "#" },
-  { label: "Pinterest", href: "#" },
-  { label: "TikTok", href: "#" },
-];
+// Empty default — pass `socials={siteConfig.socials}` from the layout to
+// surface the studio's actual handles. Falling back to "#" placeholders
+// here would ship broken links on a fork that forgets to wire the prop.
+const DEFAULT_SOCIALS: FooterSocial[] = [];
 
 /**
  * Global site footer. Backward-compatible: called with just `studioName`,

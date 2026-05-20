@@ -44,3 +44,10 @@ export interface GalleryImage {
    */
   h: string;
 }
+
+export interface SocialProofStat {
+  /** Display value (e.g. "200+", "5★", "8 Years"). */
+  value: string;
+  /** Caption below (e.g. "Sessions Photographed"). */
+  label: string;
+}

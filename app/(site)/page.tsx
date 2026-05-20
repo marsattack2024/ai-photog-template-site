@@ -5,9 +5,10 @@ import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
 import { ImageQuote } from "@/components/sections/ImageQuote";
 import { BookingUrgencyCTA } from "@/components/sections/BookingUrgencyCTA";
 import { buildPageMetadata } from "@/lib/seo";
-import { buildLocalBusinessSchema } from "@/lib/schema";
+import { buildLocalBusinessSchema, buildFAQSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/lib/site.config";
+import { faqs } from "@/lib/content.config";
 
 // Below-fold: deferred until after hero paints
 const TestimonialCards = dynamic(() =>
@@ -51,6 +52,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={buildLocalBusinessSchema()} />
+      <JsonLd data={buildFAQSchema(faqs)} />
 
       {/* 1. Hero — static import, server component, LCP paints before hydration */}
       <Hero {...siteConfig.hero} />

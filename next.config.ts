@@ -41,7 +41,7 @@ const securityHeaders = [
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com`,
       "style-src 'self' 'unsafe-inline'",    // required: Tailwind v4 inline styles
       `img-src 'self' data: blob: https://${supabaseProjectRef} https://www.google-analytics.com https://*.google-analytics.com`,
-      `connect-src 'self' https://${supabaseProjectRef} wss://${supabaseProjectRef} https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com${isDev ? " ws://localhost:* http://localhost:*" : ""}`,
+      `connect-src 'self' https://${supabaseProjectRef} wss://${supabaseProjectRef} https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com${isDev ? " ws://localhost:* http://localhost:*" : ""}`,
       "font-src 'self'",
       "frame-ancestors 'none'",
       "object-src 'none'",

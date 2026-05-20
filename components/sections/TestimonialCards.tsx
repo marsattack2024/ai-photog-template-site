@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
 import { featuredTestimonials as DEFAULT_FEATURED_TESTIMONIALS } from "@/lib/content.config";
 import type { FeaturedTestimonial } from "./types";
@@ -15,7 +15,7 @@ function Stars({ count }: { count: number }) {
       {Array.from({ length: count }).map((_, i) => (
         <svg
           key={i}
-          className="w-4 h-4 text-(--color-accent)"
+          className="w-4 h-4 text-(--color-accent-text)"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -51,7 +51,7 @@ export function TestimonialCards({
   return (
     <section className="bg-(--color-cream) py-[var(--space-section-y)] px-[var(--space-section-x)] border-t border-(--color-border)">
       <div className="max-w-3xl mx-auto">
-        <motion.div
+        <m.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -64,10 +64,10 @@ export function TestimonialCards({
           <h2 className="font-serif text-3xl font-normal text-(--color-ink) mt-2 md:text-4xl">
             {headline}
           </h2>
-        </motion.div>
+        </m.div>
 
         <AnimatePresence mode="wait">
-          <motion.div
+          <m.div
             key={current}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -97,7 +97,7 @@ export function TestimonialCards({
                 {t.detail}
               </p>
             </div>
-          </motion.div>
+          </m.div>
         </AnimatePresence>
 
         <div className="flex items-center justify-center gap-6 mt-12">

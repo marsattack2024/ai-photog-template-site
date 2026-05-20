@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
 import { motionEasings } from "@/lib/motion.config";
 import { carouselTestimonials as DEFAULT_CAROUSEL_TESTIMONIALS } from "@/lib/content.config";
@@ -39,7 +39,7 @@ export function TestimonialsCarousel({
   return (
     <section className="bg-(--color-ink) py-[var(--space-section-y)] px-[var(--space-section-x)] overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <motion.div
+        <m.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -52,11 +52,11 @@ export function TestimonialsCarousel({
           <h2 className="font-serif text-4xl font-normal text-(--color-cream) mt-[var(--space-heading-eyebrow-gap)] md:text-5xl">
             {headline}
           </h2>
-        </motion.div>
+        </m.div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-10">
           {visible.map((t, i) => (
-            <motion.div
+            <m.div
               key={`${current}-${i}`}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ export function TestimonialsCarousel({
                 i > 0 ? "hidden md:flex" : "flex"
               }`}
             >
-              <span className="font-serif text-5xl text-(--color-accent) opacity-40 leading-none">
+              <span className="font-serif text-5xl text-(--color-accent-text) opacity-40 leading-none">
                 &ldquo;
               </span>
               <blockquote className="font-serif text-base italic text-(--color-cream) leading-relaxed flex-1">
@@ -77,7 +77,7 @@ export function TestimonialsCarousel({
                   {t.detail}
                 </p>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 

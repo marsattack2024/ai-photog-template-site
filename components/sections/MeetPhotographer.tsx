@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { siteConfig } from "@/lib/site.config";
+import { photographerBio } from "@/lib/content.config";
 
 export interface MeetPhotographerProps {
   /** Eyebrow above the headline. */
@@ -19,15 +20,10 @@ export interface MeetPhotographerProps {
   variant?: "light" | "dark";
 }
 
-const DEFAULT_BIO = [
-  "I've been photographing real people — not models, not actors — for over eight years. I started because I believed everyone deserves to feel seen and beautiful in photographs. That belief still drives every session I shoot.",
-  "My approach is guided, warm, and a little bit playful. I'll walk you through every pose, every angle, every expression. By the end of the session, most clients tell me it was nothing like what they feared.",
-];
-
 export function MeetPhotographer({
   eyebrow = "Meet Your Photographer",
   name = "[Name]",
-  bioParagraphs = DEFAULT_BIO,
+  bioParagraphs = photographerBio,
   photoSrc = siteConfig.images.portrait.src,
   photoAlt = siteConfig.images.portrait.alt,
   ctaLabel = "Work With Me",
@@ -58,7 +54,7 @@ export function MeetPhotographer({
           />
         </div>
         <div className="flex flex-col gap-6">
-          <span className="text-xs tracking-widest uppercase text-(--color-accent)">
+          <span className="text-xs tracking-widest uppercase text-(--color-accent-text)">
             {eyebrow}
           </span>
           <h2

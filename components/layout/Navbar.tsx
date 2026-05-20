@@ -78,13 +78,13 @@ export function Navbar({ brandName = "[Studio Name]" }: NavbarProps) {
           isOpen ? "max-h-64 py-6" : "max-h-0 py-0"
         }`}
       >
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-2">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.label}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className="text-xs tracking-widest uppercase text-(--color-muted) hover:text-(--color-ink) transition-colors"
+              className="text-xs tracking-widest uppercase text-(--color-muted) hover:text-(--color-ink) transition-colors py-3 min-h-[44px] flex items-center"
               tabIndex={isOpen ? 0 : -1}
             >
               {item.label}
@@ -93,7 +93,7 @@ export function Navbar({ brandName = "[Studio Name]" }: NavbarProps) {
           <a
             href="#contact"
             onClick={() => setIsOpen(false)}
-            className="text-xs tracking-widest uppercase border border-(--color-ink) px-5 py-2 text-center hover:bg-(--color-ink) hover:text-(--color-cream) transition-colors"
+            className="text-xs tracking-widest uppercase border border-(--color-ink) px-5 py-3 min-h-[44px] flex items-center justify-center hover:bg-(--color-ink) hover:text-(--color-cream) transition-colors mt-2"
             tabIndex={isOpen ? 0 : -1}
           >
             Inquire

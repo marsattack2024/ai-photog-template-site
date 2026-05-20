@@ -154,7 +154,10 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  // MCP discovery probe — some clients GET /api/mcp before POSTing
+  // MCP discovery probe — some clients GET /api/mcp before POSTing.
+  // No CORS header: the MCP POST transport doesn't require browser CORS,
+  // and exposing wildcard ACAO here would signal the full surface as
+  // browser-callable (it isn't). Server-to-server clients ignore CORS.
   return new Response(
     JSON.stringify({
       mcp: "streamable-http",
@@ -163,10 +166,7 @@ export async function GET() {
     }),
     {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: { "Content-Type": "application/json" },
     }
   );
 }

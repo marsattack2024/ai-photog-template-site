@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 type ButtonVariant = "primary" | "ghost";
 type ButtonSize = "md" | "lg";
@@ -69,13 +69,13 @@ export function Button(props: ButtonProps) {
       className: classes,
     };
     return isInternalRoute(href) ? (
-      <motion.span {...motionProps}>
+      <m.span {...motionProps}>
         <Link href={href} className="contents" aria-label={props["aria-label"]}>
           {children}
         </Link>
-      </motion.span>
+      </m.span>
     ) : (
-      <motion.a
+      <m.a
         href={href}
         target={target}
         rel={rel ?? (target === "_blank" ? "noopener noreferrer" : undefined)}
@@ -83,20 +83,20 @@ export function Button(props: ButtonProps) {
         {...motionProps}
       >
         {children}
-      </motion.a>
+      </m.a>
     );
   }
 
   const { variant: _v, size: _s, className: _c, children: _ch, ...buttonProps } = props;
   void _v; void _s; void _c; void _ch;
   return (
-    <motion.button
+    <m.button
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={classes}
-      {...(buttonProps as React.ComponentProps<typeof motion.button>)}
+      {...(buttonProps as React.ComponentProps<typeof m.button>)}
     >
       {children}
-    </motion.button>
+    </m.button>
   );
 }

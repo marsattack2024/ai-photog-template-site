@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Thank You",
+  // Prevent indexing of the post-submit confirmation page — it shouldn't
+  // surface in search results or be advertised to AI crawlers.
+  robots: { index: false, follow: false },
+};
 
 export default function ThankYou() {
   return (

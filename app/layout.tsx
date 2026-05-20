@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
-import { MotionConfig } from "framer-motion";
+import { LazyMotion, MotionConfig, domAnimation } from "framer-motion";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { AttributionTracker } from "@/components/ui/AttributionTracker";
 import { siteConfig } from "@/lib/site.config";
@@ -89,7 +89,12 @@ export default function RootLayout({
           Skip to main content
         </a>
         <AttributionTracker />
-        <MotionConfig reducedMotion="user">{children}</MotionConfig>
+        {/* LazyMotion + strict: tree-shakes ~25KB by only bundling
+            the domAnimation feature pack. `strict` enforces `m.*` (not
+            `motion.*`) so missing features fail at compile time, not runtime. */}
+        <LazyMotion features={domAnimation} strict>
+          <MotionConfig reducedMotion="user">{children}</MotionConfig>
+        </LazyMotion>
         {/* GA4 only loads when GA_ID set AND GTM is not — most setups load GA
             via GTM instead of duplicating it. */}
         {GA_ID && !GTM_ID && <GoogleAnalytics gaId={GA_ID} />}

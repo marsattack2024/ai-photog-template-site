@@ -32,7 +32,7 @@ export function TestimonialsGrid({
     <section className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-cream)">
       <div className="max-w-7xl mx-auto flex flex-col gap-12">
         <div className="text-center flex flex-col gap-4">
-          <span className="text-xs tracking-widest uppercase text-(--color-accent)">
+          <span className="text-xs tracking-widest uppercase text-(--color-accent-text)">
             {eyebrow}
           </span>
           <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">
@@ -47,7 +47,7 @@ export function TestimonialsGrid({
             >
               <div className="flex gap-1" aria-hidden="true">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <span key={i} className="text-(--color-accent) text-sm">
+                  <span key={i} className="text-(--color-accent-text) text-sm">
                     &#9733;
                   </span>
                 ))}

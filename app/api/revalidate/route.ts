@@ -3,6 +3,18 @@ export const runtime = "nodejs"; // revalidateTag is not available in Edge runti
 
 import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import { timingSafeEqual } from "node:crypto";
+
+/**
+ * Constant-time secret comparison. Plain `!==` is vulnerable to timing
+ * side-channels — an attacker measuring response latency can brute-force
+ * a short secret one byte at a time. `timingSafeEqual` requires equal-length
+ * buffers, so we early-return on length mismatch to avoid throwing.
+ */
+function secretsMatch(provided: string | null, expected: string): boolean {
+  if (!provided || provided.length !== expected.length) return false;
+  return timingSafeEqual(Buffer.from(provided), Buffer.from(expected));
+}
 
 // Map Supabase table names to cache tags. Template forks add new tables here;
 // the allowlist below is derived from the values so it never drifts.
@@ -21,9 +33,9 @@ const TABLE_TAGS: Record<string, string[]> = {
 const ALLOWED_TAGS = new Set<string>(Object.values(TABLE_TAGS).flat());
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
-  const secret = req.headers.get("x-revalidate-secret");
+  const provided = req.headers.get("x-revalidate-secret");
 
-  if (!process.env.REVALIDATE_SECRET || secret !== process.env.REVALIDATE_SECRET) {
+  if (!process.env.REVALIDATE_SECRET || !secretsMatch(provided, process.env.REVALIDATE_SECRET)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

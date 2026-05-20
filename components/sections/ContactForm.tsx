@@ -2,10 +2,41 @@
 import { useActionState } from "react";
 import { submitInquiry, type SubmitInquiryState } from "@/app/actions/submitInquiry";
 import { AttributionFields } from "@/components/ui/AttributionFields";
+import { contactFormCopy } from "@/lib/content.config";
 
 const initialState: SubmitInquiryState = { success: false, errors: {} };
 
-export function ContactForm() {
+export interface ContactFormProps {
+  eyebrow?: string;
+  /** Headline with optional italic span (controlled via `italicWord`). */
+  headline?: string;
+  /** When set, this substring inside `headline` gets wrapped in an italic <em>. */
+  italicWord?: string;
+  subline?: string;
+  successHeadline?: string;
+  successBody?: string;
+}
+
+function withItalic(headline: string, italicWord: string) {
+  if (!italicWord || !headline.includes(italicWord)) return headline;
+  const [before, after] = headline.split(italicWord);
+  return (
+    <>
+      {before}
+      <em className="italic">{italicWord}</em>
+      {after}
+    </>
+  );
+}
+
+export function ContactForm({
+  eyebrow = contactFormCopy.eyebrow,
+  headline = contactFormCopy.headline,
+  italicWord = contactFormCopy.italicWord,
+  subline = contactFormCopy.subline,
+  successHeadline = contactFormCopy.successHeadline,
+  successBody = contactFormCopy.successBody,
+}: ContactFormProps = {}) {
   const [state, formAction, isPending] = useActionState(submitInquiry, initialState);
 
   if (state.success) {
@@ -16,9 +47,9 @@ export function ContactForm() {
           aria-live="polite"
           className="max-w-2xl mx-auto border border-(--color-border) p-12 text-center flex flex-col gap-4"
         >
-          <p className="font-serif text-3xl text-(--color-ink)">Message Received</p>
+          <p className="font-serif text-3xl text-(--color-ink)">{successHeadline}</p>
           <p className="text-sm text-(--color-muted) max-w-sm mx-auto leading-relaxed">
-            Thank you for reaching out. You&apos;ll hear back personally within 24 hours.
+            {successBody}
           </p>
         </div>
       </section>
@@ -29,12 +60,12 @@ export function ContactForm() {
     <section id="contact" className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-cream)">
       <div className="max-w-2xl mx-auto flex flex-col gap-10">
         <div className="text-center flex flex-col gap-4">
-          <span className="text-xs tracking-widest uppercase text-(--color-accent)">Get In Touch</span>
+          <span className="text-xs tracking-widest uppercase text-(--color-accent-text)">{eyebrow}</span>
           <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">
-            Ready to Book Your <em className="italic">Session?</em>
+            {withItalic(headline, italicWord)}
           </h2>
           <p className="text-sm leading-relaxed text-(--color-muted)">
-            Fill out the form and you&apos;ll hear back within 24 hours.
+            {subline}
           </p>
         </div>
 

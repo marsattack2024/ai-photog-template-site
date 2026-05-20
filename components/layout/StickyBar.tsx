@@ -19,7 +19,7 @@ export function StickyBar({ text, ctaLabel, ctaHref }: StickyBarProps) {
             {" — "}
             <a
               href={ctaHref}
-              className="underline hover:text-(--color-accent) transition-colors"
+              className="underline hover:text-(--color-accent-text) transition-colors"
             >
               {ctaLabel}
             </a>

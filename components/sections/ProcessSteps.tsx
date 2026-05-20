@@ -46,7 +46,7 @@ export function ProcessSteps({
               delay={i * 120}
               className="flex flex-col gap-5 px-8 py-10 first:pl-0 last:pr-0"
             >
-              <span className="font-serif text-7xl text-(--color-accent) opacity-20 leading-none">
+              <span className="font-serif text-7xl text-(--color-accent-text) opacity-20 leading-none">
                 {step.number}
               </span>
               <div className="w-8 h-px bg-(--color-border)" />

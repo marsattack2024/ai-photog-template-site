@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
 
 interface ImageQuoteProps {
@@ -58,7 +58,7 @@ export function ImageQuote({
       />
       <div className="absolute inset-0 bg-(--color-overlay-dark-heavy)" />
       <div className={`absolute inset-0 flex ${containerAlign}`}>
-        <motion.div
+        <m.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -73,7 +73,7 @@ export function ImageQuote({
               &mdash; {attribution}
             </p>
           )}
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );

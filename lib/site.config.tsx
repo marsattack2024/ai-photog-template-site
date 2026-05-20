@@ -140,7 +140,12 @@ export const siteConfig: SiteConfig = {
     name: "[Studio Name]",
     tagline:
       "Editorial portrait photography for the people who keep putting themselves last.",
+    phone: "(555) 000-0000",
     email: "hello@yourdomain.com",
+    location: {
+      city: "[City]",
+      state: "[ST]",
+    },
   },
   seo: {
     baseUrl:
@@ -182,7 +187,7 @@ export const siteConfig: SiteConfig = {
       "A boutique portrait and editorial studio for people ready to see themselves the way the world already does.",
     ctaLabel: "Inquire Today",
     ctaHref: "#contact",
-    imageSrc: "/images/hero.jpg",
+    imageSrc: "/placeholder/hero.svg",
     imageAlt:
       "Portrait photography session — editorial light, intimate moment captured by a real photographer",
   },
@@ -204,34 +209,14 @@ export const siteConfig: SiteConfig = {
       src: "/placeholder/portrait.svg",
       alt: "Photographer portrait",
     },
-    imageQuotes: [
-      {
-        src: "/images/underwater/empathy-section.webp",
-        alt: "Editorial portrait session — intimate moment captured by a real photographer",
-        position: "center 30%",
-        quote:
-          "I almost cancelled three different times. I'm so glad I didn't. Walking out of that session I felt like a completely different person.",
-        attribution: "Portrait Session Client",
-        align: "left",
-      },
-      {
-        src: "/images/family/family-cta-bg.jpg",
-        alt: "Family session — three generations laughing together in natural light",
-        position: "center 35%",
-        quote:
-          "She made me feel like I belonged in front of the camera. Every shot looks like me on my best day.",
-        attribution: "Family Session Client",
-        align: "right",
-      },
-      {
-        src: "/images/underwater/jennifer-portrait.jpg",
-        alt: "Close-up portrait — quiet moment, soft natural light",
-        position: "center 25%",
-        quote:
-          "I cried at the viewing. Not because they were sad — because for the first time I saw myself the way the people who love me see me.",
-        attribution: "Portrait Session Client",
-        align: "left",
-      },
-    ],
+    // ImageQuote breakers are opt-in. Add 1–3 entries to weave evocative
+    // pull-quotes between cream sections. The homepage renders each slot
+    // conditionally, so an empty array simply omits them.
+    //
+    // Example:
+    //   { src: "/images/portrait-01.webp", alt: "...", quote: "...",
+    //     attribution: "Portrait Session Client", align: "left",
+    //     position: "center 30%" },
+    imageQuotes: [],
   },
 };

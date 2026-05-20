@@ -23,7 +23,7 @@ export function WhyBook({
     <section className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-cream)">
       <div className="max-w-7xl mx-auto flex flex-col gap-12">
         <div className="text-center flex flex-col gap-4">
-          <span className="text-xs tracking-widest uppercase text-(--color-accent)">
+          <span className="text-xs tracking-widest uppercase text-(--color-accent-text)">
             {eyebrow}
           </span>
           <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">

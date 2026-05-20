@@ -60,7 +60,7 @@ export function SessionScenes({
     >
       <div className="max-w-7xl mx-auto flex flex-col gap-14">
         <AnimateOnScroll className="text-center flex flex-col gap-3">
-          <span className="text-xs tracking-widest uppercase text-(--color-accent)">
+          <span className="text-xs tracking-widest uppercase text-(--color-accent-text)">
             {eyebrow}
           </span>
           <h2

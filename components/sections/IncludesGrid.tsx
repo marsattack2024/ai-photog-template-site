@@ -21,7 +21,7 @@ export function IncludesGrid({
     <section className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-cream)">
       <div className="max-w-7xl mx-auto flex flex-col gap-12">
         <div className="text-center flex flex-col gap-4">
-          <span className="text-xs tracking-widest uppercase text-(--color-accent)">
+          <span className="text-xs tracking-widest uppercase text-(--color-accent-text)">
             {eyebrow}
           </span>
           <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">
@@ -34,7 +34,7 @@ export function IncludesGrid({
               key={item}
               className="flex items-center gap-3 border border-(--color-border) px-5 py-4"
             >
-              <span className="text-(--color-accent) text-lg">&#10003;</span>
+              <span className="text-(--color-accent-text) text-lg">&#10003;</span>
               <span className="text-sm text-(--color-ink)">{item}</span>
             </div>
           ))}

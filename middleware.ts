@@ -36,8 +36,11 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
+  // Skip the middleware entirely for routes that never need markdown
+  // negotiation. The function body short-circuits for these too, but
+  // bypassing at the matcher level avoids the per-request invocation
+  // (and its bundle load) altogether — meaningful on cold starts.
   matcher: [
-    // Match every path except Next internals and obvious static assets.
-    "/((?!_next/static|_next/image|favicon.ico).*)",
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|llms.txt|llms-full.txt|api/|md/|.well-known/|.*\\.).*)",
   ],
 };

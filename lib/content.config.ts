@@ -18,6 +18,7 @@ import type {
   FeaturedTestimonial,
   CarouselTestimonial,
   GalleryImage,
+  SocialProofStat,
 } from "@/components/sections/types";
 
 // ── FAQs ──────────────────────────────────────────────────────────────
@@ -160,6 +161,37 @@ export const galleryImages: GalleryImage[] = [
   { src: "/placeholder/landscape.svg", alt: "Session photo", h: "h-[260px]" },
   { src: "/placeholder/portrait.svg", alt: "Session photo", h: "h-[480px]" },
 ];
+
+// ── Social proof stats (above-fold strip on ink bg) ───────────────────
+export const socialProofStats: SocialProofStat[] = [
+  { value: "200+", label: "Sessions Photographed" },
+  { value: "5★", label: "Average Review" },
+  { value: "8 Years", label: "Experience" },
+  { value: "Featured", label: "In Editorial Press" },
+];
+
+// ── Photographer bio (MeetPhotographer section) ───────────────────────
+export const photographerBio: string[] = [
+  "I've been photographing real people — not models, not actors — for over eight years. I started because I believed everyone deserves to feel seen and beautiful in photographs. That belief still drives every session I shoot.",
+  "My approach is guided, warm, and a little bit playful. I'll walk you through every pose, every angle, every expression. By the end of the session, most clients tell me it was nothing like what they feared.",
+];
+
+// ── Empathy block defaults (the "I hear that all the time" section) ───
+export const empathyBody: string[] = [
+  "Most people feel awkward in front of a camera. They don't know where to look, what to do with their hands, or how to feel natural when someone is pointing a lens at them. That's not a you problem — that's a photographer problem. My job is to make you forget the camera is there.",
+  "Every session includes full posing guidance, a pre-shoot style consultation, and a relaxed pace that lets you actually enjoy the experience. You don't need to know how to pose. You just need to show up.",
+];
+
+// ── Contact form copy ─────────────────────────────────────────────────
+export const contactFormCopy = {
+  eyebrow: "Get In Touch",
+  headline: "Ready to Book Your Session?",
+  /** Italic span inside the headline — set to "" to disable the italic accent. */
+  italicWord: "Session?",
+  subline: "Fill out the form and you'll hear back within 24 hours.",
+  successHeadline: "Message Received",
+  successBody: "Thank you for reaching out. You'll hear back personally within 24 hours.",
+};
 
 // ── Carousel testimonials (3-up dark variant) ─────────────────────────
 export const carouselTestimonials: CarouselTestimonial[] = [

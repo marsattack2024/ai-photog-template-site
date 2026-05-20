@@ -1,3 +1,5 @@
+import { empathyBody as DEFAULT_BRIEF_BODY } from "@/lib/content.config";
+
 export interface EmpathyPullQuote {
   text: string;
   attribution?: string;
@@ -31,11 +33,6 @@ const DEFAULT_BRIEF_HEADLINE = (
     <em className="italic">I hear that all the time.</em>
   </>
 );
-
-const DEFAULT_BRIEF_BODY: string[] = [
-  "Most people feel awkward in front of a camera. They don't know where to look, what to do with their hands, or how to feel natural when someone is pointing a lens at them. That's not a you problem — that's a photographer problem. My job is to make you forget the camera is there.",
-  "Every session includes full posing guidance, a pre-shoot style consultation, and a relaxed pace that lets you actually enjoy the experience. You don't need to know how to pose. You just need to show up.",
-];
 
 export function EmpathyBlock({
   variant = "brief",

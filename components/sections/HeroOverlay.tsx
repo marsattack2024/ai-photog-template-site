@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 interface HeroOverlayProps {
   eyebrow?: string;
@@ -12,7 +12,7 @@ interface HeroOverlayProps {
 export function HeroOverlay({ eyebrow, headline, subline, ctaLabel, ctaHref }: HeroOverlayProps) {
   return (
     <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-16 pb-16 md:pb-28 flex justify-center md:justify-start">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
@@ -40,7 +40,7 @@ export function HeroOverlay({ eyebrow, headline, subline, ctaLabel, ctaHref }: H
             {ctaLabel}
           </a>
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

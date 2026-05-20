@@ -1,5 +1,5 @@
 "use client";
-import { motion, type Variants } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
 
 interface AnimateInProps {
@@ -11,7 +11,7 @@ interface AnimateInProps {
 
 export function AnimateIn({ children, variants = fadeUp, className = "", delay = 0 }: AnimateInProps) {
   return (
-    <motion.div
+    <m.div
       variants={variants}
       initial="hidden"
       whileInView="visible"
@@ -20,6 +20,6 @@ export function AnimateIn({ children, variants = fadeUp, className = "", delay =
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
