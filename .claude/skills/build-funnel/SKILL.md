@@ -27,6 +27,8 @@ system.
   offer, ads, quiz, follow-up, phone script, and measurement.
 - Use `site-builder` and `supabase-cms` only when the funnel needs to be
   implemented in this Next/Supabase site.
+- Use `deliverable-format` for strategy, copy, audit, and campaign outputs
+  intended for non-technical review.
 
 ## Operating Principles
 
@@ -36,9 +38,8 @@ system.
 - Never invent testimonials, results, guarantees, prices, awards, or scarcity.
 - Search current platform documentation when campaign, tracking, Typeform,
   Google Ads, Supabase, or deployment behavior is uncertain.
-- Keep human-facing drafts easy to review. For substantial copy/strategy, write
-  clean Google-Doc-ready Markdown and create a Google Doc when that connector is
-  available and the user wants a shareable review artifact.
+- Keep human-facing drafts easy to review. Use `deliverable-format` rather than
+  inventing a new output convention for each campaign.
 
 ## Output
 

@@ -11,6 +11,8 @@ This project uses `.claude/skills` as the source of truth. `.agents/skills` and
 - `intake` - turn a loose client brief into a build plan.
 - `launch-checklist` - final pre-launch verification.
 - `memory-maintenance` - keep project instructions and lessons lean.
+- `deliverable-format` - decide whether output belongs in chat, Markdown,
+  Google Docs, TypeScript config, or project files.
 
 ## Page And Site Specialists
 
@@ -45,7 +47,10 @@ This project uses `.claude/skills` as the source of truth. `.agents/skills` and
 
 ## Output Format Defaults
 
-- Client-facing drafts should be Google-Doc-ready Markdown by default.
+- Use `deliverable-format` whenever the task produces copy, strategy, audits,
+  funnel plans, campaign assets, page plans, or handoff notes.
+- Substantial client-facing drafts should be Google-Doc-ready Markdown by
+  default.
 - If a Google Docs connector is available and the user wants a shareable review
   artifact, create a Google Doc and return the link.
 - Repo implementation notes, task summaries, and launch checks can stay in

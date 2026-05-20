@@ -16,9 +16,9 @@ Write as a skeptical conversion copywriter, not an order-taker. The client is th
 Before writing or auditing full website, landing page, funnel, or campaign copy, look for relevant project sources or connected client materials when available. Prioritize:
 
 1. User-provided brief, website, reviews, testimonials, call notes, or existing copy.
-2. **`docs/P2P Copy Bible.md`** (this template's local copy) — canonical voice,
-   frameworks, and conversion patterns used across every studio. Read it
-   before writing if you haven't seen it this session.
+2. Local copy/source docs when present — canonical voice, frameworks, and
+   conversion patterns used across the template. Read relevant local docs
+   before writing if you haven't seen them this session.
 3. Project source docs, especially StoryBrand Copywriting for Photography Studios and Website Setup for Photographers.
 4. Genre-specific references, especially THE BOUDOIR BUYER BIBLE for boudoir work (the `boudoir-copywriter` skill loads it).
 5. Campaign-specific guides, quiz guides, ad handbooks, or review-mining docs when the website page connects to those assets.
@@ -41,11 +41,10 @@ When working inside this Next.js template, your copy goes into:
   edit metadata strings directly in page files when they can flow from
   siteConfig.
 
-**Output format**: prefer the TS object the file expects when the copy
-goes into a config file (saves the dev a transcription step). For
-hero/page-specific copy, output clean markdown for review, then dev
-moves it into siteConfig. If the user wants a Google Doc deliverable,
-output markdown with `# H1` + `## H2` so it pastes cleanly into Docs.
+**Output format**: use `deliverable-format`. Prefer the TS object the file
+expects when the copy is going directly into a config file. For substantial
+review drafts, use Google-Doc-ready Markdown; create a Google Doc only when the
+connector is available and the user wants a shareable review artifact.
 
 **Image alt text** is copywriter work too. For every hero / service page
 image, draft alt text in the asset-intake handoff. Standards live in the

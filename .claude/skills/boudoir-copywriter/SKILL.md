@@ -29,10 +29,9 @@ Then load only the additional reference files needed for the task:
 
 When operating inside this Next.js photography-site template, reference:
 
-- **`docs/P2P Copy Bible.md`** — the canonical brand-voice + framework doc.
-  Read this BEFORE writing if you haven't seen it this session; it's the
-  source of truth for tone, frames, and conversion patterns the team uses
-  across every studio.
+- Local copy/source docs when present — canonical voice, frames, and conversion
+  patterns used across the template. Read relevant local docs before writing if
+  you haven't seen them this session.
 - **`lib/site.config.tsx`** — your hero copy + bookingCTA copy + brand
   tagline + announcement bar copy land here as `siteConfig.hero.headline`
   (JSX), `siteConfig.hero.subline`, `siteConfig.brand.tagline`, etc.
@@ -40,9 +39,9 @@ When operating inside this Next.js photography-site template, reference:
   what's-included items, featured/carousel testimonials land here as typed
   arrays. The shapes are defined in `components/sections/types.ts`.
 
-**Output as the TS object the file expects** when the copywriter is
-writing into this template — not as a markdown table the dev has to
-transcribe. Example for FAQs:
+Use `deliverable-format` for review artifacts. **Output as the TS object the
+file expects** when the copywriter is writing directly into this template, not
+as a markdown table the dev has to transcribe. Example for FAQs:
 
 ```ts
 // drop directly into lib/content.config.ts
@@ -52,13 +51,9 @@ export const faqs: FAQ[] = [
 ];
 ```
 
-For sections that don't have a config file home (hero, custom
-service-page copy), output as **clean markdown** for review-first; the
-dev will move it into the right `metadata` export or page JSX.
-
-If the user asks for a Google Doc deliverable instead, output markdown
-with `# H1` and `## H2` — they can paste into Docs and use "Format from
-markdown."
+For sections that don't have a config file home, use Google-Doc-ready Markdown
+for review-first drafts. Create a Google Doc only when the connector is
+available and the user wants a shareable review artifact.
 
 ## Non-negotiable operating rules
 

@@ -15,6 +15,13 @@ Every asset you produce improves one of those three numbers. If it doesn't, it d
 
 ---
 
+## Output Format
+
+Use `deliverable-format` for strategy, copy, campaign assets, and handoffs.
+Default to Google-Doc-ready Markdown for phase outputs so non-technical
+operators can review and comment. Create a Google Doc only when the connector is
+available and the user wants a shareable review artifact.
+
 ## Before You Start: Load the Right Stage
 
 This skill operates as a phased, stage-gated workflow. Each stage has a dedicated reference file. Load the relevant file before executing each stage — do not work from memory alone.
@@ -254,7 +261,8 @@ Confirm with user before regenerating any artifact.
 ## What This Skill Does NOT Do
 
 - Does not run ads or connect to ad platforms (produces copy + strategy)
-- Does not build pages in any builder (produces HTML artifacts + copy)
+- Does not build pages in any builder or framework directly (produces page
+  strategy, quiz/landing-page blueprint, and copy)
 - Does not set up CRM or email tools (produces sequence copy for GoHighLevel/MeetNikki or any CRM)
 - Does not create graphic design or video (provides creative direction)
 - Does not build the Typeform quiz directly (produces the complete blueprint)

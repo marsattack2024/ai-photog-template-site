@@ -101,7 +101,8 @@ When asked "is the SEO good?" — run through:
 ## What this skill is NOT
 
 - Not for building NEW SEO infrastructure (already done — see file map above).
-- Not for content writing — that's `copywriting`, `photo-studio-website-copywriter`, `boudoir-copywriter`.
+- Not for content writing — that's `photo-studio-website-copywriter` or
+  `boudoir-copywriter`.
 - Not for the actual contact form / CRM wiring — that's the existing GHL integration in `lib/ghl/`.
 - Not for analytics (GA4, GTM) — separate concern, see `gtm-tracking` skill if added.
 

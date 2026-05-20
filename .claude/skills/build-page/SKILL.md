@@ -59,9 +59,10 @@ by `app/(site)/layout.tsx` — fed from siteConfig automatically.
 - `intake` → when the brief is incomplete or this is a new client/site
 - `asset-intake` → when images, brand assets, or galleries drive the page
 - `photo-studio-website-copywriter` → general multi-genre web copy (uses
-  StoryBrand, references `docs/P2P Copy Bible.md`)
+  StoryBrand and the local copy/source docs when present)
 - `boudoir-copywriter` → boudoir-specific (deeper psychology, Bible-aware)
-- `copywriting` → quick copy edits, brief CTAs, small rewrites
+- `deliverable-format` → when the output is a draft, audit, plan, or handoff
+  for non-technical review
 - `site-builder` → broader site structure changes (multiple pages, navigation)
 - `frontend-design` → visual composition + premium editorial quality
 - `tail-wind-design` → Tailwind v4 token edits, color tweaks, spacing rhythm
@@ -100,6 +101,9 @@ by `app/(site)/layout.tsx` — fed from siteConfig automatically.
   the app + CSS `@media` handles transitions. Don't bypass.
 - **Keep copy generic to studio genre + brief.** No internal agency,
   coaching, or marketing-system language in visitor-facing copy.
+- **Use review-friendly outputs.** For substantial copy/page planning, apply
+  `deliverable-format` before deciding chat, Google-Doc-ready Markdown, or a
+  config-shaped snippet.
 - **Search current official docs** when Next.js 15, Tailwind v4, Framer
   Motion 12, or `@modelcontextprotocol/sdk` behavior is uncertain.
 

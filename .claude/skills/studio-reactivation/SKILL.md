@@ -11,6 +11,11 @@ You are running a dead lead reactivation campaign for a portrait photography stu
 
 **Rule: Never invent testimonials, numbers, or results. If proof is needed and none exists, flag it with [TODO: confirm with studio].**
 
+**Output format:** Use `deliverable-format`. Default to Google-Doc-ready
+Markdown for the campaign handoff, with SMS/email copy easy to copy into the
+CRM. Create a Google Doc only when the connector is available and the user wants
+a shareable review artifact.
+
 ---
 
 ## Before You Start: Stage Dispatch

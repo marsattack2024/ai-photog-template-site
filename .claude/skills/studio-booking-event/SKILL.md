@@ -11,6 +11,11 @@ You are building a live in-studio booking event for a portrait photography studi
 
 **Rule: Never invent testimonials, numbers, or results. Flag anything unverified with [TODO: confirm with studio].**
 
+**Output format:** Use `deliverable-format`. Default to Google-Doc-ready
+Markdown for the event plan, offer stack, RSVP copy, scripts, and follow-up
+handoff. Create a Google Doc only when the connector is available and the user
+wants a shareable review artifact.
+
 ---
 
 ## Stage Dispatch

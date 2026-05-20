@@ -119,6 +119,10 @@ Use `references/troubleshooting.md` when auditing poor performance.
 
 ## Default Output
 
+Use `deliverable-format` for the final handoff. Full campaign builds should be
+Google-Doc-ready Markdown by default, with tables only where character counts,
+assets, or QA rows benefit from a compact grid.
+
 Use this structure for full campaign builds:
 
 # Google Ads Build: [Studio Name]
@@ -206,6 +210,7 @@ When auditing existing Google Ads, evaluate:
 
 ## Handoff Behavior
 
-For campaign creation, deliver build-ready assets in plain text or tables.
+For campaign creation, deliver build-ready assets in plain text or compact
+tables using Google-Doc-ready Markdown.
 For implementation support, include naming conventions, URL/UTM guidance, and QA steps.
 For missing information, make the smallest safe assumption, mark TODOs, and continue.

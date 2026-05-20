@@ -5,6 +5,10 @@ description: builds genre-agnostic typeform quiz popups for photography studios 
 
 Build the quiz in the photographer's voice, follow the exact quiz structure in this skill, and keep the output practical for immediate use in Typeform.
 
+Use `deliverable-format` for the final handoff. Default to Google-Doc-ready
+Markdown for quiz copy, thank-you page copy, and follow-up email so
+non-technical users can review it before it is built in Typeform.
+
 ## Workflow
 
 Follow this sequence every time:
