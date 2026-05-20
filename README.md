@@ -28,7 +28,7 @@ A working photographer site you fork per client. Generic by default, brand-swapp
 - **Tailwind CSS v4.3** (CSS-first `@theme` tokens, no config file)
 - **Framer Motion 12** with `<LazyMotion features={domAnimation} strict>` + global `MotionConfig reducedMotion="user"`
 - **GoHighLevel** for CRM (contact form → GHL upsert)
-- **Supabase** scaffolded but optional (deferred; blog wiring lives in `lib/data.ts`)
+- **Supabase** migrations included in `supabase/` as starter schema (TS bridges intentionally not shipped — install `@supabase/supabase-js` only when a fork wires the CMS)
 - **`@modelcontextprotocol/sdk`** for the MCP server
 
 ---
@@ -229,7 +229,7 @@ lib/
   seo.ts                    buildPageMetadata / buildArticleMetadata
   schema.ts                 JSON-LD builders (LocalBusiness, Person, etc.)
   validators.ts             Zod schema for inquiry form
-  supabase.ts, supabase-server.ts, data.ts   Supabase scaffolding (deferred)
+  (no supabase.ts — add when a fork wires the CMS)
 
 public/                     static assets (hero, portrait, gallery, etc.)
 ```
@@ -301,7 +301,7 @@ Kill the dev process and `find .next -mindepth 1 -delete && npm run dev`. Webpac
 
 ## What's intentionally not in scope
 
-- Blog (`lib/data.ts` has Supabase placeholders but no routes)
+- Blog (no routes; `supabase/migrations/0001_schema.sql` has a `posts` table ready when a fork wants one)
 - Multi-tenant / workspace isolation (single site per fork)
 - OAuth / OIDC discovery, Web Bot Auth signing (not photographer-relevant)
 - CMS (edit code; this is a template, not a SaaS)

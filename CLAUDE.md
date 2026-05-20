@@ -1,10 +1,10 @@
-# Project Instructions: Showit-Style Websites with Next.js + Supabase
+# Project Instructions: Showit-Style Photography Websites with Next.js
 
 ## What We're Building
 
-Premium, editorial-style websites for photographers, wedding vendors, creatives, and service-based entrepreneurs. These replicate the look of high-end Showit templates but are built as real Next.js applications with Supabase as the CMS/database layer.
+Premium, editorial-style websites for photographers, wedding vendors, creatives, and service-based entrepreneurs. These replicate the look of high-end Showit templates but are built as real Next.js applications.
 
-The workflow is CLI-first. The human provides a brief (brand name, niche, palette, fonts, copy, images) and Claude builds the entire site. Content lives in Supabase.
+The workflow is CLI-first. The human provides a brief (brand name, niche, palette, fonts, copy, images) and Claude builds the entire site. Content lives in the typed config files (`lib/site.config.tsx`, `lib/content.config.ts`); add a CMS like Supabase only when a fork needs editor-side updates (migrations are provided as a starting point in `supabase/`).
 
 ---
 
@@ -12,7 +12,7 @@ The workflow is CLI-first. The human provides a brief (brand name, niche, palett
 
 - **Framework**: Next.js 15 or latest stable (App Router)
 - **Styling**: Tailwind CSS — use whichever version the project already has (v3 or v4). Do not switch versions mid-build.
-- **Database/CMS**: Supabase (Postgres + Storage + Auth)
+- **Database/CMS** (optional): Supabase migrations included in `supabase/` as a starter schema. Drop in `@supabase/supabase-js` when a fork actually needs editor-side content; the default template is fully static + form-only.
 - **Deployment**: Vercel
 - **Package Manager**: Use whatever the project already uses (npm, pnpm, yarn). Do not switch mid-build.
 - **Animations**: Framer Motion (`whileInView` for scroll triggers, `useScroll`/`useTransform` for parallax)
@@ -47,8 +47,9 @@ components/
   sections/                   # Hero, SplitSection, AboutTeaser, ContactForm, etc.
   ui/                         # Button, Input, Textarea, etc.
 lib/
-  supabase.ts                 # Supabase client
   motion.ts                   # Shared Framer Motion variants
+  ghl/contacts.ts             # GHL CRM upsert (the wired CMS surface)
+  # supabase.ts (optional)    # Add when a fork wires Supabase
 public/
   placeholder/
 ```
