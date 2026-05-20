@@ -37,10 +37,11 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       // dev: unsafe-eval required for React Fast Refresh (webpack HMR uses eval)
-      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+      // Analytics domains added inline so the build emits one canonical CSP string.
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com`,
       "style-src 'self' 'unsafe-inline'",    // required: Tailwind v4 inline styles
-      `img-src 'self' data: blob: https://${supabaseProjectRef}`,
-      `connect-src 'self' https://${supabaseProjectRef} wss://${supabaseProjectRef}${isDev ? " ws://localhost:* http://localhost:*" : ""}`,
+      `img-src 'self' data: blob: https://${supabaseProjectRef} https://www.google-analytics.com https://*.google-analytics.com`,
+      `connect-src 'self' https://${supabaseProjectRef} wss://${supabaseProjectRef} https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com${isDev ? " ws://localhost:* http://localhost:*" : ""}`,
       "font-src 'self'",
       "frame-ancestors 'none'",
       "object-src 'none'",

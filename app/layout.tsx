@@ -1,8 +1,22 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import { MotionConfig } from "framer-motion";
+import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { siteConfig } from "@/lib/site.config";
 import "./globals.css";
+
+// Analytics IDs: prefer siteConfig, fall back to env vars at runtime.
+// Production-only by design: localhost + Vercel preview deploys never load
+// analytics so we don't pollute the photographer's data with test traffic.
+// VERCEL_ENV is "production" | "preview" | "development" on Vercel; undefined
+// locally. Missing ID still no-ops gracefully — never blocks the build/launch.
+const IS_PRODUCTION = process.env.VERCEL_ENV === "production";
+const GTM_ID = IS_PRODUCTION
+  ? siteConfig.analytics?.gtmId || process.env.NEXT_PUBLIC_GTM_ID
+  : undefined;
+const GA_ID = IS_PRODUCTION
+  ? siteConfig.analytics?.gaId || process.env.NEXT_PUBLIC_GA_ID
+  : undefined;
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -37,6 +51,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
+      {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
       <body>
         {/* Skip nav — first element in body, visible on focus */}
         <a
@@ -46,6 +61,9 @@ export default function RootLayout({
           Skip to main content
         </a>
         <MotionConfig reducedMotion="user">{children}</MotionConfig>
+        {/* GA4 only loads when GA_ID set AND GTM is not — most setups load GA
+            via GTM instead of duplicating it. */}
+        {GA_ID && !GTM_ID && <GoogleAnalytics gaId={GA_ID} />}
       </body>
     </html>
   );

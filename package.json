@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
+    "@next/third-parties": "^16.2.6",
     "@sentry/nextjs": "^10.53.1",
     "@supabase/supabase-js": "^2.99.3",
     "framer-motion": "^12.38.0",

@@ -1,6 +1,7 @@
 import { InquirySchema } from "@/lib/validators";
 import { upsertContact } from "@/lib/ghl/contacts";
 import { siteConfig } from "@/lib/site.config";
+import { rateLimit, getClientIpFromRequest } from "@/lib/rate-limit";
 
 /**
  * POST /api/v1/inquiry — public REST endpoint for agent-submitted contacts.
@@ -24,10 +25,18 @@ const CORS_HEADERS: HeadersInit = {
 
 const MAX_BODY_BYTES = 8192;
 
-function json(payload: unknown, status = 200): Response {
+function json(
+  payload: unknown,
+  status = 200,
+  extraHeaders: Record<string, string> = {}
+): Response {
   return new Response(JSON.stringify(payload), {
     status,
-    headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+    headers: {
+      "Content-Type": "application/json",
+      ...CORS_HEADERS,
+      ...extraHeaders,
+    },
   });
 }
 
@@ -36,6 +45,19 @@ export async function OPTIONS() {
 }
 
 export async function POST(req: Request) {
+  // Rate limit: 5 requests / minute / IP. Defense against bot spam since
+  // CORS is open. Effective per Vercel function instance — see
+  // lib/rate-limit.ts caveats for distributed-rate-limit upgrade path.
+  const ip = getClientIpFromRequest(req);
+  const limit = rateLimit(`inquiry:${ip}`, { max: 5, windowMs: 60_000 });
+  if (!limit.ok) {
+    return json(
+      { ok: false, error: "rate_limited", retryAfter: limit.retryAfter },
+      429,
+      { "Retry-After": String(limit.retryAfter) }
+    );
+  }
+
   // Size guard
   const cl = req.headers.get("content-length");
   if (cl && Number(cl) > MAX_BODY_BYTES) {
