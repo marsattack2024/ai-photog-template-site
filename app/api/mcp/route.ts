@@ -22,6 +22,7 @@ import { z } from "zod";
 import { upsertContact } from "@/lib/ghl/contacts";
 import { siteConfig } from "@/lib/site.config";
 import { rateLimit, getClientIpFromRequest } from "@/lib/rate-limit";
+import { InquirySchema } from "@/lib/validators";
 
 function createMcpServer(): McpServer {
   const server = new McpServer({
@@ -67,8 +68,27 @@ function createMcpServer(): McpServer {
       },
     },
     async (args) => {
+      // Re-validate through the canonical InquirySchema so MCP submissions
+      // get the same phone normalization + length caps as the REST endpoint
+      // and the browser form. MCP's inputSchema is for client advertisement;
+      // this is the trust boundary.
+      const parsed = InquirySchema.safeParse(args);
+      if (!parsed.success) {
+        return {
+          content: [
+            {
+              type: "text",
+              text: `Inquiry validation failed: ${parsed.error.issues
+                .map((i) => `${i.path.join(".")}: ${i.message}`)
+                .join("; ")}`,
+            },
+          ],
+          isError: true,
+        };
+      }
+
       const result = await upsertContact({
-        ...args,
+        ...parsed.data,
         sourceName: `${siteConfig.brand.name} (MCP)`,
         extraTags: ["source-mcp"],
       });

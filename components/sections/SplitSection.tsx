@@ -58,9 +58,7 @@ export function SplitSection({
         <p className="text-sm leading-relaxed text-(--color-muted) max-w-sm">{body}</p>
         {ctaLabel && (
           <div>
-            <a href={ctaHref}>
-              <Button variant="ghost">{ctaLabel}</Button>
-            </a>
+            <Button variant="ghost" href={ctaHref}>{ctaLabel}</Button>
           </div>
         )}
       </AnimateOnScroll>

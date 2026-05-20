@@ -11,7 +11,11 @@ export function ContactForm() {
   if (state.success) {
     return (
       <section id="contact" className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-cream)">
-        <div className="max-w-2xl mx-auto border border-(--color-border) p-12 text-center flex flex-col gap-4">
+        <div
+          role="status"
+          aria-live="polite"
+          className="max-w-2xl mx-auto border border-(--color-border) p-12 text-center flex flex-col gap-4"
+        >
           <p className="font-serif text-3xl text-(--color-ink)">Message Received</p>
           <p className="text-sm text-(--color-muted) max-w-sm mx-auto leading-relaxed">
             Thank you for reaching out. You&apos;ll hear back personally within 24 hours.

@@ -89,9 +89,7 @@ export function GalleryGrid({
 
         {ctaLabel && ctaHref && (
           <AnimateOnScroll delay={200} className="flex justify-center mt-12">
-            <a href={ctaHref}>
-              <Button variant="ghost">{ctaLabel}</Button>
-            </a>
+            <Button variant="ghost" href={ctaHref}>{ctaLabel}</Button>
           </AnimateOnScroll>
         )}
       </div>

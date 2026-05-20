@@ -73,6 +73,21 @@ export async function GET() {
                 },
               },
             },
+            "429": {
+              description:
+                "Rate limited (5 requests/min/IP). Retry-After header indicates seconds until the next allowed request.",
+              headers: {
+                "Retry-After": {
+                  schema: { type: "integer" },
+                  description: "Seconds the client should wait before retrying.",
+                },
+              },
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ApiError" },
+                },
+              },
+            },
             "502": {
               description: "Upstream CRM rejected the request.",
               content: {

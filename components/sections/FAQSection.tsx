@@ -112,9 +112,7 @@ export function FAQSection({
             <p className="text-sm text-(--color-muted) mb-4">{footerText}</p>
           )}
           {footerCtaLabel && footerCtaHref && (
-            <a href={footerCtaHref}>
-              <Button variant="ghost">{footerCtaLabel}</Button>
-            </a>
+            <Button variant="ghost" href={footerCtaHref}>{footerCtaLabel}</Button>
           )}
         </motion.div>
       </div>
