@@ -25,6 +25,7 @@ function GalleryColumn({ images, baseDelay = 0 }: { images: typeof leftCol; base
             src={img.src}
             alt={img.alt}
             fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="object-cover transition-transform duration-700 hover:scale-[1.03]"
           />
         </AnimateOnScroll>
