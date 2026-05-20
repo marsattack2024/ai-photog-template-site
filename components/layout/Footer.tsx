@@ -1,3 +1,17 @@
+import Link from "next/link";
+
+/**
+ * Internal route detector: a relative path starting with `/` that doesn't
+ * end with a file extension (.xml, .pdf, .txt, etc.) — those should still
+ * full-load. External hrefs (http://, mailto:, tel:, #) also full-load.
+ */
+function isInternalRoute(href: string): boolean {
+  if (!href.startsWith("/")) return false;
+  // Match `.xml`, `.txt`, `.pdf`, `.json`, etc. at the end of the path
+  if (/\.[a-z0-9]{2,5}(\?|#|$)/i.test(href)) return false;
+  return true;
+}
+
 export interface FooterSocial {
   label: string;
   href: string;
@@ -109,15 +123,21 @@ export function Footer({
                 <p className="text-xs tracking-widest uppercase text-(--color-accent)">
                   Quick Links
                 </p>
-                {navLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="text-sm text-(--color-on-dark-secondary) hover:text-(--color-cream) transition-colors w-fit"
-                  >
-                    {link.label}
-                  </a>
-                ))}
+                {navLinks.map((link) => {
+                  const className =
+                    "text-sm text-(--color-on-dark-secondary) hover:text-(--color-cream) transition-colors w-fit";
+                  // Internal Next.js routes get SPA navigation via <Link>;
+                  // file assets (sitemap.xml) and external URLs full-load via <a>.
+                  return isInternalRoute(link.href) ? (
+                    <Link key={link.label} href={link.href} className={className}>
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a key={link.label} href={link.href} className={className}>
+                      {link.label}
+                    </a>
+                  );
+                })}
               </div>
             )}
           </div>
