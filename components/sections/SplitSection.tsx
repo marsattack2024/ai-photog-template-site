@@ -34,6 +34,7 @@ export function SplitSection({
           src={imageSrc}
           alt={imageAlt}
           fill
+          sizes="(min-width: 768px) 50vw, 100vw"
           className="object-cover"
         />
       </AnimateOnScroll>
