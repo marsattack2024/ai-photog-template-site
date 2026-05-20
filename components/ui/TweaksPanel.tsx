@@ -23,27 +23,28 @@ export interface TweaksPanelProps {
 }
 
 /**
+ * ╔══════════════════════════════════════════════════════════════════╗
+ * ║  NOT DEAD CODE. Intentionally scaffolded for client review.      ║
+ * ║  See lib/tweaks.config.ts header for the FULL usage guide        ║
+ * ║  (3 patterns, worked example, CSS recipes, handoff workflow).    ║
+ * ║  Re-exported from @/components/ui so it's discoverable.          ║
+ * ╚══════════════════════════════════════════════════════════════════╝
+ *
  * Floating live-design-tweaks panel for client review sessions.
  *
- * Renders ONLY on localhost (NODE_ENV !== "production" + hostname check) —
- * triple-layered guard so this can never accidentally ship to a Vercel
- * preview or prod deploy.
+ * SAFE BY DESIGN — triple-guarded so this never reaches preview/prod:
+ *   - NODE_ENV !== "production"  (build-time)
+ *   - window.location.hostname === "localhost"  (runtime)
+ *   - Tree-shaken from prod bundle when nothing imports it
  *
- * How it works:
- *   1. Page / layout imports this and passes `groups` + `defaults`
- *   2. Panel sets `body[data-{key}]="{val}"` when an option is picked
- *   3. CSS in globals.css (or a per-page stylesheet) targets those
- *      attributes to override design tokens, hide sections, swap layouts:
+ * MULTIPLE TWEAKS AT ONCE: each TweakGroup sets its own body attribute
+ * (data-{group.key}). All groups run simultaneously; the panel can drive
+ * 10 independent dials at once without conflict. Changes are CSS-only,
+ * so there is no React re-render and no page reload.
  *
- *      body[data-palette="warm-luxe"] {
- *        --primitive-accent: #B65D3B;
- *        --primitive-ink: #1A1410;
- *      }
- *      body[data-show-testimonials="off"] section.testimonials { display: none }
- *
- *   4. Photographer / client clicks around, lands on a combo they like
- *   5. "Copy choices for Claude →" button copies a paste-ready prompt
- *      asking to lock in the picks as defaults and remove this panel
+ * SECTION-SCOPED OR GLOBAL: the body attribute is set globally, but
+ * the CSS selector decides where the override lands. Want a tweak to
+ * affect only the hero? Write `body[data-hero-crop="right"] section.hero ...`.
  *
  * Pattern adapted from p2p-react-website/src/app/components/TweaksPanel.tsx.
  */

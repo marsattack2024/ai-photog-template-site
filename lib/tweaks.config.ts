@@ -1,56 +1,154 @@
 import type { TweakGroup } from "@/components/ui/TweaksPanel";
 
 /**
- * Tweaks registry for a client review session.
+ * ╔══════════════════════════════════════════════════════════════════╗
+ * ║  NOT DEAD CODE. Intentionally scaffolded + waiting.              ║
+ * ║                                                                  ║
+ * ║  This file + components/ui/TweaksPanel.tsx ship empty so a fork  ║
+ * ║  can wire them in 5 minutes for a client design review session,  ║
+ * ║  then remove the mount when the design is locked. The panel is   ║
+ * ║  triple-guarded — it physically cannot render on Vercel preview  ║
+ * ║  or prod even if accidentally left wired.                        ║
+ * ║                                                                  ║
+ * ║  See CLAUDE.md → "Optional: live design tweaks" for the          ║
+ * ║  high-level activation steps. This header is the deep how-to.    ║
+ * ╚══════════════════════════════════════════════════════════════════╝
  *
- * This file is INTENTIONALLY empty in the template. Forks add groups
- * when they want to demo design variations to a photographer:
+ * ─── WHY THIS EXISTS ───────────────────────────────────────────────
  *
+ *   Letting a photographer click between design variants in a live
+ *   review call (palette, hero crop, layout density, which sections
+ *   show, dark vs light) without redeploying between every nudge.
+ *
+ *   The mechanism is just `document.body.setAttribute()` plus CSS
+ *   attribute selectors — no React re-render, no page reload, no
+ *   network. Changes are visually instant.
+ *
+ * ─── THREE PATTERNS YOU CAN COMBINE ────────────────────────────────
+ *
+ *   1. Multiple independent tweaks running simultaneously.
+ *      Each TweakGroup gets its own body data-attribute. The panel
+ *      can drive 10 of them at once — palette + hero crop + which
+ *      testimonial style + dark vs light + CTA copy variant, etc.
+ *
+ *   2. Section-scoped tweaks.
+ *      The body attribute is global, but the CSS selector decides
+ *      WHERE the override lands — one tweak can affect only the
+ *      hero, another only the gallery. Both run at the same time.
+ *
+ *   3. Whole-page "version A vs version B."
+ *      A `data-layout` tweak combined with conditional CSS can hide
+ *      half the sections and show alternates. Same URL, same DOM,
+ *      different visible composition — still no reload.
+ *
+ * ─── WORKED EXAMPLE: ALL THREE PATTERNS AT ONCE ────────────────────
+ *
+ *   // lib/tweaks.config.ts
  *   export const TWEAK_GROUPS: TweakGroup[] = [
+ *     // PATTERN 1 — global theme swap (affects every section)
  *     {
  *       key: "palette",
- *       label: "Color Palette",
+ *       label: "Palette",
  *       opts: [
  *         { val: "default", label: "Editorial Cream", swatches: ["#C9A961", "#1A1A1A"] },
- *         { val: "warm-luxe", label: "Warm Luxe", swatches: ["#B65D3B", "#1A1410"] },
- *         { val: "moody", label: "Dark Moody", swatches: ["#8C6B49", "#141619"] },
+ *         { val: "moody",   label: "Boudoir Moody",   swatches: ["#8C6B49", "#141619"] },
+ *         { val: "warm",    label: "Warm Luxe",       swatches: ["#B65D3B", "#1A1410"] },
  *       ],
  *     },
+ *     // PATTERN 2 — scoped to ONE section (hero only)
  *     {
- *       key: "show-testimonials",
+ *       key: "hero-crop",
+ *       label: "Hero crop",
+ *       opts: [
+ *         { val: "center", label: "Centered subject" },
+ *         { val: "right",  label: "Subject right" },
+ *         { val: "left",   label: "Subject left" },
+ *       ],
+ *     },
+ *     // PATTERN 2 — scoped to the testimonials section
+ *     {
+ *       key: "testimonials",
  *       label: "Testimonials",
  *       opts: [
- *         { val: "on", label: "Show" },
- *         { val: "off", label: "Hide" },
+ *         { val: "cards",    label: "Featured cards (1-up)" },
+ *         { val: "carousel", label: "Carousel (3-up dark)" },
+ *         { val: "off",      label: "Hide section" },
+ *       ],
+ *     },
+ *     // PATTERN 3 — whole-page version toggle
+ *     {
+ *       key: "layout",
+ *       label: "Page version",
+ *       opts: [
+ *         { val: "long",  label: "Long scroll (default)" },
+ *         { val: "short", label: "Tight one-pager" },
  *       ],
  *     },
  *   ];
  *
  *   export const TWEAK_DEFAULTS: Record<string, string> = {
  *     palette: "default",
- *     "show-testimonials": "on",
+ *     "hero-crop": "center",
+ *     testimonials: "cards",
+ *     layout: "long",
  *   };
  *
- * Then add CSS overrides in globals.css:
+ *   // app/globals.css — the actual visual swaps
  *
- *   body[data-palette="warm-luxe"] {
+ *   // Pattern 1: palette is body-wide
+ *   body[data-palette="moody"] {
+ *     --primitive-cream: oklch(96% 0.02 60);
+ *     --primitive-accent: #8C6B49;
+ *     --primitive-ink: #141619;
+ *   }
+ *   body[data-palette="warm"] {
  *     --primitive-accent: #B65D3B;
  *     --primitive-ink: #1A1410;
  *   }
- *   body[data-show-testimonials="off"] section[id="testimonials"] {
+ *
+ *   // Pattern 2: hero-crop scoped to one section only
+ *   body[data-hero-crop="right"] section.hero img { object-position: 80% 15%; }
+ *   body[data-hero-crop="left"]  section.hero img { object-position: 20% 15%; }
+ *
+ *   // Pattern 2: testimonials scoped — show one, hide others
+ *   body[data-testimonials="cards"]    section.testimonials-carousel { display: none; }
+ *   body[data-testimonials="carousel"] section.testimonials-cards    { display: none; }
+ *   body[data-testimonials="off"]      section[class*="testimonials"]{ display: none; }
+ *
+ *   // Pattern 3: whole-page version — hide a bunch of sections at once
+ *   body[data-layout="short"] section.gallery,
+ *   body[data-layout="short"] section.process,
+ *   body[data-layout="short"] section.image-quote {
  *     display: none;
  *   }
  *
- * And mount the panel in app/(site)/layout.tsx (dev-only):
+ *   (Each section needs a matching CSS class for the selectors above
+ *   to grab — `<section className="hero">`, etc. The template's sections
+ *   mostly don't have these yet; add them when you wire a tweak that
+ *   needs them.)
  *
+ * ─── HOW TO MOUNT THE PANEL ────────────────────────────────────────
+ *
+ *   // app/(site)/layout.tsx
+ *   import { TweaksPanel } from "@/components/ui";
+ *   import { TWEAK_GROUPS, TWEAK_DEFAULTS } from "@/lib/tweaks.config";
+ *   //  ... inside the layout's return tree, anywhere:
  *   <TweaksPanel groups={TWEAK_GROUPS} defaults={TWEAK_DEFAULTS} />
  *
- * The panel only renders on localhost — triple-layered NODE_ENV +
- * hostname guard means it never ships to a preview or prod deploy.
+ * ─── HANDOFF AFTER THE REVIEW ──────────────────────────────────────
  *
- * After the review session, click "Copy choices for Claude →" in the
- * panel, paste the message, and the chosen values get promoted to
- * permanent defaults.
+ *   Photographer picks their favorite combo → clicks "Copy choices
+ *   for Claude →" in the panel → pastes the prompt to an agent.
+ *   The agent promotes the winning values to permanent defaults in
+ *   :root (or wherever) and removes both the TweaksPanel mount and
+ *   the now-unused override blocks from globals.css.
+ *
+ * ─── KEEP THESE ARRAYS EMPTY UNTIL YOU NEED THE PANEL ──────────────
+ *
+ *   With empty groups the panel still renders but shows nothing,
+ *   so leaving the mount in costs nothing. To turn the system fully
+ *   "off" between reviews, remove the <TweaksPanel /> mount in the
+ *   layout. The component + types stay tree-shaken either way.
  */
 
 export const TWEAK_GROUPS: TweakGroup[] = [];
