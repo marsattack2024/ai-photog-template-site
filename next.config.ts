@@ -34,18 +34,35 @@ const securityHeaders = [
   },
   {
     key: "Content-Security-Policy",
+    /**
+     * Compatibility-focused CSP for a static lead-gen marketing site.
+     *
+     * Deliberately uses 'unsafe-inline' instead of nonces:
+     *   - This site is mostly static prerendered HTML. A nonce CSP forces every
+     *     page through dynamic SSR (cookies/headers reads) and breaks edge cache.
+     *   - The common embed vendors here (GTM, Typeform, Calendly, YouTube,
+     *     Vimeo) all require inline scripts or iframes that fight strict CSP.
+     *   - The real threat surface for this kind of site is form abuse + bot
+     *     spam, which is covered upstream by rate-limit + Vercel WAF.
+     *
+     * We keep the strong basics: frame-ancestors 'none', object-src 'none',
+     * base-uri 'self', form-action 'self', HSTS, nosniff, frame-options.
+     */
     value: [
       "default-src 'self'",
       // dev: unsafe-eval required for React Fast Refresh (webpack HMR uses eval)
-      // Analytics domains added inline so the build emits one canonical CSP string.
-      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com`,
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://embed.typeform.com https://*.typeform.com https://assets.calendly.com`,
       "style-src 'self' 'unsafe-inline'",    // required: Tailwind v4 inline styles
-      `img-src 'self' data: blob: https://${supabaseProjectRef} https://www.google-analytics.com https://*.google-analytics.com`,
-      `connect-src 'self' https://${supabaseProjectRef} wss://${supabaseProjectRef} https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com${isDev ? " ws://localhost:* http://localhost:*" : ""}`,
-      "font-src 'self'",
+      `img-src 'self' data: blob: https://${supabaseProjectRef} https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com https://*.typeform.com https://*.calendly.com https://i.ytimg.com https://i.vimeocdn.com`,
+      `connect-src 'self' https://${supabaseProjectRef} wss://${supabaseProjectRef} https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.typeform.com https://calendly.com https://*.calendly.com${isDev ? " ws://localhost:* http://localhost:*" : ""}`,
+      "font-src 'self' data: https://assets.calendly.com",
+      // Allow common embed iframes (YouTube, Vimeo, Typeform, Calendly).
+      // Adding a new vendor? Add its domain here.
+      "frame-src 'self' https://*.youtube.com https://*.youtube-nocookie.com https://player.vimeo.com https://*.typeform.com https://calendly.com https://*.calendly.com https://www.googletagmanager.com",
       "frame-ancestors 'none'",
       "object-src 'none'",
       "base-uri 'self'",
+      "form-action 'self'",
     ].join("; "),
   },
 ];

@@ -209,9 +209,22 @@ export const siteConfig: SiteConfig = {
       src: "/placeholder/portrait.svg",
       alt: "Photographer portrait",
     },
-    // ImageQuote breakers are opt-in. Add 1–3 entries to weave evocative
+    // ImageQuote breakers are opt-in. Add up to 3 entries to weave evocative
     // pull-quotes between cream sections. The homepage renders each slot
     // conditionally, so an empty array simply omits them.
+    //
+    // RHYTHM NOTE: the homepage already has dark sections at Hero, SocialProofStrip,
+    // MeetPhotographer(dark variant), TestimonialsCarousel, UrgencyBlock, and
+    // BookingUrgencyCTA. ImageQuotes also render dark (image + heavy overlay),
+    // so use them sparingly — adding all 3 stacks the dark count. Pattern that
+    // reads best: 2 imageQuotes (slots 0 and 1), skip slot 2.
+    //
+    // IMAGE SELECTION: pick editorial-quality photos with a clear focal area
+    // OUT of the text path (`position` lets you nudge — `"center 30%"` pulls the
+    // subject up so the centered overlay text doesn't land on a face). Avoid:
+    // - busy backgrounds that fight the quote
+    // - subjects with masks/sunglasses (face is the emotional anchor)
+    // - tight crops that look bad at 100vw width
     //
     // Example:
     //   { src: "/images/portrait-01.webp", alt: "...", quote: "...",

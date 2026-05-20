@@ -11,6 +11,9 @@ import { siteConfig } from "@/lib/site.config";
 import { faqs } from "@/lib/content.config";
 
 // Below-fold: deferred until after hero paints
+const EmpathyBlock = dynamic(() =>
+  import("@/components/sections/EmpathyBlock").then((m) => ({ default: m.EmpathyBlock }))
+);
 const TestimonialCards = dynamic(() =>
   import("@/components/sections/TestimonialCards").then((m) => ({ default: m.TestimonialCards }))
 );
@@ -61,7 +64,11 @@ export default function Home() {
       <SocialProofStrip />
 
       {/* Below-fold — all dynamically imported */}
-      {/* 3. Featured testimonial cards (cream) */}
+      {/* 3. Empathy intro (cream) — breaks the Hero+SocialProof dark double
+             and lands the emotional argument before the testimonial proof */}
+      <EmpathyBlock />
+
+      {/* 4. Featured testimonial cards (cream) */}
       <TestimonialCards />
 
       {/* 4. Breaker — image quote (cream → image → cream) */}
