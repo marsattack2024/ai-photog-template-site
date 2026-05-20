@@ -1,56 +1,55 @@
-const testimonials = [
-  {
-    quote: "I have never liked photos of myself. After this session I literally cried looking at my gallery. I cannot recommend her enough.",
-    name: "Sarah M.",
-    detail: "Portrait Session",
-  },
-  {
-    quote: "She made the whole experience so easy and fun. I was nervous going in and completely relaxed within the first 10 minutes.",
-    name: "Jamie & Chris",
-    detail: "Couples Session",
-  },
-  {
-    quote: "The photos arrived in 4 days and they are absolutely stunning. My family keeps asking who took them.",
-    name: "Rachel T.",
-    detail: "Family Session",
-  },
-  {
-    quote: "I booked on a whim and it was the best spontaneous decision I've ever made. Worth every penny.",
-    name: "Alex K.",
-    detail: "Portrait Session",
-  },
-  {
-    quote: "Professional, warm, talented, and fast. The trifecta. Book her before she's fully booked out.",
-    name: "Dana L.",
-    detail: "Branding Session",
-  },
-  {
-    quote: "I sent the gallery link to my mom and she cried. That's the highest compliment I can give.",
-    name: "Maria C.",
-    detail: "Portrait Session",
-  },
-];
+import { carouselTestimonials as DEFAULT_GRID_TESTIMONIALS } from "@/lib/content.config";
+import type { CarouselTestimonial } from "./types";
 
-export function TestimonialsGrid() {
+export { DEFAULT_GRID_TESTIMONIALS };
+export type GridTestimonial = CarouselTestimonial;
+
+export interface TestimonialsGridProps {
+  eyebrow?: string;
+  headline?: React.ReactNode;
+  testimonials?: CarouselTestimonial[];
+}
+
+/**
+ * Flat-grid testimonials variant (3 columns desktop, 2 tablet, 1 mobile).
+ * Each card: quote + 5 stars + name + detail. Alternative layout to
+ * TestimonialCards (1-up carousel) and TestimonialsCarousel (dark 3-up).
+ *
+ * Shares CarouselTestimonial shape with TestimonialsCarousel — same source
+ * array in content.config. Forks can pass their own testimonials prop for
+ * grid-only content.
+ */
+export function TestimonialsGrid({
+  eyebrow = "Client Love",
+  headline = (
+    <>
+      Don&apos;t Take My Word <em className="italic">For It</em>
+    </>
+  ),
+  testimonials = DEFAULT_GRID_TESTIMONIALS,
+}: TestimonialsGridProps = {}) {
   return (
     <section className="py-[var(--space-section-y)] px-[var(--space-section-x)] bg-(--color-cream)">
       <div className="max-w-7xl mx-auto flex flex-col gap-12">
         <div className="text-center flex flex-col gap-4">
-          <span className="text-xs tracking-widest uppercase text-(--color-accent)">Client Love</span>
+          <span className="text-xs tracking-widest uppercase text-(--color-accent)">
+            {eyebrow}
+          </span>
           <h2 className="font-serif text-4xl md:text-5xl font-normal leading-tight text-(--color-ink)">
-            Don&apos;t Take My Word{" "}
-            <em className="italic">For It</em>
+            {headline}
           </h2>
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {testimonials.map((t) => (
             <div
-              key={t.name}
+              key={t.name + t.detail}
               className="flex flex-col gap-4 border border-(--color-border) p-6"
             >
-              <div className="flex gap-1">
+              <div className="flex gap-1" aria-hidden="true">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <span key={i} className="text-(--color-accent) text-sm">&#9733;</span>
+                  <span key={i} className="text-(--color-accent) text-sm">
+                    &#9733;
+                  </span>
                 ))}
               </div>
               <p className="text-sm leading-relaxed text-(--color-muted) italic">
@@ -58,7 +57,9 @@ export function TestimonialsGrid() {
               </p>
               <div className="mt-auto">
                 <p className="text-sm font-medium text-(--color-ink)">{t.name}</p>
-                <p className="text-xs tracking-widest uppercase text-(--color-muted)">{t.detail}</p>
+                <p className="text-xs tracking-widest uppercase text-(--color-muted)">
+                  {t.detail}
+                </p>
               </div>
             </div>
           ))}
