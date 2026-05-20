@@ -2,6 +2,7 @@ import { InquirySchema } from "@/lib/validators";
 import { upsertContact } from "@/lib/ghl/contacts";
 import { siteConfig } from "@/lib/site.config";
 import { rateLimit, getClientIpFromRequest } from "@/lib/rate-limit";
+import { attributionFromJson } from "@/lib/contact-attribution";
 
 /**
  * POST /api/v1/inquiry — public REST endpoint for agent-submitted contacts.
@@ -96,11 +97,17 @@ export async function POST(req: Request) {
   const sourcePage =
     typeof body.sourcePage === "string" ? body.sourcePage : undefined;
 
+  // Agents may pass attribution fields as `attr_gclid`, `attr_utm_source`,
+  // etc. — same naming convention as the browser form's hidden inputs.
+  // Most agent inquiries skip this; browser-relay clients pass it through.
+  const attribution = attributionFromJson(body);
+
   const result = await upsertContact({
     ...parsed.data,
     sourcePage,
     sourceName: `${siteConfig.brand.name} (API · ${sourceAgent})`,
     extraTags: [`source-agent:${sourceAgent}`],
+    attribution,
   });
 
   if (!result.ok) {

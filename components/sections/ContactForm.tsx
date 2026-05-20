@@ -1,6 +1,7 @@
 "use client";
 import { useActionState } from "react";
 import { submitInquiry, type SubmitInquiryState } from "@/app/actions/submitInquiry";
+import { AttributionFields } from "@/components/ui/AttributionFields";
 
 const initialState: SubmitInquiryState = { success: false, errors: {} };
 
@@ -43,6 +44,8 @@ export function ContactForm() {
             aria-hidden="true"
             className="absolute -left-[9999px] w-px h-px opacity-0"
           />
+          {/* Ad-click + UTM attribution from cookies (set by AttributionTracker) */}
+          <AttributionFields />
           <div className="flex flex-col gap-1.5">
             <label htmlFor="name" className="text-xs tracking-widest uppercase text-(--color-muted)">
               Full Name

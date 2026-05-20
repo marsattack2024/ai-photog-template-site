@@ -1,5 +1,7 @@
 import "server-only";
 import { GHL_BASE, ghlHeaders, withGHLTimeout } from "./client";
+import { normalizePhone } from "@/lib/phone";
+import type { AttributionData } from "@/lib/contact-attribution";
 
 /**
  * Upsert a contact into GoHighLevel from a website inquiry form.
@@ -31,6 +33,70 @@ export interface UpsertContactInput {
   sourceName?: string;
   /** Additional tags appended to the contact. Capped at 20 total (GHL limit). */
   extraTags?: string[];
+  /**
+   * Optional ad-click + UTM attribution. Captured client-side from URL
+   * params + cookies (see lib/contact-attribution). Mapped to GHL's
+   * `attributionSource` object on the contact.
+   */
+  attribution?: AttributionData;
+}
+
+/**
+ * Map our AttributionData to GHL's attributionSource field shape.
+ * GHL field naming is camelCase; ours is the URL param name. Skip empty
+ * values; only emit fields that have data.
+ */
+function buildGhlAttributionSource(
+  attribution: AttributionData | undefined
+): Record<string, string> | null {
+  if (!attribution) return null;
+  const out: Record<string, string> = {};
+
+  // Click IDs — direct mapping (LinkedIn is the outlier: li_fat_id → liFatId)
+  if (attribution.gclid) out.gclid = attribution.gclid;
+  if (attribution.gbraid) out.gbraid = attribution.gbraid;
+  if (attribution.wbraid) out.wbraid = attribution.wbraid;
+  if (attribution.fbclid) out.fbclid = attribution.fbclid;
+  if (attribution.ttclid) out.ttclid = attribution.ttclid;
+  if (attribution.msclkid) out.msclkid = attribution.msclkid;
+  if (attribution.li_fat_id) out.liFatId = attribution.li_fat_id;
+
+  // Meta pixel cookies — live read
+  if (attribution.fbp) out.fbp = attribution.fbp;
+  if (attribution.fbc) out.fbc = attribution.fbc;
+
+  // UTMs — GHL uses camelCase + a duplicate flat shape (medium, campaign)
+  if (attribution.utm_source) out.utmSource = attribution.utm_source;
+  if (attribution.utm_medium) {
+    out.utmMedium = attribution.utm_medium;
+    out.medium = attribution.utm_medium;
+  }
+  if (attribution.utm_campaign) {
+    out.utmCampaign = attribution.utm_campaign;
+    out.campaign = attribution.utm_campaign;
+  }
+  if (attribution.utm_term) out.utmTerm = attribution.utm_term;
+  if (attribution.utm_content) out.utmContent = attribution.utm_content;
+
+  // Derive sessionSource — coarse but useful for GHL dashboard filters.
+  // Paid = any click ID OR utm_medium contains cpc/paid/ads.
+  const hasClickId = Boolean(
+    attribution.gclid ||
+      attribution.fbclid ||
+      attribution.ttclid ||
+      attribution.msclkid ||
+      attribution.gbraid ||
+      attribution.wbraid ||
+      attribution.li_fat_id
+  );
+  const paidMedium = /\b(cpc|ppc|paid|ads?)\b/i.test(
+    attribution.utm_medium ?? ""
+  );
+  if (hasClickId || paidMedium) out.sessionSource = "Paid";
+  else if (attribution.utm_medium === "organic") out.sessionSource = "Organic";
+  else if (attribution.utm_medium === "referral") out.sessionSource = "Referral";
+
+  return Object.keys(out).length > 0 ? out : null;
 }
 
 export type UpsertContactResult =
@@ -64,7 +130,15 @@ export async function upsertContact(
     tags,
   };
   if (lastName) body.lastName = lastName;
-  if (input.phone) body.phone = input.phone;
+  // Phone is normalized to E.164 at the boundary so GHL doesn't 422 on bare
+  // 10-digit US numbers. Original input is preserved when normalization can't
+  // confidently coerce (international without prefix, etc.).
+  if (input.phone) body.phone = normalizePhone(input.phone);
+
+  // Ad attribution — flatten our typed data into GHL's attributionSource shape.
+  // Skipped entirely when no attribution data present (most direct visits).
+  const attribSource = buildGhlAttributionSource(input.attribution);
+  if (attribSource) body.attributionSource = attribSource;
 
   try {
     const res = await fetch(
