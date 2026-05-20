@@ -198,9 +198,35 @@ CREATE TABLE services (
 | `app/layout.tsx` | Root layout, fonts, metadata |
 | `app/globals.css` | Tailwind imports + `@theme` tokens |
 | `lib/motion.ts` | Shared Framer Motion variants |
-| `lib/supabase.ts` | Supabase browser client |
+| `lib/tweaks.config.ts` | Live-design-tweaks registry (see below — opt-in) |
+| `components/ui/TweaksPanel.tsx` | Floating dev-only review panel (paired with above) |
 | `components/sections/` | Page section components |
 | `components/ui/` | Button, Input, Textarea primitives |
+
+---
+
+## Optional: live design tweaks (for client review sessions)
+
+`components/ui/TweaksPanel` + `lib/tweaks.config.ts` ship in the repo
+but are NOT wired by default. Activate when you want a photographer to
+A/B compare design variants (palette, with/without testimonials, dark
+vs light hero) without you redeploying between every nudge:
+
+1. Add groups + defaults to `lib/tweaks.config.ts` (header comments show
+   a worked example — palette swap with swatches + section visibility)
+2. Mount in `app/(site)/layout.tsx`:
+   `<TweaksPanel groups={TWEAK_GROUPS} defaults={TWEAK_DEFAULTS} />`
+3. Add the CSS overrides in `globals.css` keyed off the body data
+   attributes the panel sets (`body[data-palette="warm-luxe"] { ... }`)
+
+The panel is triple-guarded (NODE_ENV check + hostname check +
+production gate) and physically cannot render on Vercel preview or
+prod — even if accidentally left wired after the review session.
+
+When the photographer picks the winning combo, the panel has a "Copy
+choices for Claude →" button that produces a paste-ready message;
+hand it back to an agent and the chosen values become the permanent
+defaults. Remove the `<TweaksPanel>` mount afterward.
 
 ---
 
@@ -210,6 +236,7 @@ CREATE TABLE services (
 npm run dev       # Start dev server
 npm run build     # Production build
 npm run typecheck # Type check (tsc --noEmit)
+npm run lint      # ESLint (max-warnings 0)
 ```
 
 ---
