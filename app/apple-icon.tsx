@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site.config";
+import { OG_COLORS } from "@/lib/og-colors";
 
 /**
  * iOS home-screen icon — 180×180. Auto-generated from siteConfig.
@@ -10,9 +11,7 @@ export const runtime = "edge";
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-const COLOR_ACCENT = "#C9A961";
-const COLOR_INK = "#1A1A1A";
-const COLOR_CREAM = "#F5F0E6";
+const { accent: COLOR_ACCENT, ink: COLOR_INK, cream: COLOR_CREAM } = OG_COLORS;
 
 export default async function AppleIcon() {
   const stripped = siteConfig.brand.name.replace(/^[\[\(\{"']+/, "");

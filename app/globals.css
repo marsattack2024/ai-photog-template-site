@@ -13,6 +13,11 @@
   --primitive-accent-text: oklch(50% 0.10 80); /* brand color darkened for text — passes 4.5:1 on cream */
   --primitive-muted:  oklch(42% 0.010 280);   /* secondary text — passes WCAG AA 4.5:1 on cream */
   --primitive-border: oklch(88% 0.006 280);   /* subtle borders */
+  --primitive-error:  oklch(54% 0.20 25);     /* form errors — passes 4.5:1 on cream */
+  /* Tonal "matte" behind <Image fill> while it loads. Warmer than border,
+     softer than accent — sits like passe-partout paper around a print so
+     the cream page bg never flashes through an unloaded image. */
+  --primitive-image-loading: oklch(88% 0.012 80);
 }
 
 /* ═══════════════════════════════════════════════
@@ -29,6 +34,12 @@
   --color-accent-text:  var(--primitive-accent-text);
   --color-muted:        var(--primitive-muted);
   --color-border:       var(--primitive-border);
+  --color-error:        var(--primitive-error);
+  /* Image-loading frame. Apply to the <div> wrapping every <Image fill>:
+       <div class="relative h-... bg-(--color-image-loading)"> <Image fill /> </div>
+     For images that get a dark gradient overlay (Hero, ImageQuote),
+     use bg-(--color-ink) instead — continuous with the overlay. */
+  --color-image-loading: var(--primitive-image-loading);
   --color-white:        oklch(100% 0 0);
 
   /* ── Overlay colors (for text/UI on dark images) ── */

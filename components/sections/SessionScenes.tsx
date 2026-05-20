@@ -82,7 +82,7 @@ export function SessionScenes({
             <AnimateOnScroll
               key={scene.name}
               delay={i * 60}
-              className="group relative h-80 overflow-hidden"
+              className="group relative h-80 overflow-hidden bg-(--color-ink)"
             >
               <Image
                 src={scene.img}

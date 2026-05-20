@@ -91,7 +91,7 @@ export function ContactForm({
               aria-describedby={state.errors?.name ? "name-error" : undefined}
             />
             {state.errors?.name && (
-              <p id="name-error" role="alert" className="text-xs text-red-600">{state.errors.name[0]}</p>
+              <p id="name-error" role="alert" className="text-xs text-(--color-error)">{state.errors.name[0]}</p>
             )}
           </div>
 
@@ -105,7 +105,7 @@ export function ContactForm({
               aria-describedby={state.errors?.email ? "email-error" : undefined}
             />
             {state.errors?.email && (
-              <p id="email-error" role="alert" className="text-xs text-red-600">{state.errors.email[0]}</p>
+              <p id="email-error" role="alert" className="text-xs text-(--color-error)">{state.errors.email[0]}</p>
             )}
           </div>
 
@@ -120,12 +120,12 @@ export function ContactForm({
               aria-describedby={state.errors?.message ? "message-error" : undefined}
             />
             {state.errors?.message && (
-              <p id="message-error" role="alert" className="text-xs text-red-600">{state.errors.message[0]}</p>
+              <p id="message-error" role="alert" className="text-xs text-(--color-error)">{state.errors.message[0]}</p>
             )}
           </div>
 
           {state.errors?.root && (
-            <p role="alert" aria-live="polite" className="text-xs text-red-600">{state.errors.root[0]}</p>
+            <p role="alert" aria-live="polite" className="text-xs text-(--color-error)">{state.errors.root[0]}</p>
           )}
 
           <button

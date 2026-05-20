@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site.config";
+import { OG_COLORS } from "@/lib/og-colors";
 
 /**
  * Browser tab favicon — auto-generated from siteConfig brand name.
@@ -18,8 +19,7 @@ export const runtime = "edge";
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
-const COLOR_ACCENT = "#C9A961"; // ~oklch(68% 0.10 80)
-const COLOR_INK = "#1A1A1A"; // ~oklch(15% 0.005 280)
+const { accent: COLOR_ACCENT, ink: COLOR_INK } = OG_COLORS;
 
 export default async function Icon() {
   // Strip leading bracket/parens/quotes from placeholder names like "[Studio Name]"

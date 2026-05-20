@@ -75,7 +75,7 @@ export function TestimonialCards({
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center gap-6 text-center"
           >
-            <div className="relative w-24 h-24 rounded-full overflow-hidden border border-(--color-border)">
+            <div className="relative w-24 h-24 rounded-full overflow-hidden border border-(--color-border) bg-(--color-image-loading)">
               <Image
                 src={t.photoSrc ?? "/placeholder/square.svg"}
                 alt={`${t.name} headshot`}

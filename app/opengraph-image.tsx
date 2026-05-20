@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site.config";
+import { OG_COLORS } from "@/lib/og-colors";
 
 /**
  * Dynamic OpenGraph image — auto-generated at the edge from siteConfig.
@@ -18,13 +19,7 @@ export const alt = siteConfig.brand.name;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Palette — match the template's default brand primitives (globals.css).
-// If a fork overrides the palette in globals.css, also update these hex
-// values OR fetch them from siteConfig if we promote them to config later.
-const COLOR_CREAM = "#F5F0E6"; // ~oklch(97% 0.008 90)
-const COLOR_INK = "#1A1A1A"; // ~oklch(15% 0.005 280)
-const COLOR_ACCENT = "#C9A961"; // ~oklch(68% 0.10 80)
-const COLOR_MUTED = "#7A7368"; // ~oklch(52% 0.010 280)
+const { cream: COLOR_CREAM, ink: COLOR_INK, accent: COLOR_ACCENT, muted: COLOR_MUTED } = OG_COLORS;
 
 export default async function OpengraphImage() {
   return new ImageResponse(

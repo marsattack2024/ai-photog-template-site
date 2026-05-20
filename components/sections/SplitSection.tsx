@@ -28,7 +28,7 @@ export function SplitSection({
       {/* Image */}
       <AnimateOnScroll
         from={reverse ? "right" : "left"}
-        className={`relative min-h-[var(--min-h-image-col)] md:min-h-full ${reverse ? "md:order-2" : ""}`}
+        className={`relative min-h-[var(--min-h-image-col)] md:min-h-full bg-(--color-image-loading) ${reverse ? "md:order-2" : ""}`}
       >
         <Image
           src={imageSrc}

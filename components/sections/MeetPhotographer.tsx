@@ -44,7 +44,7 @@ export function MeetPhotographer({
       className={`py-[var(--space-section-y)] px-[var(--space-section-x)] ${sectionBg}`}
     >
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        <div className="relative aspect-[4/5] w-full overflow-hidden">
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-(--color-image-loading)">
           <Image
             src={photoSrc}
             alt={photoAlt}

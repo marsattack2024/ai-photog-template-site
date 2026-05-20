@@ -34,7 +34,7 @@ function GalleryColumn({
         <AnimateOnScroll
           key={i}
           delay={baseDelay + i * 60}
-          className={`relative w-full overflow-hidden ${img.h}`}
+          className={`relative w-full overflow-hidden bg-(--color-image-loading) ${img.h}`}
         >
           <Image
             src={img.src}

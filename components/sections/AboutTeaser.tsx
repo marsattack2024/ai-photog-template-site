@@ -25,7 +25,7 @@ export function AboutTeaser({
     <section className="grid md:grid-cols-2 min-h-[var(--min-h-split)] bg-(--color-cream)">
       {/* Photo collage */}
       <div className="relative grid grid-cols-2 gap-3 p-10 md:p-16">
-        <AnimateOnScroll delay={0} className="relative col-span-2 h-64">
+        <AnimateOnScroll delay={0} className="relative col-span-2 h-64 bg-(--color-image-loading)">
           <Image
             src={images[0]}
             alt={imageAlts[0]}
@@ -34,7 +34,7 @@ export function AboutTeaser({
             className="object-cover"
           />
         </AnimateOnScroll>
-        <AnimateOnScroll delay={100} className="relative h-48">
+        <AnimateOnScroll delay={100} className="relative h-48 bg-(--color-image-loading)">
           <Image
             src={images[1]}
             alt={imageAlts[1]}
@@ -43,7 +43,7 @@ export function AboutTeaser({
             className="object-cover"
           />
         </AnimateOnScroll>
-        <AnimateOnScroll delay={180} className="relative h-48 mt-6">
+        <AnimateOnScroll delay={180} className="relative h-48 mt-6 bg-(--color-image-loading)">
           <Image
             src={images[2]}
             alt={imageAlts[2]}
