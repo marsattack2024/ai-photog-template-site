@@ -14,6 +14,15 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <Footer
         studioName={siteConfig.brand.name}
         socials={siteConfig.socials}
+        tagline={siteConfig.brand.tagline}
+        contact={{
+          phone: siteConfig.brand.phone,
+          email: siteConfig.brand.email,
+          location: siteConfig.brand.location
+            ? `${siteConfig.brand.location.city}, ${siteConfig.brand.location.state}`
+            : undefined,
+        }}
+        navLinks={siteConfig.footerLinks}
       />
     </>
   );
