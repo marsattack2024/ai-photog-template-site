@@ -11,7 +11,7 @@
   --primitive-cream:  oklch(97% 0.008 90);    /* warm white */
   --primitive-accent: oklch(68% 0.10 80);     /* brand color (decorative use) */
   --primitive-accent-text: oklch(50% 0.10 80); /* brand color darkened for text — passes 4.5:1 on cream */
-  --primitive-muted:  oklch(52% 0.010 280);   /* secondary text */
+  --primitive-muted:  oklch(42% 0.010 280);   /* secondary text — passes WCAG AA 4.5:1 on cream */
   --primitive-border: oklch(88% 0.006 280);   /* subtle borders */
 }
 

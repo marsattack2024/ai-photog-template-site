@@ -21,6 +21,7 @@ import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/
 import { z } from "zod";
 import { upsertContact } from "@/lib/ghl/contacts";
 import { siteConfig } from "@/lib/site.config";
+import { rateLimit, getClientIpFromRequest } from "@/lib/rate-limit";
 
 function createMcpServer(): McpServer {
   const server = new McpServer({
@@ -99,6 +100,31 @@ function createMcpServer(): McpServer {
 }
 
 export async function POST(req: Request) {
+  // Rate limit: shared "inquiry:<ip>" key namespace with /api/v1/inquiry +
+  // submitInquiry server action. A single IP can't get 15 submissions by
+  // mixing form + REST + MCP — all three count against the same 5/min cap.
+  // Without this, /api/mcp was an unauthenticated write surface to GHL.
+  const ip = getClientIpFromRequest(req);
+  const limit = rateLimit(`inquiry:${ip}`, { max: 5, windowMs: 60_000 });
+  if (!limit.ok) {
+    return new Response(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        error: {
+          code: -32029, // MCP convention: rate-limit
+          message: `Rate limited. Retry after ${limit.retryAfter}s.`,
+        },
+      }),
+      {
+        status: 429,
+        headers: {
+          "Content-Type": "application/json",
+          "Retry-After": String(limit.retryAfter),
+        },
+      }
+    );
+  }
+
   const transport = new WebStandardStreamableHTTPServerTransport({
     sessionIdGenerator: undefined, // stateless
   });
