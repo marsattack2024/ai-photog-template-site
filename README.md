@@ -9,23 +9,24 @@ Next.js 15 + Tailwind v4 template for boutique photography studio websites. Toke
 A working photographer site you fork per client. Generic by default, brand-swappable in one config file. Every section is a reusable component fed by a centralized content registry.
 
 **Routes that ship today:**
-- `/` — homepage (hero, social proof, testimonials, image quote breakers, dark "Meet" inversion, process, includes, gallery, urgency, contact, FAQ, booking CTA, footer)
-- `/thank-you` — post-form confirmation
+- `/` — homepage (hero → social proof ribbon → empathy intro → testimonials → image quote → process → dark "Meet" inversion → why book → includes → image quote → gallery → testimonials carousel → urgency → contact → image quote → FAQ → booking CTA → footer)
+- `/thank-you` — post-form confirmation (noindex)
 - `/robots.txt`, `/sitemap.xml` — crawler defaults with AI bot policy + Content Signals
 - `/llms.txt`, `/llms-full.txt` — content map for AI agents
 - `/api/v1/inquiry` — JSON REST endpoint for agent-submitted inquiries
 - `/api/mcp`, `/.well-known/mcp/server-card.json` — MCP server with `submit_inquiry` tool
-- `/api/openapi.json`, `/.well-known/api-catalog`, `/.well-known/agent-skills/index.json` — agent discovery surfaces
+- `/api/openapi.json`, `/.well-known/api-catalog`, `/.well-known/agent.json`, `/.well-known/agents.json`, `/.well-known/agent-skills/index.json` — agent discovery surfaces
+- `/api/revalidate` — secret-gated on-demand cache invalidation (Supabase webhooks)
 - `/md/[slug]` — markdown negotiation (Accept: text/markdown serves clean markdown of any page)
-- `/opengraph-image` — auto-generated social share card
+- `/opengraph-image`, `/icon`, `/apple-icon` — auto-generated social share card + favicons
 
 ---
 
 ## Stack
 
 - **Next.js 15.5** App Router · React 19 · TypeScript 5.9
-- **Tailwind CSS v4.2** (CSS-first `@theme` tokens, no config file)
-- **Framer Motion 12** with global `MotionConfig reducedMotion="user"`
+- **Tailwind CSS v4.3** (CSS-first `@theme` tokens, no config file)
+- **Framer Motion 12** with `<LazyMotion features={domAnimation} strict>` + global `MotionConfig reducedMotion="user"`
 - **GoHighLevel** for CRM (contact form → GHL upsert)
 - **Supabase** scaffolded but optional (deferred; blog wiring lives in `lib/data.ts`)
 - **`@modelcontextprotocol/sdk`** for the MCP server
