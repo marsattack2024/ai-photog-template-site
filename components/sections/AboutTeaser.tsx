@@ -26,13 +26,31 @@ export function AboutTeaser({
       {/* Photo collage */}
       <div className="relative grid grid-cols-2 gap-3 p-10 md:p-16">
         <AnimateOnScroll delay={0} className="relative col-span-2 h-64">
-          <Image src={images[0]} alt={imageAlts[0]} fill className="object-cover" />
+          <Image
+            src={images[0]}
+            alt={imageAlts[0]}
+            fill
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover"
+          />
         </AnimateOnScroll>
         <AnimateOnScroll delay={100} className="relative h-48">
-          <Image src={images[1]} alt={imageAlts[1]} fill className="object-cover" />
+          <Image
+            src={images[1]}
+            alt={imageAlts[1]}
+            fill
+            sizes="(min-width: 768px) 25vw, 50vw"
+            className="object-cover"
+          />
         </AnimateOnScroll>
         <AnimateOnScroll delay={180} className="relative h-48 mt-6">
-          <Image src={images[2]} alt={imageAlts[2]} fill className="object-cover" />
+          <Image
+            src={images[2]}
+            alt={imageAlts[2]}
+            fill
+            sizes="(min-width: 768px) 25vw, 50vw"
+            className="object-cover"
+          />
         </AnimateOnScroll>
       </div>
 
