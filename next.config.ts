@@ -53,8 +53,28 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: path.join(__dirname),
+
+  // ── Performance optimizations (adapted from p2p-react-website) ──
+  experimental: {
+    // Inline critical CSS into the HTML head instead of a separate request.
+    // Eliminates a render-blocking round-trip; ~150-250ms LCP improvement
+    // on cold cache. Safe on all Vercel deploys.
+    inlineCss: true,
+    // Tree-shake barrel imports so we only pay for what we actually use.
+    // framer-motion + @sentry/nextjs are the heavy hitters in this stack.
+    optimizePackageImports: [
+      "framer-motion",
+      "@sentry/nextjs",
+      "@next/third-parties",
+    ],
+  },
+
   images: {
     formats: ["image/avif", "image/webp"],
+    // 30-day cache on Vercel's image optimizer. Photographer images don't
+    // change often; long TTL means edge cache survives Supabase / source
+    // image hiccups and most requests bypass the optimizer entirely.
+    minimumCacheTTL: 2592000, // 30 days in seconds
     remotePatterns: [
       {
         protocol: "https",
@@ -63,8 +83,22 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
   async headers() {
-    return [{ source: "/(.*)", headers: securityHeaders }];
+    return [
+      { source: "/(.*)", headers: securityHeaders },
+      // Long cache on next/image optimized outputs at the edge.
+      // Pairs with images.minimumCacheTTL above.
+      {
+        source: "/_next/image(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
   },
 };
 
