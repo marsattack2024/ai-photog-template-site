@@ -1,4 +1,17 @@
+# Stay tracked: .claude/, .codex/, .agents/ (skills, agent configs, project memory).
+# Stay tracked: supabase/migrations/ (schema source of truth).
+
+# ── OS cruft ──
 .DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ── Editor / IDE cruft ──
+.idea/
+*.swp
+*.swo
+*~
 
 # Dependencies
 node_modules/
@@ -15,8 +28,20 @@ out/
 # Vercel
 .vercel
 
+# Sentry CLI auth token (never commit)
+.sentryclirc
+
+# Test / E2E artifacts (Playwright, etc. — if added later)
+playwright-report/
+test-results/
+e2e/.auth/
+
 # TypeScript — incremental build caches (regenerated)
 *.tsbuildinfo
+
+# ESLint / SWC caches (regenerated)
+.eslintcache
+.swc/
 
 # Logs & diagnostics
 *.log
