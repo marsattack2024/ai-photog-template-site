@@ -11,12 +11,13 @@
  * per-render by passing props to the section.
  */
 
-import type { FAQ } from "@/components/sections/types";
-import type { ProcessStep } from "@/components/sections/types";
-import type { WhyBookReason } from "@/components/sections/types";
 import type {
+  FAQ,
+  ProcessStep,
+  WhyBookReason,
   FeaturedTestimonial,
   CarouselTestimonial,
+  GalleryImage,
 } from "@/components/sections/types";
 
 // ── FAQs ──────────────────────────────────────────────────────────────
@@ -144,6 +145,20 @@ export const featuredTestimonials: FeaturedTestimonial[] = [
     detail: "Milestone Session",
     stars: 5,
   },
+];
+
+// ── Gallery images (2-col masonry; per-item heights are intentional rhythm) ──
+export const galleryImages: GalleryImage[] = [
+  // Left column
+  { src: "/placeholder/portrait.svg", alt: "Session photo", h: "h-[480px]" },
+  { src: "/placeholder/landscape.svg", alt: "Session photo", h: "h-[300px]" },
+  { src: "/placeholder/portrait.svg", alt: "Session photo", h: "h-[540px]" },
+  { src: "/placeholder/landscape.svg", alt: "Session photo", h: "h-[280px]" },
+  // Right column
+  { src: "/placeholder/landscape.svg", alt: "Session photo", h: "h-[260px]" },
+  { src: "/placeholder/portrait.svg", alt: "Session photo", h: "h-[510px]" },
+  { src: "/placeholder/landscape.svg", alt: "Session photo", h: "h-[260px]" },
+  { src: "/placeholder/portrait.svg", alt: "Session photo", h: "h-[480px]" },
 ];
 
 // ── Carousel testimonials (3-up dark variant) ─────────────────────────

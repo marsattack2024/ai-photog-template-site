@@ -1,26 +1,41 @@
 import Image from "next/image";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { Button } from "@/components/ui";
+import { galleryImages as DEFAULT_GALLERY_IMAGES } from "@/lib/content.config";
+import type { GalleryImage } from "./types";
 
-const leftCol = [
-  { src: "/placeholder/portrait.svg", alt: "Session photo", h: "h-[480px]" },
-  { src: "/placeholder/landscape.svg", alt: "Session photo", h: "h-[300px]" },
-  { src: "/placeholder/portrait.svg", alt: "Session photo", h: "h-[540px]" },
-  { src: "/placeholder/landscape.svg", alt: "Session photo", h: "h-[280px]" },
-];
+export { DEFAULT_GALLERY_IMAGES };
+export type { GalleryImage };
 
-const rightCol = [
-  { src: "/placeholder/landscape.svg", alt: "Session photo", h: "h-[260px]" },
-  { src: "/placeholder/portrait.svg", alt: "Session photo", h: "h-[510px]" },
-  { src: "/placeholder/landscape.svg", alt: "Session photo", h: "h-[260px]" },
-  { src: "/placeholder/portrait.svg", alt: "Session photo", h: "h-[480px]" },
-];
+export interface GalleryGridProps {
+  eyebrow?: string;
+  headline?: React.ReactNode;
+  subheading?: string;
+  /**
+   * Images displayed in the 2-col masonry. Split evenly: first half →
+   * left column, second half → right column. Pass an even-length array
+   * for balanced columns.
+   */
+  images?: GalleryImage[];
+  ctaLabel?: string;
+  ctaHref?: string;
+}
 
-function GalleryColumn({ images, baseDelay = 0 }: { images: typeof leftCol; baseDelay?: number }) {
+function GalleryColumn({
+  images,
+  baseDelay = 0,
+}: {
+  images: GalleryImage[];
+  baseDelay?: number;
+}) {
   return (
     <div className="flex flex-col gap-3">
       {images.map((img, i) => (
-        <AnimateOnScroll key={i} delay={baseDelay + i * 60} className={`relative w-full overflow-hidden ${img.h}`}>
+        <AnimateOnScroll
+          key={i}
+          delay={baseDelay + i * 60}
+          className={`relative w-full overflow-hidden ${img.h}`}
+        >
           <Image
             src={img.src}
             alt={img.alt}
@@ -34,18 +49,37 @@ function GalleryColumn({ images, baseDelay = 0 }: { images: typeof leftCol; base
   );
 }
 
-export function GalleryGrid() {
+export function GalleryGrid({
+  eyebrow = "The Work",
+  headline = (
+    <>
+      Real People. <em className="italic">Real Sessions.</em>
+    </>
+  ),
+  subheading = "Not models. Not staged. Just everyday people who decided to show up for themselves.",
+  images = DEFAULT_GALLERY_IMAGES,
+  ctaLabel = "View Full Gallery",
+  ctaHref = "#contact",
+}: GalleryGridProps = {}) {
+  const mid = Math.ceil(images.length / 2);
+  const leftCol = images.slice(0, mid);
+  const rightCol = images.slice(mid);
+
   return (
     <section className="bg-(--color-cream) py-[var(--space-section-y)] px-[var(--space-section-x)]">
       <div className="max-w-5xl mx-auto">
         <AnimateOnScroll className="text-center mb-[var(--space-heading-body-gap)]">
-          <span className="text-xs uppercase tracking-widest text-(--color-muted)">The Work</span>
+          <span className="text-xs uppercase tracking-widest text-(--color-muted)">
+            {eyebrow}
+          </span>
           <h2 className="font-serif text-4xl font-normal text-(--color-ink) mt-[var(--space-heading-eyebrow-gap)] md:text-5xl">
-            Real People. <em className="italic">Real Sessions.</em>
+            {headline}
           </h2>
-          <p className="mt-[var(--space-subheading-gap)] text-sm text-(--color-muted) max-w-sm mx-auto leading-relaxed">
-            Not models. Not staged. Just everyday people who decided to show up for themselves.
-          </p>
+          {subheading && (
+            <p className="mt-[var(--space-subheading-gap)] text-sm text-(--color-muted) max-w-sm mx-auto leading-relaxed">
+              {subheading}
+            </p>
+          )}
         </AnimateOnScroll>
 
         <div className="grid grid-cols-2 gap-3 md:gap-4">
@@ -53,9 +87,13 @@ export function GalleryGrid() {
           <GalleryColumn images={rightCol} baseDelay={80} />
         </div>
 
-        <AnimateOnScroll delay={200} className="flex justify-center mt-12">
-          <a href="#contact"><Button variant="ghost">View Full Gallery</Button></a>
-        </AnimateOnScroll>
+        {ctaLabel && ctaHref && (
+          <AnimateOnScroll delay={200} className="flex justify-center mt-12">
+            <a href={ctaHref}>
+              <Button variant="ghost">{ctaLabel}</Button>
+            </a>
+          </AnimateOnScroll>
+        )}
       </div>
     </section>
   );

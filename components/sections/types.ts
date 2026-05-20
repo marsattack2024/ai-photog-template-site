@@ -34,3 +34,13 @@ export interface CarouselTestimonial {
   name: string;
   detail: string;
 }
+
+export interface GalleryImage {
+  src: string;
+  alt: string;
+  /**
+   * Tailwind height class for this image (e.g. `"h-[480px]"`). Per-item
+   * heights are deliberate — they create the masonry rhythm. Don't tokenize.
+   */
+  h: string;
+}
