@@ -52,6 +52,33 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
+      <head>
+        {/*
+          Preconnect to GoHighLevel — first contact-form submission hits
+          services.leadconnectorhq.com. Resolving TLS + DNS during idle
+          page load saves ~100-200ms off the first submit.
+        */}
+        <link
+          rel="preconnect"
+          href="https://services.leadconnectorhq.com"
+          crossOrigin="anonymous"
+        />
+        {/*
+          Preconnect to GTM only when actually loading it. GTM script fetches
+          additional resources from googletagmanager.com on init — preconnect
+          shaves ~100ms off the first paint after script execution.
+        */}
+        {GTM_ID && (
+          <>
+            <link
+              rel="preconnect"
+              href="https://www.googletagmanager.com"
+              crossOrigin="anonymous"
+            />
+            <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+          </>
+        )}
+      </head>
       {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
       <body>
         {/* Skip nav — first element in body, visible on focus */}
