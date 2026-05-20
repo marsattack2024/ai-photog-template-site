@@ -8,7 +8,7 @@ import {
 
 /**
  * Per-page markdown builders for the markdown-negotiation system.
- * Triggered when a request to / (or /seattle-boudoir etc.) carries
+ * Triggered when a request to / (or any future route) carries
  * Accept: text/markdown — middleware rewrites the URL to /md/[slug]
  * and this module renders the page as plain markdown for the agent.
  *

@@ -9,8 +9,8 @@ import type { CSSProperties } from "react";
  *   </div>
  *
  * Not wired into any page — this file demonstrates the override shape.
- * Copy + edit for your own variants. Pattern matches the `seaTokens`
- * object in app/(site)/seattle-boudoir/page.tsx.
+ * Copy + edit for your own variants. To use, import into any page and
+ * pass to a wrapping <div style={...}> (see lib/themes/README.md).
  *
  * Override the PRIMITIVE tokens, not the semantic ones. The semantic
  * tokens (--color-ink, --color-cream, etc.) re-resolve automatically.

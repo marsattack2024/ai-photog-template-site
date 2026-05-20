@@ -23,7 +23,7 @@ Use `oklch()` so adjacent tokens stay perceptually consistent when lightness cha
 
 ### 2. Per-page override — inline style on a wrapper div
 
-For sites with multiple distinct brand looks (e.g., a sub-brand page that needs different colors than the main site), wrap the page in a `<div style={tokens}>` and pass a CSS variable override object. This is the pattern used by `app/(site)/seattle-boudoir/page.tsx`.
+For sites with multiple distinct brand looks (e.g., a sub-brand page that needs different colors than the main site), wrap the page in a `<div style={tokens}>` and pass a CSS variable override object.
 
 ```tsx
 import { exampleWarmLuxe } from "@/lib/themes/example-warm-luxe.tokens";
@@ -42,7 +42,7 @@ The inline `style` prop is Server-Component-safe (no hydration mismatch, no flas
 ## When to use which
 
 - **Forking the whole site for a new client** → option 1 (edit `globals.css`). One source of truth.
-- **One page within a site needs a different look** → option 2 (inline override). Used by the Seattle Boudoir reference page.
+- **One page within a site needs a different look** → option 2 (inline override).
 - **A/B testing two palettes** → option 2 with a feature flag swap.
 
 ## Examples in this directory
