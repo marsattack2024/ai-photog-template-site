@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
+import { AttributionTracker } from "@/components/ui/AttributionTracker";
 import { siteConfig } from "@/lib/site.config";
 import "./globals.css";
 
@@ -60,6 +61,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        <AttributionTracker />
         <MotionConfig reducedMotion="user">{children}</MotionConfig>
         {/* GA4 only loads when GA_ID set AND GTM is not — most setups load GA
             via GTM instead of duplicating it. */}
