@@ -66,6 +66,22 @@ export interface SiteImages {
   imageQuotes: SiteImageQuote[];
 }
 
+export interface SiteAnalytics {
+  /**
+   * Google Tag Manager container ID (GTM-XXXXXXX). When set, the layout
+   * renders <GoogleTagManager /> from @next/third-parties.
+   * Falls back to env var NEXT_PUBLIC_GTM_ID at runtime.
+   */
+  gtmId?: string;
+  /**
+   * Google Analytics 4 measurement ID (G-XXXXXXXXXX). Most setups should
+   * use GTM instead and load GA from there — only set this if you're
+   * loading GA4 directly without GTM.
+   * Falls back to env var NEXT_PUBLIC_GA_ID at runtime.
+   */
+  gaId?: string;
+}
+
 export interface SiteConfig {
   brand: {
     name: string;
@@ -111,6 +127,12 @@ export interface SiteConfig {
    * of hero copy, not a reusable asset).
    */
   images: SiteImages;
+  /**
+   * Optional analytics IDs. Both fall back to env vars at runtime
+   * (NEXT_PUBLIC_GTM_ID / NEXT_PUBLIC_GA_ID) so you can rotate per
+   * environment without redeploying code.
+   */
+  analytics?: SiteAnalytics;
 }
 
 export const siteConfig: SiteConfig = {
@@ -172,6 +194,10 @@ export const siteConfig: SiteConfig = {
       </>
     ),
     body: "I take on a limited number of portrait sessions each month to ensure every client gets my full attention. Once the calendar fills, it fills. Don't wait and wonder — reach out today to hold your date.",
+  },
+  analytics: {
+    // Leave undefined to fall back to env vars. Set explicit IDs here if you
+    // want them committed to the repo (most clients don't — env is safer).
   },
   images: {
     portrait: {
