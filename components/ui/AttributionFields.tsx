@@ -19,6 +19,10 @@ export function AttributionFields() {
   const [fields, setFields] = useState<Array<{ name: string; value: string }>>([]);
 
   useEffect(() => {
+    // Hydration-safe cookie read: SSR has no document.cookie, so attribution
+    // fields must populate post-mount. The cascading-render warning here is
+    // expected — one render to hydrate, one to inject the hidden inputs.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFields(attributionToFormFields());
   }, []);
 

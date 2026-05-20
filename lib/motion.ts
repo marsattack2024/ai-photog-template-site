@@ -3,7 +3,6 @@ import {
   motionDurations,
   motionEasings,
   motionOffsets,
-  motionScale,
   motionStagger,
 } from "./motion.config";
 
@@ -33,32 +32,5 @@ export const stagger: Variants = {
       staggerChildren: motionStagger.base,
       delayChildren: motionStagger.sm,
     },
-  },
-};
-
-export const slideLeft: Variants = {
-  hidden: { opacity: 0, x: -motionOffsets.lg },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: motionDurations.xl, ease: easeOut },
-  },
-};
-
-export const slideRight: Variants = {
-  hidden: { opacity: 0, x: motionOffsets.lg },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: motionDurations.xl, ease: easeOut },
-  },
-};
-
-export const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: motionScale.sm },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: motionDurations.md, ease: easeOut },
   },
 };

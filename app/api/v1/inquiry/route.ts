@@ -3,6 +3,7 @@ import { upsertContact } from "@/lib/ghl/contacts";
 import { siteConfig } from "@/lib/site.config";
 import { rateLimit, getClientIpFromRequest } from "@/lib/rate-limit";
 import { attributionFromJson } from "@/lib/contact-attribution";
+import { sanitizeFreeText, sanitizeSlugSafe } from "@/lib/sanitize";
 
 /**
  * POST /api/v1/inquiry — public REST endpoint for agent-submitted contacts.
@@ -89,13 +90,8 @@ export async function POST(req: Request) {
     );
   }
 
-  const sourceAgent =
-    typeof body.source_agent === "string" && body.source_agent
-      ? body.source_agent.slice(0, 80)
-      : "unknown";
-
-  const sourcePage =
-    typeof body.sourcePage === "string" ? body.sourcePage : undefined;
+  const sourceAgent = sanitizeSlugSafe(body.source_agent);
+  const sourcePage = sanitizeFreeText(body.sourcePage);
 
   // Agents may pass attribution fields as `attr_gclid`, `attr_utm_source`,
   // etc. — same naming convention as the browser form's hidden inputs.

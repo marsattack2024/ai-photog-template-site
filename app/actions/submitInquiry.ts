@@ -5,6 +5,7 @@ import { InquirySchema } from "@/lib/validators";
 import { upsertContact } from "@/lib/ghl/contacts";
 import { rateLimit, getClientIpFromHeaders } from "@/lib/rate-limit";
 import { attributionFromFormData } from "@/lib/contact-attribution";
+import { sanitizeFreeText } from "@/lib/sanitize";
 
 export type SubmitInquiryState =
   | { success: true }
@@ -46,8 +47,7 @@ export async function submitInquiry(
     };
   }
 
-  const sourcePage =
-    typeof raw.sourcePage === "string" && raw.sourcePage ? raw.sourcePage : undefined;
+  const sourcePage = sanitizeFreeText(raw.sourcePage);
 
   // Pull ad-click + UTM attribution from hidden form fields (populated
   // client-side by <AttributionFields />). Falls through cleanly when

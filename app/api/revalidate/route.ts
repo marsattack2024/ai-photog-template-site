@@ -4,7 +4,8 @@ export const runtime = "nodejs"; // revalidateTag is not available in Edge runti
 import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
-// Map Supabase table names to cache tags
+// Map Supabase table names to cache tags. Template forks add new tables here;
+// the allowlist below is derived from the values so it never drifts.
 const TABLE_TAGS: Record<string, string[]> = {
   site_config:    ["site-config"],
   services:       ["services"],
@@ -13,6 +14,11 @@ const TABLE_TAGS: Record<string, string[]> = {
   posts:          ["posts", "post-slugs"],
   testimonials:   ["testimonials"],
 };
+
+// Allowlist: only tags that this route knows how to mint can be revalidated.
+// Without this, a leaked REVALIDATE_SECRET could be used to poison ANY tag
+// in the app's cache graph (including future tags the template author adds).
+const ALLOWED_TAGS = new Set<string>(Object.values(TABLE_TAGS).flat());
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const secret = req.headers.get("x-revalidate-secret");
@@ -28,9 +34,12 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  // Allow direct tag revalidation or table-based lookup
+  // Allow direct tag revalidation or table-based lookup. Direct `tag` requests
+  // must be in the allowlist — see ALLOWED_TAGS above.
   const tagsToInvalidate = body.tag
-    ? [body.tag]
+    ? ALLOWED_TAGS.has(body.tag)
+      ? [body.tag]
+      : []
     : TABLE_TAGS[body.table ?? ""] ?? [];
 
   if (tagsToInvalidate.length === 0) {
