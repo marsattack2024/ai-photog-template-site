@@ -1,5 +1,6 @@
 import "server-only";
 import { GHL_BASE, ghlHeaders, withGHLTimeout } from "./client";
+import { normalizePhone } from "@/lib/phone";
 
 /**
  * Upsert a contact into GoHighLevel from a website inquiry form.
@@ -64,7 +65,10 @@ export async function upsertContact(
     tags,
   };
   if (lastName) body.lastName = lastName;
-  if (input.phone) body.phone = input.phone;
+  // Phone is normalized to E.164 at the boundary so GHL doesn't 422 on bare
+  // 10-digit US numbers. Original input is preserved when normalization can't
+  // confidently coerce (international without prefix, etc.).
+  if (input.phone) body.phone = normalizePhone(input.phone);
 
   try {
     const res = await fetch(
